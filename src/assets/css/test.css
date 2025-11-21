@@ -1,0 +1,32 @@
+/* * {
+    position: relative;
+    overflow: hidden !important;
+    max-width: 100vw;
+} */
+
+#test {
+    position: relative;
+    background-color: red;
+    width: calc(100vw- 120px);
+    height: 100vh;
+}
+
+#test::before, #test::after {
+    
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100px;
+}
+
+#test::before {
+    background-color: blue;
+    left: -100px;
+}
+
+#test::after {
+    background-color: green;
+    right: -100px;
+
+}
