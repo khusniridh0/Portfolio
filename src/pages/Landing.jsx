@@ -145,6 +145,15 @@ const Landing = () => {
 		setMenu(false)
 	}
 
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		const form = e.currentTarget
+		const formData = new FormData(form)
+		const data = Object.fromEntries(formData)
+		console.log('This feature is not available yet')
+		form.reset()
+	}
+
 	return (
 		<LandingLayout>
 			<header id="main-nav" className="flex justify-between items-center sticky top-5">
@@ -445,7 +454,7 @@ const Landing = () => {
 
 				<div className="grid grid-cols-6 md:grid-cols-12 gap-10">
 					<div className="md:form col-span-6 md:col-span-7 order-2 md:order-1">
-						<form action="" method="POST">
+						<form onSubmit={handleSubmit}>
 							<div className=" w-full flex flex-col gap-2 mb-4">
 								<label className="text-sm font-medium" htmlFor="name">Name</label>
 								<input type="text" id="name" name="name" className="rounded-1 text-sm border-secondary p-4" required autoComplete='true' />

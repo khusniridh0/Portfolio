@@ -27,7 +27,10 @@
     }
 
     button {
-        @apply outline-0
+        @apply outline-0;
+        &:focus {
+            @apply outline-0
+        }
     }
 
     input,
