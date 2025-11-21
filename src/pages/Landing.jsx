@@ -380,7 +380,7 @@ const Landing = () => {
 				<div className="cta-branding grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
 					<div className="branding-item relative overflow-hidden rounded-1 border-primary p-5">
 						<div className="flex justify-between items-center mb-3">
-							<img src="/public/icon/worker.svg" alt="worker" />
+							<img src="icon/worker.svg" alt="worker" />
 							<h3 className="text-3xl  font-bold">30</h3>
 						</div>
 						<h3 className="text-lg  font-semibold">Project</h3>
@@ -388,7 +388,7 @@ const Landing = () => {
 					</div>
 					<div className="branding-item relative overflow-hidden rounded-1 border-primary p-5">
 						<div className="flex justify-between items-center mb-3">
-							<img src="/public/icon/technology.svg" alt="technology" />
+							<img src="icon/technology.svg" alt="technology" />
 							<h3 className="text-3xl  font-bold">30</h3>
 						</div>
 						<h3 className="text-lg  font-semibold">Tech Stack</h3>
@@ -396,7 +396,7 @@ const Landing = () => {
 					</div>
 					<div className="branding-item relative overflow-hidden rounded-1 border-primary p-5 md:col-span-2 lg:col-span-1">
 						<div className="flex justify-between items-center mb-3">
-							<img src="/public/icon/certificate.svg" alt="certificate" />
+							<img src="icon/certificate.svg" alt="certificate" />
 							<h3 className="text-3xl  font-bold">30</h3>
 						</div>
 						<h3 className="text-lg  font-semibold">Certificate</h3>
