@@ -137,24 +137,32 @@ const Landing = () => {
 			}).catch(err => console.log('Gagal copy link:', err));
 	}
 
+	const scrolling = (e) => {
+		e.preventDefault()
+		const target = e.currentTarget.getAttribute('href').slice(1)
+		const element = document.querySelector(`#${target}`)
+		element.scrollIntoView()
+		setMenu(false)
+	}
+
 	return (
 		<LandingLayout>
 			<header id="main-nav" className="flex justify-between items-center sticky top-5">
 				<img src="logo/logo-91x80.svg" alt="Khusni Ridho" className="logo h-10 lg:h-[70px] p-1 lg:p-3 aspect-square rounded-full" />
 				<nav className={`border-primary animated ${menu && 'show'}`}>
-					<a href="#hero" className={'item-link w-full py-3 lg:p-0 text-center font-semibold active'} onClick={() => { setMenu(false) }}>
+					<a href="#hero" className={'item-link w-full py-3 lg:p-0 text-center font-semibold active'} onClick={scrolling}>
 						<span>Home</span>
 					</a>
-					<a href="#about" className={'item-link w-full py-3 lg:p-0 text-center font-semibold'} onClick={() => { setMenu(false) }}>
+					<a href="#about" className={'item-link w-full py-3 lg:p-0 text-center font-semibold'} onClick={scrolling}>
 						<span>About</span>
 					</a>
-					<a href="#skill" className={'item-link w-full py-3 lg:p-0 text-center font-semibold'} onClick={() => { setMenu(false) }}>
+					<a href="#skill" className={'item-link w-full py-3 lg:p-0 text-center font-semibold'} onClick={scrolling}>
 						<span>Skill</span>
 					</a>
-					<a href="#works" className={'item-link w-full py-3 lg:p-0 text-center font-semibold'} onClick={() => { setMenu(false) }}>
+					<a href="#works" className={'item-link w-full py-3 lg:p-0 text-center font-semibold'} onClick={scrolling}>
 						<span>Project</span>
 					</a>
-					<a href="#cta" className={'item-link w-full py-3 lg:p-0 text-center font-semibold'} onClick={() => { setMenu(false) }}>
+					<a href="#cta" className={'item-link w-full py-3 lg:p-0 text-center font-semibold'} onClick={scrolling}>
 						<span>Contact</span>
 					</a>
 					<button className="absolute top-5 right-5 lg:hidden" onClick={() => { setMenu(false) }}>
