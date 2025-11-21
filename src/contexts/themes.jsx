@@ -21,18 +21,15 @@ const reducer = (state, action) => {
 export const ThemeProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const setTheme = (theme) => {
-        document.body.className = theme;
-        document.body.dataset.theme = theme;
-        localStorage.setItem('theme', theme);
-        dispatch({ type: 'SET_THEME', payload: theme });
+    const setTheme = (data) => {
+        document.body.className = data;
+        document.body.dataset.theme = data;
+        localStorage.setItem('theme', data);
+        dispatch({ type: 'SET_THEME', payload: data });
     };
 
     useEffect(() => {
-        const theme = localStorage.getItem('theme');
-        if (theme) {
-            setTheme(theme);
-        }
+        setTheme(localStorage.getItem('theme') || 'dark');
     }, [])
 
     return (
