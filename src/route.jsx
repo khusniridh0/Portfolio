@@ -5,11 +5,13 @@ import './assets/css/main.css';
 
 const PreLoadingPage = lazy(() => import("./components/pre-loading-page"))
 const Landing = lazy(() => import("./pages/Landing"))
+const Error404 = lazy(() => import("./pages/Error-404"))
 const Test = lazy(() => import("./pages/Test"))
 
 const router = createBrowserRouter([
   { path: "/", element: <Landing /> },
-  { path: "/test", element: <Test /> }
+  { path: "*", element: <Error404 /> }
+  // { path: "/test", element: <Test /> }
 ]);
 
 function Route() {
