@@ -417,10 +417,6 @@ const Landing = () => {
 									<sup className="inline-block ml-2"><ExternalLink color="#fff" width={16} height={16} /></sup>
 								</a>
 								<p className="text-sm lg:text-lg  text-ellipsis line-clamp-3 mb-6">{activeWorks.desc}</p>
-								<a href="#contact" className="w-fit btn rounded-full border-gradient mx-auto lg:mx-0">
-									<span className="me-4">View Details</span>
-									<ExternalLink color="var(--text-content)" />
-								</a>
 							</div>
 							<div className="banner-other flex gap-4 flex-1 lg:justify-end">
 								{dataWorks.slice(0, 3).map((item, i) => (
