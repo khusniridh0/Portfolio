@@ -155,6 +155,18 @@
         -moz-text-stroke: 5px transparent;
     }
 
+    .loading-up {
+        transform: translate(0, -100%);
+        transition: var(--duration-4);
+        transition-delay: calc(var(--delay) * 100);
+    }
+    
+    .loading-down {
+        transform: translate(0, 100%);
+        transition: var(--duration-4);
+        transition-delay: calc(var(--delay) * 100);
+    }
+
     /* 
     ============================================
                     NAVBAR

@@ -1,8 +1,11 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
-import Landing from "./pages/Landing"
-import Test from "./pages/Test"
-import './assets/css/main.css'
+import './assets/css/main.css';
+
+const PreLoadingPage = lazy(() => import("./components/pre-loading-page"))
+const Landing = lazy(() => import("./pages/Landing"))
+const Test = lazy(() => import("./pages/Test"))
 
 const router = createBrowserRouter([
   { path: "/", element: <Landing /> },
@@ -11,7 +14,9 @@ const router = createBrowserRouter([
 
 function Route() {
   return (
-    <RouterProvider router={router} />
+    <Suspense fallback={<PreLoadingPage />}>
+      <RouterProvider router={router} />
+    </Suspense>
   )
 }
 

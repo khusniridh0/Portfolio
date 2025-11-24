@@ -1,3 +1,5 @@
+import LoadingPage from "../components/loading-page";
+
 const LandingLayout = ({ children }) => {
     const scrolled = (e) => {
         const virtualWindow = e.currentTarget;
@@ -19,11 +21,14 @@ const LandingLayout = ({ children }) => {
     }
 
     return (
-        <div className="max-h-screen overflow-x-hidden" onScroll={scrolled}>
-            <div className="container mx-auto relative">
-                {children}
+        <>
+            <LoadingPage />
+            <div className="max-h-screen overflow-x-hidden" onScroll={scrolled}>
+                <div className="container mx-auto relative">
+                    {children}
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
