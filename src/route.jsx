@@ -2,14 +2,18 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import './assets/css/main.css';
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 const PreLoadingPage = lazy(() => import("./components/pre-loading-page"))
 const Landing = lazy(() => import("./pages/Landing"))
+const Project = lazy(() => import("./pages/Project"))
 const Error404 = lazy(() => import("./pages/Error-404"))
-const Test = lazy(() => import("./pages/Test"))
+// const Test = lazy(() => import("./pages/Test"))
 
 const router = createBrowserRouter([
   { path: "/", element: <Landing /> },
+  { path: "/project", element: <Project /> },
   { path: "*", element: <Error404 /> }
   // { path: "/test", element: <Test /> }
 ]);

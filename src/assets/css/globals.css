@@ -10,7 +10,7 @@
     * {
         @apply select-none scroll-smooth;
         scrollbar-width: none;
-        cursor: none;
+        /* cursor: none; */
     }
 
     body {
@@ -485,43 +485,44 @@
         @apply flex-1 text-center;
     }
 
-    .cursor {
-        @apply pointer-events-none;
-    }
-    
-    .cursor::before {
-        content: '';
-        @apply absolute w-[10px] h-[10px] top-[50%] left-[50%] translate-[-50%] bg-amber-500 rounded-full outline outline-2 outline-offset-2 outline-amber-900;
-    }
-    
-    .cursor .rect-animate{
-        clip-path: circle(0 at 100% 100%);
-    }
-    
-    .cursor.clicked .rect-animate{
-        animation: wave2 0.5s ease-in-out;
+    .hover\:marquee .marquee-content:hover {
+        animation-play-state: paused;
     }
 
-    @keyframes wave1 {
-        0% {
-            width: 0px;
-            height: 0px;
-            outline-offset: 0px;
-        }
-        100% {
-            width: 20px;
-            height: 20px;
-            outline-offset: 20px;
-        }
+    .cursor::before {
+        content: '';
+        @apply absolute w-[10px] h-[10px] top-[50%] left-[50%] translate-[-50%] bg-amber-500 rounded-full outline-2 outline-offset-2 outline-amber-900;
     }
-    
-    @keyframes wave2 {
+
+    /* .mouse-clicked {
+        @apply absolute w-[20px] h-[20px] translate-[-7px] z-50;
+    } */
+
+    .cursor-clicked .rect-animate {
+        clip-path: circle(0 at 100% 100%);
+    }
+
+    .cursor-clicked.clicked .rect-animate {
+        animation: wave 0.5s ease-in-out;
+    }
+
+    .slick-current {
+        
+        /* padding: ; */
+        /* transition: all 0.5s ease-in-out;
+        scale: 1.1; */
+        /* transition: all 0.3s ease-in-out; */
+    }
+
+    @keyframes wave {
         0% {
             clip-path: circle(0 at 100% 100%);
         }
+
         50% {
             clip-path: circle(300% at 100% 100%);
         }
+
         100% {
             height: 0;
         }

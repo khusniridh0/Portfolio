@@ -1,164 +1,40 @@
 import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "../contexts/themes";
+import { Link, useNavigate } from "react-router";
+import { AllContext } from "../contexts/all-context";
 import LandingLayout from "../layout/landing-layout";
+import { dataCertificate, dataContact, dataLearning, dataStack, dataWorks } from "../services/main";
 import { ArrowRight, Close, Copy, ExternalLink, Github, Instagram, LinkedIn, Menu, Moon, SendMessage, Sun, WhatsApp } from "../utils/icons";
 
-const dataStack = [
-	{ image: 'brand/figma.svg', name: 'Figma' },
-	{ image: 'brand/html.svg', name: 'HTML' },
-	{ image: 'brand/css.svg', name: 'CSS' },
-	{ image: 'brand/javascript.svg', name: 'Javascript' },
-	{ image: 'brand/php.svg', name: 'PHP' },
-	{ image: 'brand/python.svg', name: 'Python' },
-	{ image: 'brand/bootstrap.svg', name: 'Bootstrap' },
-	{ image: 'brand/tailwind.svg', name: 'TailwindCSS' },
-	{ image: 'brand/reactjs.svg', name: 'React' },
-	{ image: 'brand/material-ui.svg', name: 'Material UI' },
-	{ image: 'brand/shadcn.svg', name: 'Shadcn' },
-	{ image: 'brand/chakraui.svg', name: 'Chakra UI' },
-	{ image: 'brand/expressjs.svg', name: 'Express' },
-	{ image: 'brand/nextjs.svg', name: 'NEXT' },
-	{ image: 'brand/codeigniter.svg', name: 'Codeigniter' },
-	{ image: 'brand/laravel.svg', name: 'Laravel' },
-	{ image: 'brand/django.svg', name: 'Django' },
-	{ image: 'brand/mysql.svg', name: 'MySQL' },
-	{ image: 'brand/mongodb.svg', name: 'MongoDB' },
-	{ image: 'brand/docker.svg', name: 'Docker' },
-	{ image: 'brand/apache.svg', name: 'Apache' },
-	{ image: 'brand/nginx.svg', name: 'Nginx' },
-	{ image: 'brand/nodejs.svg', name: 'NodeJS' },
-	{ image: 'brand/vite.svg', name: 'Vite' },
-	{ image: 'brand/linux.svg', name: 'Favorite OS' },
-]
-
-const dataLearning = [
-	{ image: 'learning/golang.png', name: 'Golang', desc: "Go. Golang adalah bahasa pemrograman yang dirancang oleh Google dan pertama kali diluncurkan pada tahun 2009. Go menawarkan kinerja tinggi dan dukungan kuat untuk concurrency melalui goroutines memungkinkan pengembangan aplikasi yang efisien. fitur canggihnya memenuhi kebutuhan pengembang dengan ekosistem pustaka yang kaya dan dukungan komunitas yang luas. Golang ideal untuk pengembangan aplikasi web, microservices, dan sistem terdistribusi." },
-	{ image: 'learning/gin.png', name: 'Gin Web Freamework', desc: "Gin merupakan framework web yang terkenal dan ringan untuk Golang. Gin dianggap lebih unggul dibandingkan framework lain seperti Echo, Beego, dan Fiber karena menawarkan kinerja tinggi, serta sintaks yang sederhana yang memudahkan pengembang baru. Framework ini dirancang khusus untuk pengembangan RESTful API, dengan fitur routing, validasi dan middleware yang fleksibel, Gin menjadi pilihan populer untuk pengembang yang membutuhkan solusi cepat dalam pengembangan aplikasi web." }
-]
-
-const dataCertificate = [
-	{ image: 'certificates/certificate-1.png', link: 'dicoding.com/certificates/07Z6L0Y4YPQR' },
-	{ image: 'certificates/certificate-2.png', link: 'dicoding.com/certificates/07Z6L0Y4YPQR' },
-	{ image: 'certificates/certificate-3.png', link: 'dicoding.com/certificates/07Z6L0Y4YPQR' },
-	{ image: 'certificates/certificate-4.png', link: 'dicoding.com/certificates/07Z6L0Y4YPQR' },
-	{ image: 'certificates/certificate-5.png', link: 'dicoding.com/certificates/07Z6L0Y4YPQR' },
-]
-
-const dataWorks = [
+export const dataBrand = [
 	{
-		name: 'Kemenag Kota Malang',
-		image: 'project/kemenag_1.png',
-		desc: 'Proyek ini bertujuan untuk membuat platform online yang memudahkan akses informasi tentang kegiatan, layanan, dan sejarah Kementerian Agama (Kemenag) Kota Malang. Dengan desain yang user-friendly, website ini diharapkan dapat meningkatkan transparansi, memudahkan komunikasi, serta memperkenalkan berbagai program dan inisiatif yang ada di Kemenag Kota Malang kepada masyarakat.'
-	},
-	{
-		name: 'Template Dashboard',
-		image: 'project/admin_template_1.png',
-		desc: 'Admin Hus adalah proyek pribadi open source berupa template dashboard yang dikembangkan menggunakan teknologi dasar HTML, CSS, dan JavaScript. Template ini didesain untuk menyediakan fondasi user interface (UI) yang bersih, modular, dan mudah dimodifikasi bagi developer yang ingin membangun sistem panel admin mereka sendiri tanpa perlu framework kompleks'
-	},
-	{
-		name: 'Arsip Surat',
-		image: 'project/arsip_1.png',
-		desc: 'Pada proyek Aplikasi Arsip ini, saya bertanggung jawab penuh mulai dari desain antarmuka hingga implementasi aplikasi yang selesai. Saya mendesain tampilan yang modern dan user-friendly, serta memastikan fungsionalitas aplikasi yang meliputi pengelolaan arsip, jenis akta, arsip surat, dan penerima surat berjalan dengan lancar. Aplikasi ini bertujuan untuk mempermudah pengelolaan dokumen hukum secara digital, dengan memberikan pengalaman pengguna yang efisien dan mudah diakses.'
-	},
-	{
-		name: 'PT. Indonesia Teknologi Preneur',
-		image: 'project/indotechpren_1.png',
-		desc: 'Indotechpren adalah perusahaan yang berfokus pada bidang teknologi informasi. Tugas saya di sini adalah mendesain ulang tampilan website agar lebih modern dengan mengusung tema teknologi. Saya berhasil menyelesaikan tugas ini dengan baik, dan klien pun merasa puas dengan hasil akhirnyaIndotechpren adalah perusahaan yang berfokus pada bidang teknologi informasi. Tugas saya di sini adalah mendesain ulang tampilan website agar lebih modern dengan mengusung tema teknologi. Saya berhasil menyelesaikan tugas ini dengan baik, dan klien pun merasa puas dengan hasil akhirnya.'
-	},
-	{
-		name: 'CapsuleIn',
-		image: 'project/capsuleinn_1.png',
-		desc: 'CapsuleInn adalah perusahaan yang bergerak di sektor perhotelan, menyediakan platform untuk memudahkan proses pemesanan hotel. Pada proyek ini, saya bertanggung jawab untuk merancang desain website company profile, mengimplementasikan desain tersebut ke dalam HTML, serta merancang tampilan aplikasi mobile. Aplikasi CapsuleInn kini tersedia untuk diunduh di Google Play Store dan Apple App Store. Untuk melihat lebih detail tentang perusahaan ini, Anda dapat mengunjungi website melalui tombol "Lihat Website.CapsuleInn adalah perusahaan yang bergerak di sektor perhotelan, menyediakan platform untuk memudahkan proses pemesanan hotel. Pada proyek ini, saya bertanggung jawab untuk merancang desain website company profile, mengimplementasikan desain tersebut ke dalam HTML, serta merancang tampilan aplikasi mobile. Aplikasi CapsuleInn kini tersedia untuk diunduh di Google Play Store dan Apple App Store. Untuk melihat lebih detail tentang perusahaan ini, Anda dapat mengunjungi website melalui tombol "Lihat Website.'
-	},
-	{
-		name: 'Ponpes Darussalam Darussalam Kamal',
-		image: 'project/ponpes_1.png',
-		desc: 'Website Resmi Pondok Pesantren Darussalam Kamal (PPDSK). Kami merancang solusi mandiri untuk kebutuhan PPDSK, lengkap dengan Sistem Pendaftaran Online dan Pengolahan Data Siswa (Sisfo) yang terintegrasi. Tampilan modern Salaf & Modern.'
-	},
-	{
-		name: 'Custom Pernikahan',
-		image: 'project/resapi_1.png',
-		desc: 'Saya merancang dan mengembangkan website profile Resepsi Online untuk memasarkan jasa pembuatan undangan pernikahan digital kustom. Solusi ini hadir dengan fokus user experience yang optimal, menawarkan lebih dari 500+ tema elegan,'
-	},
-	{
-		name: 'Green Eat',
-		image: 'project/green_eat_1.png',
-		desc: 'Green Eat adalah aplikasi web pemesanan makanan yang dirancang untuk mendukung pengguna dalam menjaga pola makan dengan menyajikan solusi nutrisi. Aplikasi ini dilengkapi dengan fitur Kalkulator Gizi untuk memonitor asupan, memberikan rekomendasi makanan yang spesifik berdasarkan jenis diet pengguna, serta fitur pemesanan langsung untuk pengalaman.'
-	},
-	{
-		name: 'Arsya',
-		image: 'project/arsha_1.png',
-		desc: 'Proyek Arsya berfokus pada front-end modification (modifikasi tampilan) dari website yang sudah ada. Kontribusi utama saya meliputi implementasi elemen dinamis, yaitu penambahan slider interaktif pada bagian header, pembuatan cection Berita'
-	},
-	{
-		name: 'Undangan Pernikahan II',
-		image: 'project/undangan_1.png',
-		desc: 'Proyek ini adalah pengembangan website undangan pernikahan digital yang sepenuhnya didasarkan pada desain grafis yang disediakan oleh klien. Fokus utama adalah pada presisi implementasi front-end untuk memastikan setiap detail visual (tipografi, palet warna, dan tata letak) pada desain statis dapat diterjemahkan dengan sempurna menjadi tampilan web elegan, dan berfungsi penuh.'
-	},
-	{
-		name: 'Undangan Pernikahan I',
-		image: 'project/pernikahan_1.png',
-		desc: 'Proyek ini adalah studi kasus desain dan pengembangan pembuatan undangan pernikahan digital. Saya bertanggung jawab penuh, mulai dari konseptualisasi desain orisinal hingga coding front-end. Fokus utamanya adalah menciptakan pengalaman visual yang unik dan menarik, sekaligus menjamin fungsionalitas seperti RSVP dan penghitung mundur.'
-	},
-	{
-		name: 'Desain Mobile Profil',
-		image: 'project/mobileporto_1.png',
-		desc: 'Proyek ini adalah konseptualisasi dan perancangan desain full-page website portofolio pribadi (Husni Design) yang bertujuan menampilkan layanan dan proyek desain digital. Fokus desain terletak pada visual yang bersih, penggunaan ilustrasi untuk menarik perhatian, dan hirarki informasi yang jelas (Home, About, Galery), memastikan pengunjung dapat langsung memahami kompetensi dengan jelas.'
-	},
-	{
-		name: 'Desain Website Profil',
-		image: 'project/porto_1.png',
-		desc: 'Husni Portfolio Mobile adalah proyek desain user interface (UI) yang berfokus pada pengalaman pengguna (user experience - UX) portofolio pribadi pada perangkat seluler. Desain ini mengutamakan aksesibilitas cepat dan tata letak berbasis kartu (card-based layout) untuk memamerkan proyek terbaru, memastikan setiap informasi layanan dapat disajikan dengan indah di layar kecil.'
-	}
-]
-
-const dataContact = [
-	{
-		image: 'icon/whatsapp.svg',
-		name: 'Email',
-		link: 'mail.khusniridho@gmail.com',
-	},
-	{
-		image: 'icon/instagram.svg',
-		name: 'Instagram',
-		link: 'https://www.instagram.com/_async.await/',
-	},
-	{
-		image: 'icon/linkedin.svg',
-		name: 'LinkedIn',
-		link: 'http://linkedin.com/in/khusni-ridho',
-	}
-]
-
-const dataBrand = [
-	{
-		icon: <LinkedIn color="var(--text-content)" width={30} height={30} />,
+		icon: <LinkedIn color="var(--text-content)" size={30} />,
 		name: 'LinkedIn',
 		link: 'http://linkedin.com/in/khusni-ridho'
 	},
 	{
-		icon: <Github color="var(--text-content)" width={30} height={30} />,
+		icon: <Github color="var(--text-content)" size={30} />,
 		name: 'Github',
 		link: 'https://github.com/khusniridh0'
 	},
 	{
-		icon: <Instagram color="var(--text-content)" width={30} height={30} />,
+		icon: <Instagram color="var(--text-content)" size={30} />,
 		name: 'Instagram',
 		link: 'https://www.instagram.com/_async.await/'
 	},
 	{
-		icon: <WhatsApp color="var(--text-content)" width={30} height={30} />,
+		icon: <WhatsApp color="var(--text-content)" size={30} />,
 		name: 'WhatsApp',
 		link: 'https://wa.me/6282399180746?text=Halo%20Khusni%20Ridho%2C%0ASaya%20sudah%20melihat%20website%20portofolio%20kamu%20dan%20kemampuan%20yang%20kamu%20miliki.%20Saya%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20peluang%20kerja%20sama%20atau%20proyek%20yang%20bisa%20kita%20kerjakan%20bersama.%0AApakah%20kamu%20ada%20waktu%20untuk%20berdiskusi%20lebih%20lanjut%3F'
 	}
 ]
 
 const Landing = () => {
-	const { theme, setTheme } = useContext(ThemeContext);
+	const { theme, setTheme, section, setReread } = useContext(AllContext);
 	const [drag, setDrag] = useState({ status: false, startX: 0, scrollLeft: 0 });
 	const [menu, setMenu] = useState(false);
 	const [activeTap, setActiveTap] = useState('tap-1');
 	const [activeWorks, setActiveWorks] = useState(dataWorks[0]);
+	const navigate = useNavigate();
 	const newRows = [9, 7, 5, 3, 1]
 
 	const createPiramid = (count, data) => {
@@ -228,6 +104,11 @@ const Landing = () => {
 		document.querySelectorAll('img').forEach(img => {
 			img.setAttribute('draggable', 'false')
 		})
+
+		if (section == 'works') {
+			const works = document.querySelector('#works');
+			works.scrollIntoView();
+		}
 	}, [])
 
 	return (
@@ -264,7 +145,7 @@ const Landing = () => {
 
 				<button className={`fixed -right-6 top-0 bottom-0 lg:hidden animated z-[40] ${menu ? 'fadeOutRight' : 'fadeInRight'}`} onClick={() => { setMenu(true) }}>
 					<div className="bg-[var(--tertiary)] p-2 rounded-1 show-nav">
-						<Menu color="var(--text-content)" width={26} height={26} />
+						<Menu color="var(--text-content)" size={26} />
 					</div>
 				</button>
 
@@ -412,10 +293,10 @@ const Landing = () => {
 						<img src={activeWorks.image} alt="Banner" className="w-full rounded-1 aspect-[9/16] md:aspect-[4/3] lg:aspect-video object-cover" loading="lazy" />
 						<div className="banner-attribute flex flex-col lg:flex-row gap-6 lg:items-end absolute bottom-0 left-0 p-4 w-full">
 							<div className="banner-caption flex-2 text-white">
-								<a className="inline-block text-2xl lg:text-5xl font-semibold capitalize underline underline-offset-4 mb-2 lg:mb-6 lg:underline-offset-6 text-nowrap text-truncate">
+								<div className="inline-block text-2xl lg:text-5xl font-semibold capitalize underline underline-offset-4 mb-2 lg:mb-6 lg:underline-offset-6 text-nowrap text-truncate" onClick={() => { setReread(activeWorks); navigate('/project') }}>
 									{activeWorks.name}
-									<sup className="inline-block ml-2"><ExternalLink color="#fff" width={16} height={16} /></sup>
-								</a>
+									<sup className="inline-block ml-2"><ExternalLink color="#fff" size={16} /></sup>
+								</div>
 								<p className="text-sm lg:text-lg  text-ellipsis line-clamp-3 mb-6">{activeWorks.desc}</p>
 							</div>
 							<div className="banner-other flex gap-4 flex-1 lg:justify-end">
@@ -433,7 +314,7 @@ const Landing = () => {
 					<div className="clip-banner gap-4" onMouseMove={dragCarousel} onMouseDown={(e) => setDrag({ status: true, startX: e.pageX, scrollLeft: e.currentTarget.scrollLeft })} onMouseUp={() => setDrag({ status: false })}>
 						<div className="clip-banner-content">
 							{dataWorks.slice(3).map((item, i) => (
-								<div className="clip-banner-item aspect-[4/3] rounded-1 overflow-hidden" draggable={false} key={i}>
+								<div className="clip-banner-item aspect-[4/3] rounded-1 overflow-hidden" draggable={false} key={i} onClick={() => { setReread(item); navigate('/project') }}>
 									<img src={item.image} alt={item.name} className="w-full h-full object-cover" loading="lazy" />
 								</div>
 							))}
@@ -521,7 +402,7 @@ const Landing = () => {
 								<label className="text-sm font-medium" htmlFor="message">Message</label>
 								<textarea id="message" name="message" rows="10" className="rounded-1 text-sm border-secondary p-4" required autoComplete='true' ></textarea>
 							</div>
-							<button type="submit" className="flex justify-center items-center bg-[var(--primary)] text-sm  font-semibold rounded-1 p-3 w-full">
+							<button type="submit" className="flex justify-center items-center bg-[var(--primary)] text-sm font-semibold rounded-1 p-3 w-full">
 								<span className="me-2 text-white">Send Message</span>
 								<SendMessage color="var(--color-white)" />
 							</button>

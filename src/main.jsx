@@ -1,12 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ThemeProvider } from "./contexts/themes";
+import { AllProvider } from "./contexts/all-context.jsx";
 import Route from './route.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider>
+    <AllProvider>
       <Route />
-    </ThemeProvider>
+    </AllProvider>
   </StrictMode>,
 )

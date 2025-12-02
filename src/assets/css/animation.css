@@ -31,3 +31,15 @@
         opacity: 0;
     }
 }
+
+@keyframes wave {
+        0% {
+            clip-path: circle(0 at 100% 100%);
+        }
+        50% {
+            clip-path: circle(300% at 100% 100%);
+        }
+        100% {
+            height: 0;
+        }
+    }
