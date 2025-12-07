@@ -1,9 +1,0 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import 'tailwindcss';
-@import './variable.css';
-@import './globals.css';
-@import './responsive.css';
-@import './animation.css';
-@import './slick.css';
-@import './slick-theme.css';
-@custom-variant dark (&:where(.dark, .dark *));
