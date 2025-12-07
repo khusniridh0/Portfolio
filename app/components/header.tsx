@@ -20,7 +20,7 @@ export const MenuComponent = ({ items }: { items: NavItem[] }) => {
                 </a>
             )}
 
-            <button className="absolute top-5 right-5 lg:hidden" onClick={() => { setMenu(false) }}>
+            <button className="absolute top-5 right-5 lg:hidden" aria-label="close menu" onClick={() => { setMenu(false) }}>
                 <Close color="var(--text-content)" />
             </button>
         </nav>
@@ -31,7 +31,7 @@ export const MenuComponent = ({ items }: { items: NavItem[] }) => {
 export const ToggleMenu = () => {
     const { menu, setMenu } = useContext(AllContext)!;
     return (
-        <button className={`fixed -right-6 top-0 bottom-0 lg:hidden z-[40] ${menu ? 'fadeOutRight' : 'fadeInRight'}`} onClick={() => { setMenu(true) }}>
+        <button className={`fixed -right-6 top-0 bottom-0 lg:hidden z-[40] ${menu ? 'fadeOutRight' : 'fadeInRight'}`} aria-label="toggle menu" onClick={() => { setMenu(true) }}>
             <div className="bg-[var(--tertiary)] p-2 rounded-1 show-nav">
                 <Menu color="var(--text-content)" size={26} />
             </div>
@@ -45,7 +45,7 @@ export const ChangeTheme = () => {
     return (
         <>
             <span className="text-sm font-semibold capitalize">{theme}</span>
-            <button className="border-primary p-2 lg:p-3 rounded-full" onClick={() => { setTheme(theme == 'light' ? 'dark' : 'light') }}>
+            <button className="border-primary p-2 lg:p-3 rounded-full" aria-label="change theme" onClick={() => { setTheme(theme == 'light' ? 'dark' : 'light') }}>
                 {theme == 'dark' ? <Sun color="var(--text-content)" /> : <Moon color="var(--text-content)" />}
             </button>
         </>
