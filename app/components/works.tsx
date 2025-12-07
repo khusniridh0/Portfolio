@@ -193,7 +193,7 @@ export const CarouselWork = ({ config }: { config: CarouselConfig }) => {
 
     return <Carousel config={{ ...config }}>
         {reread?.detail.images.map((image, i) => (
-            <ImageSkeleton src={image} alt={reread?.name} width={1024} height={768} key={i} loading="lazy" />
+            <ImageSkeleton src={image} alt={reread?.name} width={1024} height={768} key={i} loading="eager" />
         ))}
     </Carousel>
 }

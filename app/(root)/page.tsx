@@ -108,7 +108,7 @@ const Home = () => {
     return (
         <>
             <header id="main-nav" className="flex justify-between items-center sticky top-5">
-                <ImageSkeleton src="/logo/logo-91x80.webp" width={76} height={76} alt="Khusni Ridho" className="logo w-auto h-10 lg:h-[64px] max-w-[76px] p-1 lg:p-3 rounded-full" loading="lazy" />
+                <ImageSkeleton src="/logo/logo-91x80.webp" width={76} height={76} alt="Khusni Ridho" className="logo w-auto h-10 lg:h-[64px] max-w-[76px] p-1 lg:p-3 rounded-full" loading="eager" />
                 <MenuComponent items={navItem} />
                 <ToggleMenu />
 
@@ -119,8 +119,8 @@ const Home = () => {
 
             <section id="hero" className="grid grid-cols-1 lg:grid-cols-2 items-center min-h-screen">
                 <div className="avatar flex justify-center lg:justify-end lg:order-2">
-                    <ImageSkeleton src="/picture/avatar-dark.png" width={610} height={767} alt="Khusni Ridho" className="hidden dark:block" loading="lazy" />
-                    {/* <ImageSkeleton src="/picture/avatar-light.png" width={610} height={767} alt="Khusni Ridho" className="block dark:hidden" loading="lazy" /> */}
+                    <ImageSkeleton src="/picture/avatar-dark.png" width={610} height={767} alt="Khusni Ridho" className="hidden dark:block" loading="eager" />
+                    <ImageSkeleton src="/picture/avatar-light.png" width={610} height={767} alt="Khusni Ridho" className="block dark:hidden" loading="eager" />
                 </div>
                 <div className="description ">
                     <div className="flex gap-x-8 gap-y-4 flex-col lg:flex-row items-center mb-8 lg:mb-4">
