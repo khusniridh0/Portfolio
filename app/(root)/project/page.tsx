@@ -19,6 +19,7 @@ interface CarouselNav {
 
 interface CarouselConfig {
     gap: number;
+    drag: boolean,
     responsive: CarouselResponsive[];
     nav: CarouselNav;
 }
@@ -37,6 +38,7 @@ const PrevArrow = () => {
 
 const carouselConfig: CarouselConfig = {
     gap: 20,
+    drag: true,
     responsive: [
         {
             breakpoint: 1024,
@@ -63,7 +65,11 @@ const Project = () => {
             <div className="fixed top-0 left-0 w-screen py-4 z-10 backdrop-filter backdrop-blur-xl bg-[var(--body-50)]">
                 <div className="container flex flex-col lg:flex-row items-center justify-between gap-y-6 mx-auto">
                     <div className="flex items-center gap-3 bg-[var(--body-50)] backdrop-filter backdrop-blur-sm rounded-full pl-6 self-end lg:self-center lg:order-2">
-                        <span className="text-sm font-semibold capitalize">Back</span>
+                        <div className="flex items-center gap-1">
+                            <span className="text-xl font-semibold inline-block">[</span>
+                            <span className="text-xs font-semibold inline-block capitalize mt-1">ESC</span>
+                            <span className="text-xl font-semibold inline-block">]</span>
+                        </div>
                         <Backwork />
                     </div>
                     <h1 className="text-lg font-semibold flex lg:order-1 self-start lg:self-center">

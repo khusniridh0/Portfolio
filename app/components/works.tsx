@@ -7,11 +7,40 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { select } from "../utils/func";
 import Carousel from "./carousel";
+import Link from "next/link";
 
 interface Works {
     name: string;
     image: string;
     desc: string;
+}
+
+interface CarouselResponsive {
+    breakpoint: number;
+    perview: number;
+}
+
+interface CarouselNav {
+    next: React.ReactNode;
+    prev: React.ReactNode;
+    position: {
+        x: 'center' | 'start' | 'end' | 'between';
+        y: 'top' | 'bottom';
+    }
+}
+
+interface CarouselConfig {
+    gap: number;
+    drag: boolean;
+    responsive: CarouselResponsive[];
+    nav: CarouselNav;
+}
+
+interface CarouselProps {
+    name: string;
+    detail: {
+        images: string[]
+    };
 }
 
 export const ActiveWorks = ({ dataWorks }: { dataWorks: Works[] }) => {
@@ -45,26 +74,19 @@ export const ActiveWorks = ({ dataWorks }: { dataWorks: Works[] }) => {
     )
 }
 
-export const SliderWork = ({ dataWorks }: { dataWorks: Works[] }) => {
+export const SliderWork = ({ dataWorks, config }: { dataWorks: Works[], config: CarouselConfig }) => {
     const { setReread } = useContext(AllContext)!;
-    const [drag, setDrag] = useState({ status: false, startX: 0, scrollLeft: 0 });
-    const router = useRouter();
-
-    const dragCarousel = (e: React.MouseEvent) => {
-        e.preventDefault();
-        const carousel = e.currentTarget;
-        if (!drag.status) return;
-        carousel.scrollLeft = drag.scrollLeft + (drag.startX - e.pageX);
-    }
 
     return (
-        <div className="clip-banner gap-4" onMouseMove={dragCarousel} onMouseDown={(e) => setDrag({ status: true, startX: e.pageX, scrollLeft: e.currentTarget.scrollLeft })} onMouseUp={() => setDrag({ ...drag, status: false })}>
+        <div className="clip-banner gap-4">
             <div className="clip-banner-content">
-                {dataWorks.slice(3).map((item, i) => (
-                    <div className="clip-banner-item aspect-[4/3] rounded-1 overflow-hidden" draggable={false} key={i} onClick={() => { setReread(item); router.push('/project') }}>
-                        <Image src={item.image} alt={item.name} width={411} height={308} className="w-full h-full object-cover" loading="lazy" />
-                    </div>
-                ))}
+                <Carousel config={{ ...config }}>
+                    {dataWorks.slice(3).map((item, i) => (
+                        <Link href="/project" className="clip-banner-item aspect-[4/3] rounded-1 overflow-hidden bg-amber-700 block" draggable={false} key={i} onMouseEnter={() => { setReread(item) }}>
+                            <Image src={item.image} alt={item.name} width={411} height={308} className="w-full h-full object-cover" loading="lazy" />
+                        </Link>
+                    ))}
+                </Carousel>
             </div>
         </div>
     )
@@ -103,6 +125,14 @@ export const Backwork = () => {
     useEffect(() => {
         if (!reread) closeProject()
     }, [reread, closeProject])
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') closeProject();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    })
 
     return <button type="button" className="border-primary h-10 w-10 flex items-center justify-center rounded-full" aria-label="close" onClick={closeProject}>
         <Close color="var(--text-content)" size={20} />
@@ -149,57 +179,9 @@ export const StackWork = () => {
     ))
 }
 
-interface CarouselResponsive {
-    breakpoint: number;
-    perview: number;
-}
-
-interface CarouselNav {
-    next: React.ReactNode;
-    prev: React.ReactNode;
-    position: {
-        x: 'center' | 'start' | 'end' | 'between';
-        y: 'top' | 'bottom';
-    }
-}
-
-interface CarouselConfig {
-    gap: number;
-    responsive: CarouselResponsive[];
-    nav: CarouselNav;
-}
-
-interface CarouselWork {
-    name: string;
-    detail: {
-        images: string[]
-    };
-}
-
 export const CarouselWork = ({ config }: { config: CarouselConfig }) => {
-    const { responsive } = config
     const pathname = usePathname()
-    const { reread } = useContext(AllContext)! as { reread: CarouselWork | null };
-    const [perview, setPerview] = useState(1)
-    const [localPerview, setLocalPerview] = useState(0);
-
-    useEffect(() => {
-        const maxPerview = responsive.reduce(
-            (maxPerview, current) =>
-                current.breakpoint > maxPerview.breakpoint
-                    ? current.perview > maxPerview.perview
-                        ? current
-                        : maxPerview
-                    : maxPerview,
-            responsive[0]
-        );
-
-        setLocalPerview(maxPerview.perview);
-    }, [responsive]);
-
-    useEffect(() => {
-        setPerview(localPerview);
-    }, [localPerview]);
+    const { reread } = useContext(AllContext)! as { reread: CarouselProps | null };
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -211,7 +193,7 @@ export const CarouselWork = ({ config }: { config: CarouselConfig }) => {
 
     return <Carousel config={{ ...config }}>
         {reread?.detail.images.map((image, i) => (
-            <Image src={image} alt={reread?.name} width={1024} height={768} key={i} loading={`${(i + 1 <= perview) ? 'eager' : 'lazy'}`} />
+            <Image src={image} alt={reread?.name} width={1024} height={768} key={i} loading="eager" />
         ))}
     </Carousel>
 }

@@ -6,10 +6,9 @@
     */
 
     * {
-        @apply scroll-smooth;
         scrollbar-width: none;
     }
-
+    
     body {
         @apply overflow-x-hidden bg-[var(--body)];
         color: var(--text-content);
@@ -398,29 +397,18 @@
         border-radius: var(--rounded);
     }
 
-    #works .clip-banner {
-        @apply overflow-x-auto snap-x snap-mandatory;
-        scrollbar-width: none;
-    }
-
-    #works .clip-banner .clip-banner-content {
-        @apply flex gap-5;
-    }
-
     #works .clip-banner .clip-banner-item {
-        @apply relative snap-start;
-        flex: 0 0 calc((100% / 1) - 15px);
+        @apply relative;
     }
 
     #works .clip-banner .clip-banner-item::after {
         content: '';
         @apply absolute top-0 left-0 w-full h-full;
         transition: all 0.3s ease-in-out;
-
     }
 
     #works .clip-banner:hover .clip-banner-item:not(:hover)::after {
-        backdrop-filter: blur(10px);
+        backdrop-filter: saturate(20%);
     }
 
     #works .clip-banner .clip-banner-item img {
@@ -428,7 +416,7 @@
     }
 
     #works .clip-banner .clip-banner-item:hover img {
-        transform: scale(1.1);
+        transform: scale(1.07) rotate(3deg);
     }
 
     /* 
@@ -497,33 +485,34 @@
     .carousel .carousel-content .carousel-item {
         @apply h-full snap-start;
         flex: 0 0 auto;
-        width: calc(100% / var(--perview) - (var(--gap) / 2));
+        width: calc((100% / var(--perview)) - var(--gap) + (var(--gap) / var(--perview)));
     }
-    
-    .carousel .carousel-item .carousel-content, .carousel .carousel-content .carousel-item > *{
+
+    .carousel .carousel-item .carousel-content,
+    .carousel .carousel-content .carousel-item>* {
         @apply w-full h-full;
     }
-    
+
     .carousel .carousel-nav.top {
         @apply top-0;
     }
-    
+
     .carousel .carousel-nav.bottom {
         @apply mb-0;
     }
-    
+
     .carousel .carousel-nav.end {
         @apply justify-end;
     }
-    
+
     .carousel .carousel-nav.start {
         @apply justify-start;
     }
-    
+
     .carousel .carousel-nav.center {
         @apply justify-center;
     }
-    
+
     .carousel .carousel-nav.between {
         @apply justify-between;
     }

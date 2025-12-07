@@ -1,11 +1,71 @@
 import { ChangeTheme, MenuComponent, ToggleMenu } from "@/app/components/header";
 import { dataCertificate, dataContact, dataLearning, dataStack, dataWorks } from "@/app/services/main";
-import { Github, Instagram, LinkedIn, SendMessage, WhatsApp } from "@/app/utils/icons";
+import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, SendMessage, WhatsApp } from "@/app/utils/icons";
 import Image from "next/image";
 import { ContactMe } from "../components/contact";
 import { ContactList } from "../components/contact";
 import { ActiveTap } from "../components/skill";
 import { ActiveWorks, SliderWork } from "../components/works";
+
+interface CarouselResponsive {
+    breakpoint: number;
+    perview: number;
+}
+
+interface CarouselNav {
+    next: React.ReactNode;
+    prev: React.ReactNode;
+    position: {
+        x: 'center' | 'start' | 'end' | 'between';
+        y: 'top' | 'bottom';
+    }
+}
+
+interface CarouselConfig {
+    gap: number;
+    drag: boolean;
+    responsive: CarouselResponsive[];
+    nav: CarouselNav;
+}
+
+const NextArrow = () => {
+    return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
+        <ArrowRight color="var(--color-white)" size={20} />
+    </div>
+}
+
+const PrevArrow = () => {
+    return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
+        <ArrowLeft color="var(--color-white)" size={20} />
+    </div>
+}
+
+const carouselConfig: CarouselConfig = {
+    gap: 20,
+    drag: false,
+    responsive: [
+        {
+            breakpoint: 1280,
+            perview: 3
+        },
+        {
+            breakpoint: 767,
+            perview: 2
+        },
+        {
+            breakpoint: 100,
+            perview: 1
+        }
+    ],
+    nav: {
+        next: <NextArrow />,
+        prev: <PrevArrow />,
+        position: {
+            x: 'center',
+            y: 'bottom'
+        }
+    }
+};
 
 const Home = () => {
     const navItem = [
@@ -125,13 +185,13 @@ const Home = () => {
             </section>
 
             <section id="works" className="pt-40">
-                <div className="section-title relative flex justify-center items-center mb-20">
+                <div className="section-title relative flex justify-center items-center">
                     <h1 className="text-7xl lg:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">works</h1>
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Experience</h1>
                 </div>
                 <div className="benner">
                     <ActiveWorks dataWorks={dataWorks} />
-                    <SliderWork dataWorks={dataWorks} />
+                    <SliderWork dataWorks={dataWorks} config={carouselConfig as CarouselConfig} />
                 </div>
             </section>
 

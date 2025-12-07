@@ -18,6 +18,7 @@ interface CarouselNav {
 
 interface CarouselConfig {
     gap: number;
+    drag: boolean;
     responsive: CarouselResponsive[];
     nav: CarouselNav;
 }
@@ -31,22 +32,22 @@ const initialState = {
 const Carousel = ({ config, children }: { config: CarouselConfig, children: React.ReactNode }) => {
     const carousel = useRef<HTMLDivElement>(null);
     const carouselItems = useRef<HTMLDivElement>(null);
-    const { responsive, gap, nav } = config;
+    const { responsive, gap, nav, drag } = config;
     const { next, prev, position: { x, y } } = nav;
     const xy = `${y} ${x}`
     const [perview, setPerview] = useState(1);
-    const [drag, setDrag] = useState(initialState);
+    const [isDrag, setIsDrag] = useState(initialState);
 
     const dragged = (event: React.MouseEvent) => {
         event.preventDefault();
-        setDrag({ status: true, startX: event.pageX, scrollLeft: event.currentTarget.scrollLeft })
+        setIsDrag({ status: true, startX: event.pageX, scrollLeft: event.currentTarget.scrollLeft })
     }
 
     const track = (event: React.MouseEvent) => {
         event.preventDefault();
-        if (!drag.status) return;
+        if (!isDrag.status) return;
         const carousel = event.currentTarget;
-        const newScrollLeft = drag.scrollLeft + ((drag.startX - event.pageX) * 1.5);
+        const newScrollLeft = isDrag.scrollLeft + ((isDrag.startX - event.pageX) * 1.5);
         carousel.scrollLeft = Math.max(0, Math.min(carousel.scrollWidth - carousel.clientWidth, newScrollLeft));
     }
 
@@ -82,7 +83,12 @@ const Carousel = ({ config, children }: { config: CarouselConfig, children: Reac
 
     return (
         <div className="carousel py-12 relative">
-            <div className="carousel-content" onMouseMove={track} onMouseDown={dragged} onMouseUp={() => setDrag(initialState)} onMouseLeave={() => setDrag(initialState)} ref={carousel} style={{ '--perview': `${perview}`, '--gap': `${gap}px` } as React.CSSProperties}>
+            <div className="carousel-content"
+                onMouseMove={(event) => drag && track(event)}
+                onMouseDown={(event) => drag && dragged(event)}
+                onMouseUp={() => drag && setIsDrag(initialState)}
+                onMouseLeave={() => drag && setIsDrag(initialState)}
+                ref={carousel} style={{ '--perview': `${perview}`, '--gap': `${gap}px` } as React.CSSProperties}>
                 {Children?.map(children, (item, i) => (
                     <div className="carousel-item" key={i} ref={carouselItems}>
                         {item}

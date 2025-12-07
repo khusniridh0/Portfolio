@@ -14,24 +14,30 @@ const Event = () => {
     };
 
     useEffect(() => {
+        const mainLayout = select('.main-layout').target as HTMLElement;
+        
         setTimeout(() => {
             if (section == 'works') {
                 const works = select('#works').target as HTMLElement;
+                mainLayout.classList.remove('scroll-smooth');
                 works.scrollIntoView();
-                setSection('')
+                setSection('home')
             }
+            mainLayout.classList.add('scroll-smooth');
         }, 500)
     })
 
     useEffect(() => {
+        const mainLayout = select('.main-layout')
         select.all('img').forEach(({ target }) => {
             target?.setAttribute('draggable', 'false');
         });
 
-        select('.main-layout').event('scroll', changeActive as EventListener);
+        
+        mainLayout.event('scroll', changeActive as EventListener);
 
         return () => {
-            select('.main-layout').removeEvent('scroll', changeActive as EventListener);
+            mainLayout.removeEvent('scroll', changeActive as EventListener);
         };
     });
 
