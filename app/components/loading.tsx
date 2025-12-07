@@ -10,14 +10,6 @@ const Loading = () => {
     const [show, setShow] = useState<boolean>(true);
 
     useEffect(() => {
-        // const timeoutReady = setTimeout(() => {
-        //     setReady(() => true); // Mengupdate berdasarkan nilai sebelumnya
-        // }, 0);
-
-        // const timeoutShow = setTimeout(() => {
-        //     setShow(() => true);
-        // }, 0);
-
         const cleanupReady = setTimeout(() => {
             setReady(() => false);
         }, 100);
@@ -27,8 +19,6 @@ const Loading = () => {
         }, 1200);
 
         return () => {
-            // clearTimeout(timeoutReady);
-            // clearTimeout(timeoutShow);
             clearTimeout(cleanupReady);
             clearTimeout(cleanupShow);
         };

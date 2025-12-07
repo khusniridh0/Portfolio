@@ -5,6 +5,7 @@ import { scrolled } from "../utils/event";
 import { Copy } from "@/app/utils/icons";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface Contact {
     image: string
@@ -14,10 +15,10 @@ interface Contact {
 
 export const ContactMe = () => {
     return (
-        <a onClick={scrolled} href="#contact" className="w-fit btn rounded-full border-gradient" rel="preload">
+        <Link onClick={scrolled} href="#contact" className="w-fit btn rounded-full border-gradient" rel="preload">
             <span className="me-4">Contact Me</span>
             <ArrowRight color="var(--text-content)" />
-        </a>
+        </Link>
     );
 }
 

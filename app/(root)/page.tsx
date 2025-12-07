@@ -6,6 +6,7 @@ import { ContactMe } from "../components/contact";
 import { ContactList } from "../components/contact";
 import { ActiveTap } from "../components/skill";
 import { ActiveWorks, SliderWork } from "../components/works";
+import Link from "next/link";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -85,7 +86,7 @@ const Home = () => {
         {
             icon: <Github color="var(--text-content)" size={30} />,
             name: 'Github',
-            link: 'https://github.com/khusniridh0'
+            link: 'https://khusniridh0.github.io/creator/'
         },
         {
             icon: <Instagram color="var(--text-content)" size={30} />,
@@ -95,7 +96,7 @@ const Home = () => {
         {
             icon: <WhatsApp color="var(--text-content)" size={30} />,
             name: 'WhatsApp',
-            link: 'https://wa.me/6282399180746?text=Halo%20Khusni%20Ridho%2C%0ASaya%20sudah%20melihat%20website%20portofolio%20kamu%20dan%20kemampuan%20yang%20kamu%20miliki.%20Saya%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20peluang%20kerja%20sama%20atau%20proyek%20yang%20bisa%20kita%20kerjakan%20bersama.%0AApakah%20kamu%20ada%20waktu%20untuk%20berdiskusi%20lebih%20lanjut%3F'
+            link: 'https://wa.me/6282399180746?text=Halo%20Khusni%20Ridho%2C%0ASaya%20telah%20melihat%20web%20portofolio%20kamu%20dan%20kemampuan%20yang%20kamu%20miliki.%20Saya%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20peluang%20kerja%20sama%20atau%20proyek%20yang%20bisa%20kita%20kerjakan%20bersama.%0AApakah%20kamu%20ada%20waktu%20untuk%20berdiskusi%20lebih%20lanjut%3F'
         }
     ]
 
@@ -139,10 +140,10 @@ const Home = () => {
             <section id="brand" className="py-18 lg:p-0">
                 <div id="brand" className="flex flex-wrap justify-around lg:justify-between items-center gap-x-22 gap-y-8 lg:gap-4 lg:flex-nowrap lg:flex-row">
                     {dataBrand.map((item, i) => (
-                        <a href={item.link} target="_blank" className="flex gap-x-4 justify-center items-center" key={i} rel="preload">
+                        <Link href={item.link} target="_blank" className="flex gap-x-4 justify-center items-center" key={i} rel="preload">
                             <span className="lg:inline-block">{item.icon}</span>
                             <span className=" md:text-2xl">{item.name}</span>
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </section>
@@ -356,9 +357,9 @@ const Tap2 = () => {
 const Tap3 = () => {
     return <div className="flex flex-wrap gap-4 mb-4 justify-center item-center mx-auto">
         {dataCertificate.map((item, i) => (
-            <a href={item.link} target="_blank" className="smooth hover:border-gradient rounded-1 p-2 lg:w-90 md:w-78 flex flex-col justify-center items-center shadow-primary duration-200" key={i} rel="preload">
+            <Link href={item.link} target="_blank" className="smooth hover:border-gradient rounded-1 p-2 lg:w-90 md:w-78 flex flex-col justify-center items-center shadow-primary duration-200" key={i} rel="preload">
                 <Image src={item.image} alt="Certificate" width={344} height={243} className="aspect-[1.43/1]" loading="lazy" />
-            </a>
+            </Link>
         ))}
     </div>
 }

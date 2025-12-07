@@ -4,6 +4,7 @@ import { AllContext } from "@/app/contexts/public-context";
 import { Close, Menu, Moon, Sun } from "@/app/utils/icons";
 import { useContext } from "react";
 import { scrolled } from "../utils/event";
+import Link from "next/link";
 
 interface NavItem {
     link: string;
@@ -15,9 +16,9 @@ export const MenuComponent = ({ items }: { items: NavItem[] }) => {
     return (
         <nav className={`${menu && 'show'}`}>
             {items?.map((item: NavItem, index: number) =>
-                <a onClick={scrolled} href={item?.link} className={`item-link w-full py-3 lg:p-0 text-center font-semibold ${index === 0 && 'active'}`} key={index} rel="preload">
+                <Link onClick={scrolled} href={item?.link} className={`item-link w-full py-3 lg:p-0 text-center font-semibold ${index === 0 && 'active'}`} key={index} rel="preload">
                     <span>{item?.text}</span>
-                </a>
+                </Link>
             )}
 
             <button className="absolute top-5 right-5 lg:hidden" aria-label="close menu" onClick={() => { setMenu(false) }}>

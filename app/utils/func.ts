@@ -9,7 +9,6 @@ const removeEvents = (element: HTMLElement, event: string, callback: EventListen
 const createSelector = (arg: string | Element) => {
     const element = typeof arg === 'string' ? document.querySelector(arg) : arg;
 
-    // Kembali ke objek yang memiliki metode `event`
     return {
         target: element,
         event: (event: string, callback: EventListener) => {

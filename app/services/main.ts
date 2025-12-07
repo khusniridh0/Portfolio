@@ -1,5 +1,3 @@
-// import { Github, Instagram, LinkedIn, WhatsApp } from "../utils/icons"
-
 export const dataStack = [
 	{ image: '/brand/figma.webp', name: 'Figma' },
 	{ image: '/brand/html.webp', name: 'HTML' },
