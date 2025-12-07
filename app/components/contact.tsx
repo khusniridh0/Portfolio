@@ -3,7 +3,7 @@
 import { ArrowRight } from "@/app/utils/icons";
 import { scrolled } from "../utils/event";
 import { Copy } from "@/app/utils/icons";
-import Image from "next/image";
+import ImageSkeleton from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -45,7 +45,7 @@ export const ContactList = ({ dataContact }: { dataContact: Contact[] }) => {
     return dataContact.map((item, i) => (
         <div className="rounded-1 border-primary p-5 md:col-span-2 lg:col-span-1 mb-6" key={i}>
             <div className="flex justify-between items-center mb-3">
-                <Image src={item.image} width={50} height={50} alt="whatsapp" loading="eager" />
+                <ImageSkeleton src={item.image} width={50} height={50} alt="whatsapp" loading="lazy" />
                 <button type="button" className={`copy ${copied == i && 'copied'} flex flex-col gap-1 items-center`} onClick={e => copying(e, item, i)}>
                     <Copy color={`${copied == i ? 'var(--color-green-500)' : 'var(--text-content)'}`} />
                     <span className="text-sm">Copy</span>

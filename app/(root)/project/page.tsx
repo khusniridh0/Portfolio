@@ -1,7 +1,7 @@
 import { Backwork, CarouselWork, CategoryWork, StackWork, WorkContent } from "@/app/components/works";
 import { dataContact } from "@/app/services/main";
 import { ArrowLeft, ArrowRight } from "@/app/utils/icons";
-import Image from "next/image";
+import ImageSkeleton from "next/image";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -85,7 +85,7 @@ const Project = () => {
                     <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start items-center gap-6">
                         {dataContact.map((contact, i) => (
                             <div key={i} className="flex items-center gap-3 lg:py-3">
-                                <Image src={contact.image} width="48" height={48} alt="" className="w-auto h-12" loading="eager" />
+                                <ImageSkeleton src={contact.image} width="48" height={48} alt="" className="w-auto h-12" loading="lazy" />
                             </div>
                         ))}
                     </div>

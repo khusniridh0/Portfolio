@@ -1,12 +1,11 @@
 import { ChangeTheme, MenuComponent, ToggleMenu } from "@/app/components/header";
 import { dataCertificate, dataContact, dataLearning, dataStack, dataWorks } from "@/app/services/main";
 import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, SendMessage, WhatsApp } from "@/app/utils/icons";
-import Image from "next/image";
-import { ContactMe } from "../components/contact";
-import { ContactList } from "../components/contact";
+import Link from "next/link";
+import { ContactList, ContactMe } from "../components/contact";
+import ImageSkeleton from "../components/image";
 import { ActiveTap } from "../components/skill";
 import { ActiveWorks, SliderWork } from "../components/works";
-import Link from "next/link";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -109,7 +108,7 @@ const Home = () => {
     return (
         <>
             <header id="main-nav" className="flex justify-between items-center sticky top-5">
-                <Image src="/logo/logo-91x80.webp" width={76} height={76} alt="Khusni Ridho" className="logo w-auto h-10 lg:h-[64px] max-w-[76px] p-1 lg:p-3 rounded-full" loading="eager" />
+                <ImageSkeleton src="/logo/logo-91x80.webp" width={76} height={76} alt="Khusni Ridho" className="logo w-auto h-10 lg:h-[64px] max-w-[76px] p-1 lg:p-3 rounded-full" loading="lazy" />
                 <MenuComponent items={navItem} />
                 <ToggleMenu />
 
@@ -120,8 +119,8 @@ const Home = () => {
 
             <section id="hero" className="grid grid-cols-1 lg:grid-cols-2 items-center min-h-screen">
                 <div className="avatar flex justify-center lg:justify-end lg:order-2">
-                    <Image src="/picture/avatar-dark.png" width={610} height={767} alt="Khusni Ridho" className="hidden dark:block" loading="eager" priority />
-                    <Image src="/picture/avatar-light.png" width={610} height={767} alt="Khusni Ridho" className="block dark:hidden" loading="eager" priority />
+                    <ImageSkeleton src="/picture/avatar-dark.png" width={610} height={767} alt="Khusni Ridho" className="hidden dark:block" loading="lazy" />
+                    {/* <ImageSkeleton src="/picture/avatar-light.png" width={610} height={767} alt="Khusni Ridho" className="block dark:hidden" loading="lazy" /> */}
                 </div>
                 <div className="description ">
                     <div className="flex gap-x-8 gap-y-4 flex-col lg:flex-row items-center mb-8 lg:mb-4">
@@ -155,7 +154,7 @@ const Home = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 relative">
                     <div className="profile sticky top-0 md:top-30  bg-[var(--body)] h-fit">
-                        <Image src="/picture/profile.png" alt="Khusni Ridho" width={640} height={837} className="w-full grayscale mix-blend-plus-darker dark:mix-blend-difference" loading="eager" />
+                        <ImageSkeleton src="/picture/profile.png" alt="Khusni Ridho" width={640} height={837} className="w-full grayscale mix-blend-plus-darker dark:mix-blend-difference" loading="lazy" />
                     </div>
                     <div className="description lg:pt-[10px] pl-1 ">
                         <div className="pb-8 mb-8 about-point">
@@ -186,7 +185,7 @@ const Home = () => {
             </section>
 
             <section id="works" className="pt-40">
-                <div className="section-title relative flex justify-center items-center">
+                <div className="section-title relative flex justify-center items-center mb-20">
                     <h1 className="text-7xl lg:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">works</h1>
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Experience</h1>
                 </div>
@@ -205,7 +204,7 @@ const Home = () => {
                 <div className="cta-branding grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                     <div className="branding-item relative overflow-hidden rounded-1 border-primary p-5">
                         <div className="flex justify-between items-center mb-3">
-                            <Image src="/icon/worker.webp" width={51} height={50} alt="worker" loading="eager" />
+                            <ImageSkeleton src="/icon/worker.webp" width={51} height={50} alt="worker" loading="lazy" />
                             <h2 className="text-3xl font-bold">{dataWorks.length}</h2>
                         </div>
                         <h3 className="text-lg font-semibold">Project</h3>
@@ -213,7 +212,7 @@ const Home = () => {
                     </div>
                     <div className="branding-item relative overflow-hidden rounded-1 border-primary p-5">
                         <div className="flex justify-between items-center mb-3">
-                            <Image src="/icon/technology.webp" width={51} height={50} alt="technology" loading="eager" />
+                            <ImageSkeleton src="/icon/technology.webp" width={51} height={50} alt="technology" loading="lazy" />
                             <h2 className="text-3xl font-bold">{dataStack.length}</h2>
                         </div>
                         <h3 className="text-lg font-semibold">Tech Stack</h3>
@@ -221,7 +220,7 @@ const Home = () => {
                     </div>
                     <div className="branding-item relative overflow-hidden rounded-1 border-primary p-5 md:col-span-2 lg:col-span-1">
                         <div className="flex justify-between items-center mb-3">
-                            <Image src="/icon/certificate.webp" width={51} height={50} alt="certificate" loading="eager" />
+                            <ImageSkeleton src="/icon/certificate.webp" width={51} height={50} alt="certificate" loading="lazy" />
                             <h2 className="text-3xl font-bold">{dataWorks.length}</h2>
                         </div>
                         <h3 className="text-lg font-semibold">Certificate</h3>
@@ -316,7 +315,7 @@ const Tap1 = () => {
         <div className="flex flex-wrap gap-3 mb-4 xl:hidden xl:gap-8 xl:mb-8 justify-center item-center mx-auto">
             {dataStack.map((item, i) => (
                 <div className="smooth hover:border-gradient rounded-1 p-4 w-28 h-28 lg:w-30 lg:h-30 flex flex-col justify-center items-center shadow-primary duration-200" key={i}>
-                    <Image src={`${item.image}`} alt="Stack Brand" width={48} height={36} className="mb-4 aspect-[4/3]" loading="eager" />
+                    <ImageSkeleton src={`${item.image}`} alt="Stack Brand" width={48} height={36} className="mb-4 aspect-[4/3]" loading="lazy" />
                     <span className=" font-semibold text-center text-sm">{item.name}</span>
                 </div>
             ))}
@@ -326,7 +325,7 @@ const Tap1 = () => {
                 {items.map((item, i) => {
                     return (
                         <div className="smooth hover:border-gradient rounded-1 p-4 w-28 h-28 lg:w-30 lg:h-30 flex flex-col justify-center items-center shadow-primary duration-200" key={i}>
-                            <Image src={`${item.image}`} alt="Stack Brand" width={48} height={36} className="mb-4 aspect-[4/3]" loading="eager" />
+                            <ImageSkeleton src={`${item.image}`} alt="Stack Brand" width={48} height={36} className="mb-4 aspect-[4/3]" loading="lazy" />
                             <span className=" font-semibold text-center text-sm">{item.name}</span>
                         </div>
                     )
@@ -342,7 +341,7 @@ const Tap2 = () => {
             <div key={i}>
                 <div className="flex gap-6 lg:gap-20 justify">
                     <h3 className="text-xl min-w-fit">[ {i + 1} ]</h3>
-                    <Image src={item.image} alt={item.name} width={352} height={246} className="hidden lg:block aspect-[1.43/1] object-cover w-88 rounded-1" loading="eager" />
+                    <ImageSkeleton src={item.image} alt={item.name} width={352} height={246} className="hidden lg:block aspect-[1.43/1] object-cover w-88 rounded-1" loading="lazy" />
                     <div className="">
                         <h3 className="text-2xl lg:text-4xl font-bold mb-4">{item.name}</h3>
                         <p>{item.desc}</p>
@@ -358,7 +357,7 @@ const Tap3 = () => {
     return <div className="flex flex-wrap gap-4 mb-4 justify-center item-center mx-auto">
         {dataCertificate.map((item, i) => (
             <Link href={item.link} target="_blank" className="smooth hover:border-gradient rounded-1 p-2 lg:w-90 md:w-78 flex flex-col justify-center items-center shadow-primary duration-200" key={i} rel="preload">
-                <Image src={item.image} alt="Certificate" width={344} height={243} className="aspect-[1.43/1]" loading="eager" />
+                <ImageSkeleton src={item.image} alt="Certificate" width={344} height={243} className="aspect-[1.43/1]" loading="lazy" />
             </Link>
         ))}
     </div>

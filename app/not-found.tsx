@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageSkeleton from "next/image";
 import Link from "next/link";
 import Cursor from "./components/cusrsor";
 import { AllProvider } from "./contexts/public-context";
@@ -17,7 +17,7 @@ const NotFound = () => {
                             <span>Back to Home</span>
                         </Link>
                     </div>
-                    <Image src="/picture/error-404.svg" alt="" width={800} height={800} className="w-full max-w-[500px] lg:max-w-[600px] xl:max-w-[700px] h-auto order-1 xl:order-2" loading="eager" />
+                    <ImageSkeleton src="/picture/error-404.svg" alt="" width={800} height={800} className="w-full max-w-[500px] lg:max-w-[600px] xl:max-w-[700px] h-auto order-1 xl:order-2" loading="lazy" />
                 </div>
             </div>
         </AllProvider>
