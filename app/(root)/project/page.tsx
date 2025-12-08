@@ -80,7 +80,7 @@ const Project = () => {
                 </div>
             </div>
 
-            <div className="content mt-30">
+            <div className="content mt-38 lg:mt-28">
                 <div className="grid grid-cols-12 gap-x-6 gap-y-8 lg:gap-y-10">
                     <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start items-center gap-6">
                         {dataContact.map((contact, i) => (

@@ -139,7 +139,7 @@ const Home = () => {
             <section id="brand" className="py-18 lg:p-0">
                 <div id="brand" className="flex flex-wrap justify-around lg:justify-between items-center gap-x-22 gap-y-8 lg:gap-4 lg:flex-nowrap lg:flex-row">
                     {dataBrand.map((item, i) => (
-                        <Link href={item.link} target="_blank" className="flex gap-x-4 justify-center items-center" key={i} rel="preload">
+                        <Link href={item.link} target="_blank" className="flex gap-x-2 justify-center items-center" key={i} rel="preload">
                             <span className="lg:inline-block">{item.icon}</span>
                             <span className=" md:text-2xl">{item.name}</span>
                         </Link>
@@ -263,15 +263,15 @@ const Home = () => {
                         <form>
                             <div className=" w-full flex flex-col gap-2 mb-4">
                                 <label className="text-sm font-medium" htmlFor="name">Name</label>
-                                <input type="text" id="name" name="name" className="rounded-1 text-sm border-secondary p-4" required autoComplete='true' />
+                                <input type="text" id="name" name="name" className="rounded-1 text-sm border-secondary p-4" required autoComplete="off" />
                             </div>
                             <div className=" w-full flex flex-col gap-2 mb-4">
                                 <label className="text-sm font-medium" htmlFor="email">Email</label>
-                                <input type="email" id="email" name="email" className="rounded-1 text-sm border-secondary p-4" required autoComplete='true' />
+                                <input type="email" id="email" name="email" className="rounded-1 text-sm border-secondary p-4" required autoComplete="off" />
                             </div>
                             <div className=" w-full flex flex-col gap-2 mb-4">
                                 <label className="text-sm font-medium" htmlFor="message">Message</label>
-                                <textarea id="message" name="message" rows={10} className="rounded-1 text-sm border-secondary p-4" required autoComplete='true' ></textarea>
+                                <textarea id="message" name="message" rows={10} className="rounded-1 text-sm border-secondary p-4" required autoComplete="off" ></textarea>
                             </div>
                             <button type="submit" className="flex justify-center items-center bg-[var(--primary)] text-sm font-semibold rounded-1 p-3 w-full">
                                 <span className="me-2 text-white">Send Message</span>

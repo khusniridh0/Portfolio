@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "rm -r ./.next/dev & next dev",
+    "dev": "rm -r ./.next/dev & PORT=3001 next dev",
+    "prebuild": "rm -r ./.next/* & next build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

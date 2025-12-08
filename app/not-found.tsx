@@ -1,6 +1,6 @@
-import ImageSkeleton from "next/image";
 import Link from "next/link";
 import Cursor from "./components/cusrsor";
+import ImageSkeleton from "./components/image";
 import { AllProvider } from "./contexts/public-context";
 
 const NotFound = () => {
@@ -8,8 +8,8 @@ const NotFound = () => {
         <AllProvider>
             <Cursor />
             <div className="container mx-auto">
-                <div className="max-h-screen h-screen w-full flex flex-col xl:flex-row items-center justify-center xl:justify-around bg-[var(--body)]">
-                    <div className="text-center xl:text-left order-2 xl:order-1">
+                <div className="max-h-screen h-screen w-full flex flex-col xl:flex-row items-center justify-around bg-[var(--body)]">
+                    <div className="text-center xl:text-left">
                         <h1 className="text-6xl lg:text-8xl font-bold mb-4">Uh, ohh!</h1>
                         <h2 className="text-2xl lg:text-4xl mb-4">We Sincerely Apologize</h2>
                         <h3 className="text-1xl lg:text-2xl mb-10">We can’t find the page that you are looking for!</h3>
@@ -17,7 +17,7 @@ const NotFound = () => {
                             <span>Back to Home</span>
                         </Link>
                     </div>
-                    <ImageSkeleton src="/picture/error-404.svg" alt="" width={800} height={800} className="w-full max-w-[500px] lg:max-w-[600px] xl:max-w-[700px] h-auto order-1 xl:order-2" loading="lazy" />
+                    <ImageSkeleton src="/picture/error-404.svg" alt="" width={800} height={800} className="w-full max-w-[500px] lg:max-w-[600px] xl:max-w-[700px] h-auto" loading="lazy" />
                 </div>
             </div>
         </AllProvider>

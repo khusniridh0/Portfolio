@@ -1,27 +1,34 @@
 'use client'
 
 import Image, { ImageProps } from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ImageSkeleton = ({ src, width, height, alt, className, ...rest }: ImageProps) => {
     const [loading, setLoading] = useState(true);
-    const commonStyle = { minWidth: width, minHeight: height };
+    const [inMobile, setInMobile] = useState(true);
+    const commonStyle = { width, height };
 
     const handleLoadComplete = () => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 3000);
+        setLoading(false);
     };
 
-    return (
-        <>
-            {loading && (<div className="relative" style={commonStyle}>
-                <div className={`${className || ''} absolute bg-gray-300 dark:bg-gray-700 rounded-lg animate-pulse w-full h-full`} />
-            </div>
-            )}
-            <Image src={src} width={width} height={height} alt={alt} className={`${className || ''} transition-opacity duration-300 ${loading ? 'absolute opacity-0 z-0' : ' opacity-100'}`} onLoadingComplete={handleLoadComplete} onError={handleLoadComplete} {...rest} />
-        </>
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            if (window.innerWidth < 768) {
+                setInMobile(false)
+            }
+        }
+    });
+
+    return inMobile ? (
+        loading ? (
+            <div className={`${className || ''} bg-gray-300 dark:bg-gray-700 rounded-lg animate-pulse`} style={commonStyle} />
+        ) : (
+            <Image src={src} width={width} height={height} alt={alt} className={`${className || ''} transition-opacity duration-300`} onLoadingComplete={handleLoadComplete} onError={handleLoadComplete} {...rest} />
+        )
+    ) : (
+        <Image src={`${src}`} width={width} height={height} alt={`${alt}`} className={`${className}`} {...rest} />
     );
-};
+}
 
 export default ImageSkeleton;
