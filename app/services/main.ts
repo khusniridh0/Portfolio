@@ -32,11 +32,11 @@ export const dataLearning = [
 ]
 
 export const dataCertificate = [
-	{ image: '/certificates/certificate-1.webp', link: 'dicoding.com/certificates/07Z6L0Y4YPQR' },
-	{ image: '/certificates/certificate-2.webp', link: 'dicoding.com/certificates/07Z6L0Y4YPQR' },
-	{ image: '/certificates/certificate-3.webp', link: 'dicoding.com/certificates/07Z6L0Y4YPQR' },
-	{ image: '/certificates/certificate-4.webp', link: 'dicoding.com/certificates/07Z6L0Y4YPQR' },
-	{ image: '/certificates/certificate-5.webp', link: 'dicoding.com/certificates/07Z6L0Y4YPQR' },
+	{ image: '/certificates/certificate-1.webp', link: 'https://www.dicoding.com/certificates/07Z6L0Y4YPQR' },
+	{ image: '/certificates/certificate-2.webp', link: 'https://www.dicoding.com/certificates/07Z6L0Y4YPQR' },
+	{ image: '/certificates/certificate-3.webp', link: 'https://www.dicoding.com/certificates/07Z6L0Y4YPQR' },
+	{ image: '/certificates/certificate-4.webp', link: 'https://www.dicoding.com/certificates/07Z6L0Y4YPQR' },
+	{ image: '/certificates/certificate-5.webp', link: 'https://www.credly.com/badges/3b03e292-2de8-4a9c-b89f-a3599a8e69b4' },
 ]
 
 export const dataWorks = [
