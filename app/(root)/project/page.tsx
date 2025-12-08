@@ -1,6 +1,6 @@
 import { Backwork, CarouselWork, CategoryWork, StackWork, WorkContent } from "@/app/components/works";
 import { dataContact } from "@/app/services/main";
-import { ArrowLeft, ArrowRight } from "@/app/utils/icons";
+import { ArrowLeft, ArrowRight } from "@/app/components/icons";
 import ImageSkeleton from "next/image";
 
 interface CarouselResponsive {

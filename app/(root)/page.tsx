@@ -1,12 +1,12 @@
 import { ChangeTheme, MenuComponent, ToggleMenu } from "@/app/components/header";
+import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, WhatsApp } from "@/app/components/icons";
 import { dataCertificate, dataContact, dataLearning, dataStack, dataWorks } from "@/app/services/main";
-import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, SendMessage, WhatsApp } from "@/app/utils/icons";
 import Link from "next/link";
-import { ContactList, ContactMe } from "../components/contact";
+import { ContactForm, ContactList, ContactMe } from "../components/contact";
+import Avatar from "../components/hero";
 import ImageSkeleton from "../components/image";
 import { ActiveTap } from "../components/skill";
 import { ActiveWorks, SliderWork } from "../components/works";
-import Avatar from "../components/hero";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -260,24 +260,7 @@ const Home = () => {
 
                 <div className="grid grid-cols-6 md:grid-cols-12 gap-10">
                     <div className="md:form col-span-6 md:col-span-7 order-2 md:order-1">
-                        <form>
-                            <div className=" w-full flex flex-col gap-2 mb-4">
-                                <label className="text-sm font-medium" htmlFor="name">Name</label>
-                                <input type="text" id="name" name="name" className="rounded-1 text-sm border-secondary p-4" required autoComplete="off" />
-                            </div>
-                            <div className=" w-full flex flex-col gap-2 mb-4">
-                                <label className="text-sm font-medium" htmlFor="email">Email</label>
-                                <input type="email" id="email" name="email" className="rounded-1 text-sm border-secondary p-4" required autoComplete="off" />
-                            </div>
-                            <div className=" w-full flex flex-col gap-2 mb-4">
-                                <label className="text-sm font-medium" htmlFor="message">Message</label>
-                                <textarea id="message" name="message" rows={10} className="rounded-1 text-sm border-secondary p-4" required autoComplete="off" ></textarea>
-                            </div>
-                            <button type="submit" className="flex justify-center items-center bg-[var(--primary)] text-sm font-semibold rounded-1 p-3 w-full">
-                                <span className="me-2 text-white">Send Message</span>
-                                <SendMessage color="var(--color-white)" />
-                            </button>
-                        </form>
+                        <ContactForm />
                     </div>
                     <div className="contact-card col-span-6 md:col-span-5 order-1 md:order-2">
                         <div className="font-semibold mb-1">Contact Details</div>

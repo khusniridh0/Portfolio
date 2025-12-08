@@ -1,7 +1,7 @@
 'use client'
 
 import { AllContext } from "@/app/contexts/public-context";
-import { Close, ExternalLink } from "@/app/utils/icons";
+import { Close, ExternalLink } from "@/app/components/icons";
 import ImageSkeleton from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useCallback, useContext, useEffect, useState } from "react";
@@ -82,7 +82,7 @@ export const SliderWork = ({ dataWorks, config }: { dataWorks: Works[], config: 
             <div className="clip-banner-content">
                 <Carousel config={{ ...config }}>
                     {dataWorks.slice(3).map((item, i) => (
-                        <Link href="/project" className="clip-banner-item aspect-[4/3] rounded-1 overflow-hidden bg-amber-700 block" draggable={false} key={i} onMouseEnter={() => { setReread(item) }}>
+                        <Link href="/project" className="clip-banner-item aspect-[4/3] rounded-1 overflow-hidden block" draggable={false} key={i} onMouseEnter={() => { setReread(item) }}>
                             <ImageSkeleton src={item.image} alt={item.name} width={411} height={308} className="w-full h-full object-cover" loading="lazy" />
                         </Link>
                     ))}

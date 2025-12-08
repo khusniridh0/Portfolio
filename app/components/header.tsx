@@ -1,7 +1,7 @@
 'use client'
 
 import { AllContext } from "@/app/contexts/public-context";
-import { Close, Menu, Moon, Sun } from "@/app/utils/icons";
+import { Close, Menu, Moon, Sun } from "@/app/components/icons";
 import { useContext } from "react";
 import { scrolled } from "../utils/event";
 import Link from "next/link";
