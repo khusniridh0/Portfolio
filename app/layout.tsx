@@ -1,6 +1,8 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./style/main.css";
+
 
 const montserrat = Montserrat({
   variable: "--font-geist-mono",
@@ -22,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${montserrat.variable} antialiased`}>
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
