@@ -6,6 +6,7 @@ import { ContactList, ContactMe } from "../components/contact";
 import ImageSkeleton from "../components/image";
 import { ActiveTap } from "../components/skill";
 import { ActiveWorks, SliderWork } from "../components/works";
+import Avatar from "../components/hero";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -119,8 +120,7 @@ const Home = () => {
 
             <section id="hero" className="grid grid-cols-1 lg:grid-cols-2 items-center min-h-screen">
                 <div className="avatar flex justify-center lg:justify-end lg:order-2">
-                    <ImageSkeleton src="/picture/avatar-dark.png" width={610} height={767} alt="Khusni Ridho" className="hidden dark:block" loading="eager" />
-                    <ImageSkeleton src="/picture/avatar-light.png" width={610} height={767} alt="Khusni Ridho" className="block dark:hidden" loading="eager" />
+                    <Avatar />
                 </div>
                 <div className="description ">
                     <div className="flex gap-x-8 gap-y-4 flex-col lg:flex-row items-center mb-8 lg:mb-4">
