@@ -29,76 +29,83 @@ interface CarouselConfig {
     nav: CarouselNav;
 }
 
-const NextArrow = () => {
-    return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
-        <ArrowRight color="var(--color-white)" size={20} />
-    </div>
-}
+const navItem = [
+    { link: '#hero', text: 'Home' },
+    { link: '#about', text: 'About' },
+    { link: '#skill', text: 'Skill' },
+    { link: '#works', text: 'Project' },
+    { link: '#cta', text: 'Contact' }
+]
 
-const PrevArrow = () => {
-    return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
-        <ArrowLeft color="var(--color-white)" size={20} />
-    </div>
-}
-
-const carouselConfig: CarouselConfig = {
-    gap: 20,
-    drag: false,
-    responsive: [
-        {
-            breakpoint: 1280,
-            perview: 3
-        },
-        {
-            breakpoint: 767,
-            perview: 2
-        },
-        {
-            breakpoint: 100,
-            perview: 1
-        }
-    ],
-    nav: {
-        next: <NextArrow />,
-        prev: <PrevArrow />,
-        position: {
-            x: 'center',
-            y: 'bottom'
-        }
+const dataBrand = [
+    {
+        icon: <LinkedIn color="var(--text-content)" size={30} />,
+        name: 'LinkedIn',
+        link: 'http://linkedin.com/in/khusni-ridho'
+    },
+    {
+        icon: <Github color="var(--text-content)" size={30} />,
+        name: 'Github',
+        link: 'https://khusniridh0.github.io/creator/'
+    },
+    {
+        icon: <Instagram color="var(--text-content)" size={30} />,
+        name: 'Instagram',
+        link: 'https://www.instagram.com/_async.await/'
+    },
+    {
+        icon: <WhatsApp color="var(--text-content)" size={30} />,
+        name: 'WhatsApp',
+        link: 'https://wa.me/6282399180746?text=Halo%20Khusni%20Ridho%2C%0ASaya%20telah%20melihat%20web%20portofolio%20kamu%20dan%20kemampuan%20yang%20kamu%20miliki.%20Saya%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20peluang%20kerja%20sama%20atau%20proyek%20yang%20bisa%20kita%20kerjakan%20bersama.%0AApakah%20kamu%20ada%20waktu%20untuk%20berdiskusi%20lebih%20lanjut%3F'
     }
+]
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Khusni Ridho",
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+    jobTitle: "Full Stack Developer & UI/UX Designer",
+    description: "Software Developer Full Stack yang berfokus pada web development modern dengan Next.js, React, TypeScript, dan desain UI/UX.",
+    image: `${process.env.NEXT_PUBLIC_SITE_URL}/picture/og-image.png`,
+    sameAs: [...dataBrand.slice(0, -1).map((item) => item.link)],
+    knowsAbout: [...dataStack.map((item) => item.name)],
+    contactPoint: [
+        {
+            "@type": "ContactPoint",
+            url: `${process.env.NEXT_PUBLIC_SITE_URL}/#contact`
+        }
+    ]
+
 };
 
 const Home = () => {
-    const navItem = [
-        { link: '#hero', text: 'Home' },
-        { link: '#about', text: 'About' },
-        { link: '#skill', text: 'Skill' },
-        { link: '#works', text: 'Project' },
-        { link: '#cta', text: 'Contact' }
-    ]
-
-    const dataBrand = [
-        {
-            icon: <LinkedIn color="var(--text-content)" size={30} />,
-            name: 'LinkedIn',
-            link: 'http://linkedin.com/in/khusni-ridho'
-        },
-        {
-            icon: <Github color="var(--text-content)" size={30} />,
-            name: 'Github',
-            link: 'https://khusniridh0.github.io/creator/'
-        },
-        {
-            icon: <Instagram color="var(--text-content)" size={30} />,
-            name: 'Instagram',
-            link: 'https://www.instagram.com/_async.await/'
-        },
-        {
-            icon: <WhatsApp color="var(--text-content)" size={30} />,
-            name: 'WhatsApp',
-            link: 'https://wa.me/6282399180746?text=Halo%20Khusni%20Ridho%2C%0ASaya%20telah%20melihat%20web%20portofolio%20kamu%20dan%20kemampuan%20yang%20kamu%20miliki.%20Saya%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20peluang%20kerja%20sama%20atau%20proyek%20yang%20bisa%20kita%20kerjakan%20bersama.%0AApakah%20kamu%20ada%20waktu%20untuk%20berdiskusi%20lebih%20lanjut%3F'
+    const carouselConfig: CarouselConfig = {
+        gap: 20,
+        drag: false,
+        responsive: [
+            {
+                breakpoint: 1280,
+                perview: 3
+            },
+            {
+                breakpoint: 767,
+                perview: 2
+            },
+            {
+                breakpoint: 100,
+                perview: 1
+            }
+        ],
+        nav: {
+            next: <NextArrow />,
+            prev: <PrevArrow />,
+            position: {
+                x: 'center',
+                y: 'bottom'
+            }
         }
-    ]
+    };
 
     const tabs = [
         { title: 'Tech Stack', component: <Tap1 />, key: 'tap1' },
@@ -108,6 +115,7 @@ const Home = () => {
 
     return (
         <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <header id="main-nav" className="flex justify-between items-center sticky top-5">
                 <ImageSkeleton src="/logo/logo-91x80.webp" width={76} height={76} alt="Khusni Ridho" className="logo w-auto h-10 lg:h-[64px] max-w-[76px] p-1 lg:p-3 rounded-full" loading="eager" />
                 <MenuComponent items={navItem} />
@@ -279,6 +287,18 @@ const Home = () => {
 }
 
 export default Home;
+
+const NextArrow = () => {
+    return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
+        <ArrowRight color="var(--color-white)" size={20} />
+    </div>
+}
+
+const PrevArrow = () => {
+    return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
+        <ArrowLeft color="var(--color-white)" size={20} />
+    </div>
+}
 
 const Tap1 = () => {
     const newRows = [9, 7, 5, 3, 1]
