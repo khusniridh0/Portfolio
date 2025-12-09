@@ -42,7 +42,7 @@ export const formContact = async (_prevState: formState, formData: FormData): Pr
     try {
         const { name, email, message } = data;
         const payload = {
-            to: process.env.NEXT_EMAIL_RECIPIENT,
+            to: process.env.NEXT_PRIVATE_EMAIL_RECIPIENT,
             subject: `Pesan dari ${name} - ${email} | Website Portfolio Personal`,
             text: message,
         }
