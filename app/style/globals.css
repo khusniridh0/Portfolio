@@ -407,10 +407,6 @@
         transition: all 0.3s ease-in-out;
     }
 
-    #works .clip-banner:hover .clip-banner-item:not(:hover)::after {
-        backdrop-filter: saturate(20%);
-    }
-
     #works .clip-banner .clip-banner-item img {
         transition: all 0.3s ease-in-out;
     }
@@ -546,5 +542,9 @@
 
     .cursor-clicked.clicked .rect-animate {
         animation: wave 0.5s ease-in-out;
+    }
+
+    .showing {
+        animation: fadeIn 0.8s ease-in-out;
     }
 }

@@ -9,7 +9,7 @@ const contactSchema = z.object({
     email: z.email('Email tidak valid.')
         .min(5, { message: 'Email minimal 5 karakter.' })
         .refine((val) => val.endsWith('@gmail.com'), {
-            message: 'Hanya menerima dari Gamil.'
+            message: 'Hanya menerima dari Gmail.'
         }),
     message: z.string()
         .min(10, { message: "Pesan minimal 10 karakter." })
@@ -42,7 +42,7 @@ export const formContact = async (_prevState: formState, formData: FormData): Pr
     try {
         const { name, email, message } = data;
         const payload = {
-            to: process.env.NEXT_PRIVATE_EMAIL_RECIPIENT,
+            to: process.env.EMAIL_RECIPIENT,
             subject: `Pesan dari ${name} - ${email} | Website Portfolio Personal`,
             text: message,
         }

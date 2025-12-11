@@ -10,7 +10,7 @@ export const scrolling = (event: MouseEvent) => {
     navs.forEach(nav => {
         if (nav.hasAttribute('href')) {
             const target = nav.getAttribute('href')?.slice(1) ?? '';
-            const element = document.querySelector<HTMLDivElement>(`#${target}`);
+            const element = document.querySelector<HTMLDivElement>(`${target}`);
             const scrollPosition = virtualWindow instanceof HTMLElement
                 ? virtualWindow.scrollTop
                 : virtualWindow instanceof Window
@@ -29,6 +29,6 @@ export const scrolled = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
     const targetElement = event.currentTarget instanceof HTMLElement ? event.currentTarget : null;
     const target = targetElement?.getAttribute('href')?.slice(1) ?? '';
-    const element = select(`#${target}`).target
+    const element = select(`${target}`).target
     element?.scrollIntoView()
 }

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./style/main.css";
 
-const url = process.env.NEXT_PUBLIC_SITE_URL!;
+const url = process.env.SITE_URL!;
 const montserrat = Montserrat({
 	variable: "--font-geist-mono",
 	subsets: ["latin"],
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 	icons: {
 		icon: "/favicon.ico",
 		shortcut: "/favicon.ico",
-		apple: "/picture/icon-180.png",
+		apple: "/logo/icon-180.png",
 	},
 };
 

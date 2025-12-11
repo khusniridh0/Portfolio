@@ -28,7 +28,7 @@ const initialState = {
 
 export const ContactMe = () => {
     return (
-        <Link onClick={scrolled} href="#contact" className="w-fit btn rounded-full border-gradient" rel="preload">
+        <Link onClick={scrolled} href="/#contact" className="w-fit btn rounded-full border-gradient" rel="preload">
             <span className="me-4">Contact Me</span>
             <ArrowRight color="var(--text-content)" />
         </Link>
@@ -40,7 +40,7 @@ export const ContactForm = () => {
     const { name, email, message } = state.errors || initialState.errors;
 
     return (
-        <form action={formAction} method="POST">
+        <form action={formAction}>
             <div className=" w-full flex flex-col gap-2 mb-4">
                 <label className="text-sm font-medium" htmlFor="name">Name</label>
                 <input type="text" id="name" name="name" defaultValue={state.formInput?.name} className="rounded-1 text-sm border-secondary p-4" required autoComplete="off" />

@@ -1,111 +1,94 @@
-import { Backwork, CarouselWork, CategoryWork, StackWork, WorkContent } from "@/app/components/works";
+export const dynamic = "force-dynamic";
+
+import Footer from "@/app/components/Footer";
+import { HeaderII } from "@/app/components/header";
+import { ExternalLink } from "@/app/components/icons";
+import ImageSkeleton from "@/app/components/image";
 import { dataContact } from "@/app/services/main";
-import { ArrowLeft, ArrowRight } from "@/app/components/icons";
-import ImageSkeleton from "next/image";
+import { request } from "@/app/utils/api";
+import Link from "next/link";
 
-interface CarouselResponsive {
-    breakpoint: number;
-    perview: number;
+interface Works {
+    slug: string;
+    name: string;
+    image: string;
+    desc: string;
 }
 
-interface CarouselNav {
-    next: React.ReactNode;
-    prev: React.ReactNode;
-    position: {
-        x: 'center' | 'start' | 'end' | 'between';
-        y: 'top' | 'bottom';
-    }
-}
+const Project = async () => {
+    const { data } = await request.get('project')
 
-interface CarouselConfig {
-    gap: number;
-    drag: boolean,
-    responsive: CarouselResponsive[];
-    nav: CarouselNav;
-}
-
-const NextArrow = () => {
-    return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
-        <ArrowRight color="var(--color-white)" size={20} />
-    </div>
-}
-
-const PrevArrow = () => {
-    return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
-        <ArrowLeft color="var(--color-white)" size={20} />
-    </div>
-}
-
-const carouselConfig: CarouselConfig = {
-    gap: 20,
-    drag: true,
-    responsive: [
-        {
-            breakpoint: 1024,
-            perview: 2
-        },
-        {
-            breakpoint: 100,
-            perview: 1
-        }
-    ],
-    nav: {
-        next: <NextArrow />,
-        prev: <PrevArrow />,
-        position: {
-            x: 'end',
-            y: 'top'
-        }
-    }
-};
-
-const Project = () => {
     return (
         <>
-            <div className="fixed top-0 left-0 w-screen py-4 z-10 backdrop-filter backdrop-blur-xl bg-[var(--body-50)]">
-                <div className="container flex flex-col lg:flex-row items-center justify-between gap-y-6 mx-auto">
-                    <div className="flex items-center gap-3 bg-[var(--body-50)] backdrop-filter backdrop-blur-sm rounded-full pl-6 self-end lg:self-center lg:order-2">
-                        <div className="flex items-center gap-1">
-                            <span className="text-xl font-semibold inline-block">[</span>
-                            <span className="text-xs font-semibold inline-block capitalize mt-1">ESC</span>
-                            <span className="text-xl font-semibold inline-block">]</span>
-                        </div>
-                        <Backwork />
-                    </div>
-                    <h1 className="text-lg font-semibold flex lg:order-1 self-start lg:self-center">
-                        <span className="capitalize block">My works</span>
-                        <span className="mx-3">|</span>
-                        <CategoryWork />
-                    </h1>
-                </div>
-            </div>
+            <HeaderII />
 
-            <div className="content mt-38 lg:mt-28">
-                <div className="grid grid-cols-12 gap-x-6 gap-y-8 lg:gap-y-10">
-                    <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start items-center gap-6">
-                        {dataContact.map((contact, i) => (
-                            <div key={i} className="flex items-center gap-3 lg:py-3">
-                                <ImageSkeleton src={contact.image} width="48" height={48} alt="" className="w-auto h-12" loading="lazy" />
-                            </div>
+            <section className="grid grid-cols-12 pt-20">
+                <div className="col-span-1 hidden lg:block relative">
+                    <div className="sticky top-0 flex lg:flex-col justify-center items-center gap-10 h-screen">
+                        <div className="horizon w-px h-full" />
+                        <div className="-rotate-90 absolute bg-[var(--body)] w-90 py-2 px-6 uppercase">
+                            web development & design ui/ux
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-span-12 lg:col-span-10">
+                    <div className="mb-20">
+                        <div className="section-title relative flex justify-center items-center mb-16">
+                            <h1 className="text-7xl lg:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">Works</h1>
+                            <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Experience</h1>
+                        </div>
+                        <p className="text-lg lg:text-2xl text-center max-w-3xl mx-auto">Arsitek digital ahli dalam membangun UI interaktif, didukung keahlian di bidang Full Stack Web Development, Desain UI/UX, dan Software Testing.</p>
+                    </div>
+
+                    <div className="grid grid-cols-6 lg:grid-cols-7 gap-x-7 gap-y-8 lg:gap-y-0">
+                        {data.map((item: Works, i: number) => (
+                            (i % 4 === 0) || (i % 4 === 3) ? (
+                                <div className="lg:p-6 col-span-6 md:col-span-3 lg:col-span-4" key={i}>
+                                    <div className="w-full h-auto aspect-[4/3] rounded-lg overflow-hidden">
+                                        <ImageSkeleton src={item.image} alt={item.name} width={671} height={503} className="w-auto h-full object-cover" loading="lazy" />
+                                    </div>
+                                    <div className="px-2">
+                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4">
+                                            {item.name}
+                                            <sup className="inline-block ml-2"><ExternalLink color="var(--text-content)" size={16} /></sup>
+                                        </Link>
+                                        <p>{item.desc.slice(0, 170)}...</p>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="lg:p-6 col-span-6 md:col-span-3 lg:col-span-3" key={i}>
+                                    <div className="w-full h-auto aspect-[4/3] rounded-lg overflow-hidden">
+                                        <ImageSkeleton src={item.image} alt={item.name} width={484} height={363} className="w-auto h-full object-cover" loading="lazy" />
+                                    </div>
+                                    <div className="px-2">
+                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4">
+                                            {item.name}
+                                            <sup className="inline-block ml-2"><ExternalLink color="var(--text-content)" size={16} /></sup>
+                                        </Link>
+                                        <p>{item.desc.slice(0, 170)}...</p>
+                                    </div>
+                                </div>
+                            )
                         ))}
                     </div>
-                    <div className="horizon w-full h-px my-4 col-span-12 lg:hidden" />
-                    <WorkContent />
-                    <div className="col-span-12 lg:col-span-4">
-                        <h1 className="text-2xl font-bold w-fit">
-                            Stack Tech
-                            <div className="horizon w-full h-px my-4" />
-                        </h1>
-                        <div className="flex flex-wrap justify-start items-start gap-4">
-                            <StackWork />
+                </div>
+
+                <div className="col-span-1 hidden lg:block relative">
+                    <div className="sticky top-0 flex lg:flex-col justify-center items-center gap-10 h-screen">
+                        <div className="horizon w-px h-full" />
+                        <div className="absolute flex -rotate-90">
+                            {dataContact.map((contact, i) => (
+                                <Link href={contact.link} target="_blank" className="bg-[var(--body)] py-2 px-6 uppercase" key={i}>
+                                    {contact.name}
+                                </Link>
+                            ))}
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div className="mt-20">
-                <CarouselWork config={carouselConfig as CarouselConfig} />
-            </div>
+            <Footer />
         </>
     )
 }

@@ -1,8 +1,12 @@
-import { ChangeTheme, MenuComponent, ToggleMenu } from "@/app/components/header";
+export const dynamic = "force-dynamic";
+
+import { HeaderI } from "@/app/components/header";
 import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, WhatsApp } from "@/app/components/icons";
 import { dataCertificate, dataContact, dataLearning, dataStack, dataWorks } from "@/app/services/main";
+import { request } from "@/app/utils/api";
 import Link from "next/link";
 import { ContactForm, ContactList, ContactMe } from "../components/contact";
+import Footer from "../components/Footer";
 import Avatar from "../components/hero";
 import ImageSkeleton from "../components/image";
 import { ActiveTap } from "../components/skill";
@@ -28,14 +32,6 @@ interface CarouselConfig {
     responsive: CarouselResponsive[];
     nav: CarouselNav;
 }
-
-const navItem = [
-    { link: '#hero', text: 'Home' },
-    { link: '#about', text: 'About' },
-    { link: '#skill', text: 'Skill' },
-    { link: '#works', text: 'Project' },
-    { link: '#cta', text: 'Contact' }
-]
 
 const dataBrand = [
     {
@@ -64,22 +60,26 @@ const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Khusni Ridho",
-    url: process.env.NEXT_PUBLIC_SITE_URL,
+    url: process.env.SITE_URL,
     jobTitle: "Full Stack Developer & UI/UX Designer",
     description: "Software Developer Full Stack yang berfokus pada web development modern dengan Next.js, React, TypeScript, dan desain UI/UX.",
-    image: `${process.env.NEXT_PUBLIC_SITE_URL}/picture/og-image.png`,
+    image: `${process.env.SITE_URL}/picture/og-image.png`,
     sameAs: [...dataBrand.slice(0, -1).map((item) => item.link)],
     knowsAbout: [...dataStack.map((item) => item.name)],
     contactPoint: [
         {
             "@type": "ContactPoint",
-            url: `${process.env.NEXT_PUBLIC_SITE_URL}/#contact`
+            url: `${process.env.SITE_URL}/#contact`
         }
     ]
 
 };
 
-const Home = () => {
+const Home = async () => {
+    const { data } = await request.get('project', { params: { start: 0, end: 9 } })
+    const activeWorks = data.slice(0, 3);
+    const otherWorks = data.slice(3);
+
     const carouselConfig: CarouselConfig = {
         gap: 20,
         drag: false,
@@ -116,15 +116,7 @@ const Home = () => {
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <header id="main-nav" className="flex justify-between items-center sticky top-5">
-                <ImageSkeleton src="/logo/logo-91x80.webp" width={76} height={76} alt="Khusni Ridho" className="logo w-auto h-10 lg:h-[64px] max-w-[76px] p-1 lg:p-3 rounded-full" loading="eager" />
-                <MenuComponent items={navItem} />
-                <ToggleMenu />
-
-                <div className="flex items-center gap-3 bg-[var(--body-50)] backdrop-filter backdrop-blur-sm rounded-full pl-6">
-                    <ChangeTheme />
-                </div>
-            </header>
+            <HeaderI />
 
             <section id="hero" className="grid grid-cols-1 lg:grid-cols-2 items-center min-h-screen">
                 <div className="avatar flex justify-center lg:justify-end lg:order-2">
@@ -140,7 +132,12 @@ const Home = () => {
                     </div>
                     <h1 className="text-4xl lg:text-7xl font-bold mb-2 lg:mb-6 w-fit uppercase">Khusni Ridho</h1>
                     <p className="text-md lg:text-xl mb-8">Software Developer fokus pada UI/UX, Full-Stack Web Development, dan Software Testing.</p>
-                    <ContactMe />
+                    <div className="flex items-center gap-10">
+                        <Link href="/readme" className="w-fit btn rounded-full border-gradient" rel="preload">
+                            <span className="me-4">Read-Me</span>
+                            <ArrowRight color="var(--text-content)" />
+                        </Link>
+                    </div>
                 </div>
             </section>
 
@@ -198,8 +195,8 @@ const Home = () => {
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Experience</h1>
                 </div>
                 <div className="benner">
-                    <ActiveWorks dataWorks={dataWorks} />
-                    <SliderWork dataWorks={dataWorks} config={carouselConfig as CarouselConfig} />
+                    <ActiveWorks dataWorks={activeWorks} />
+                    <SliderWork dataWorks={otherWorks} config={carouselConfig as CarouselConfig} />
                 </div>
             </section>
 
@@ -277,16 +274,10 @@ const Home = () => {
                 </div>
             </section>
 
-            <footer className="flex flex-wrap justify-between items-center py-6 gap-6 mt-10">
-                <div className="horizon w-full h-px" />
-                <div className="text-sm font-medium">♥️ 2025 Created By Khusni Ridho</div>
-                <div className="text-sm font-medium">Showcase</div>
-            </footer>
+            <Footer />
         </>
     );
 }
-
-export default Home;
 
 const NextArrow = () => {
     return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
@@ -365,3 +356,5 @@ const Tap3 = () => {
         ))}
     </div>
 }
+
+export default Home;
