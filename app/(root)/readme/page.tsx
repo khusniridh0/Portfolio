@@ -1,6 +1,6 @@
 import Footer from "@/app/components/Footer";
 import { HeaderII } from "@/app/components/header";
-import Image from "next/image";
+import ImageSkeleton from "@/app/components/image";
 
 const ReadMe = async () => {
 
@@ -29,13 +29,7 @@ const ReadMe = async () => {
                         </div>
                     </div>
 
-                    <Image
-                        src="/picture/readme.webp"
-                        alt="Website My Portfolio"
-                        width={1000}
-                        height={1000}
-                        className="w-full h-auto aspect-video object-cover my-10"
-                    />
+                    <ImageSkeleton src="/picture/readme.webp" alt="Website My Portfolio" width={853} height={480} className="w-full h-auto aspect-video object-cover my-10" />
 
                     <div className="part-1 mb-20">
                         <Heading level={2}>Intoduction</Heading>

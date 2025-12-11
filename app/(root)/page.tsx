@@ -5,12 +5,12 @@ import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, WhatsApp } from "@/
 import { dataCertificate, dataContact, dataLearning, dataStack, dataWorks } from "@/app/services/main";
 import { request } from "@/app/utils/api";
 import Link from "next/link";
-import { ContactForm, ContactList, ContactMe } from "../components/contact";
-import Footer from "../components/Footer";
-import Avatar from "../components/hero";
-import ImageSkeleton from "../components/image";
-import { ActiveTap } from "../components/skill";
-import { ActiveWorks, SliderWork } from "../components/works";
+import { ContactForm, ContactList, ContactMe } from "@/app/components/contact";
+import Footer from "@/app/components/Footer";
+import Avatar from "@/app/components/hero";
+import ImageSkeleton from "@/app/components/image";
+import { ActiveTap } from "@/app/components/skill";
+import { ActiveWorks, SliderWork } from "@/app/components/works";
 
 interface CarouselResponsive {
     breakpoint: number;

@@ -1,8 +1,8 @@
 'use client'
 
 import { useContext } from "react";
-import { AllContext } from "../contexts/public-context";
-import ImageSkeleton from "./image";
+import { AllContext } from "@/app/contexts/public-context";
+import ImageSkeleton from "@/app/components/image"; 
 
 const Avatar = () => {
     const { theme } = useContext(AllContext)!;

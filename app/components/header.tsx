@@ -5,7 +5,7 @@ import { AllContext } from "@/app/contexts/public-context";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
-import { scrolled } from "../utils/event";
+import { scrolled } from "@/app/utils/event";
 
 interface NavItem {
     link: string;

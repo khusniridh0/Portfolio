@@ -2,9 +2,9 @@
 
 import { usePathname } from "next/navigation";
 import { useContext, useEffect } from "react";
-import { AllContext } from "../contexts/public-context";
-import { scrolling } from "../utils/event";
-import { select } from "../utils/func";
+import { AllContext } from "@/app/contexts/public-context";
+import { scrolling } from "@/app/utils/event";
+import { select } from "@/app/utils/func";
 
 const Event = () => {
     const { setMenu } = useContext(AllContext)!;

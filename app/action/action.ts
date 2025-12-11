@@ -1,8 +1,8 @@
 'use server'
 
 import * as z from "zod";
-import { smtp } from "../utils/api";
-import { getErrors } from "../utils/errors";
+import { smtp } from "@/app/utils/api";
+import { getErrors } from "@/app/utils/errors";
 
 const contactSchema = z.object({
     name: z.string().min(3, { message: 'Nama minimal 3 karakter.' }),

@@ -1,7 +1,7 @@
-import Cursor from "../components/cusrsor";
-import Event from "../components/event";
-import Loading from "../components/loading";
-import { AllProvider } from "../contexts/public-context";
+import Cursor from "@/app/components/cusrsor";
+import Event from "@/app/components/event";
+import Loading from "@/app/components/loading";
+import { AllProvider } from "@/app/contexts/public-context";
 
 const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 

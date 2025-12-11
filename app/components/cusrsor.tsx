@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from "react";
-import { select } from "../utils/func";
+import { select } from "@/app/utils/func";
 
 const Cursor = () => {
 

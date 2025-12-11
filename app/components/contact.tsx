@@ -4,8 +4,8 @@ import { ArrowRight, Copy, SendMessage } from "@/app/components/icons";
 import ImageSkeleton from "next/image";
 import Link from "next/link";
 import { useActionState, useEffect, useState } from "react";
-import { formContact, formState } from "../action/action";
-import { scrolled } from "../utils/event";
+import { formContact, formState } from "@/app/action/action";
+import { scrolled } from "@/app/utils/event";
 
 interface Contact {
     image: string
