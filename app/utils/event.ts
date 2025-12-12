@@ -1,4 +1,4 @@
-import { select } from "./func";
+import { select } from "@/app/utils/func";
 
 export const scrolling = (event: MouseEvent) => {
     event.preventDefault();

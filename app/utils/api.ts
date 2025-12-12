@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const smtp = axios.create({
     baseURL: process.env.EMAIL_SMTP,
-    timeout: 10000,
+    timeout: 30000,
     headers: {
         'Content-Type': 'application/json',
     },
@@ -15,5 +15,6 @@ export const request = axios.create({
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
+        'x-api-key': process.env.API_KEY
     },
 });

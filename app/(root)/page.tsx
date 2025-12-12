@@ -1,16 +1,15 @@
-export const dynamic = "force-dynamic";
-
-import { HeaderI } from "@/app/components/header";
-import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, WhatsApp } from "@/app/components/icons";
-import { dataCertificate, dataContact, dataLearning, dataStack, dataWorks } from "@/app/services/main";
-import { request } from "@/app/utils/api";
-import Link from "next/link";
+import { getProjects } from "@/app/actions/project";
 import { ContactForm, ContactList, ContactMe } from "@/app/components/contact";
+import ErrorNotFound from "@/app/components/error-404";
 import Footer from "@/app/components/Footer";
+import { HeaderI } from "@/app/components/header";
 import Avatar from "@/app/components/hero";
+import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, WhatsApp } from "@/app/components/icons";
 import ImageSkeleton from "@/app/components/image";
 import { ActiveTap } from "@/app/components/skill";
 import { ActiveWorks, SliderWork } from "@/app/components/works";
+import { dataCertificate, dataContact, dataLearning, dataStack, dataWorks } from "@/app/services/main";
+import Link from "next/link";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -76,9 +75,10 @@ const jsonLd = {
 };
 
 const Home = async () => {
-    const { data } = await request.get('project', { params: { start: 0, end: 9 } })
-    const activeWorks = data.slice(0, 3);
-    const otherWorks = data.slice(3);
+    const data = await getProjects({ start: 0, end: 9 })
+    if (!data) return <ErrorNotFound />
+    const activeWorks = data?.slice(0, 3);
+    const otherWorks = data?.slice(3);
 
     const carouselConfig: CarouselConfig = {
         gap: 20,

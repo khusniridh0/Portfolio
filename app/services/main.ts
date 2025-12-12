@@ -41,7 +41,7 @@ export const dataCertificate = [
 
 export const dataContact = [
 	{
-		image: '/icon/whatsapp.webp',
+		image: '/icon/email.webp',
 		name: 'Email',
 		link: 'mail.khusniridho@gmail.com',
 	},

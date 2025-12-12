@@ -1,9 +1,9 @@
-export const dynamic = "force-dynamic";
+import { getProjectDetail } from "@/app/actions/project";
 import Carousel from "@/app/components/carousel";
+import ErrorNotFound from "@/app/components/error-404";
 import { ArrowLeft, ArrowRight } from "@/app/components/icons";
 import { Backwork } from "@/app/components/works";
 import { dataContact } from "@/app/services/main";
-import { request } from "@/app/utils/api";
 import ImageSkeleton from "next/image";
 import Link from "next/link";
 
@@ -41,8 +41,8 @@ interface Stack {
 
 const ProjectDetail = async ({ params }: ProjectProps) => {
     const { slug } = await params
-    const res = await request.get('project', { params: { slug } })
-    const { data } = res
+    const data = await getProjectDetail(slug);
+    if (!data) return <ErrorNotFound />
     const carouselConfig: CarouselConfig = {
         gap: 20,
         drag: true,
@@ -92,8 +92,9 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
                 <div className="grid grid-cols-12 gap-x-6 gap-y-8 lg:gap-y-10">
                     <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start items-center gap-6">
                         {dataContact.map((contact, i) => (
-                            <Link href={contact.link} target="_blank" key={i} className="flex items-center gap-3 lg:py-3">
-                                <ImageSkeleton src={contact.image} width={48} height={48} alt="" className="w-auto h-12" loading="lazy" />
+                            <Link href={contact.link} target="_blank" key={i} className="flex flex-col items-center gap-2 lg:py-3" rel="preload">
+                                <ImageSkeleton src={contact.image} width={48} height={48} alt="" className="w-auto h-10" loading="lazy" />
+                                <span className="text-sm ">{contact.name}</span>
                             </Link>
                         ))}
                     </div>

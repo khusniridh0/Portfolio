@@ -54,3 +54,4 @@ next-env.d.ts
 *.sln
 *.sw?
 note.txt
+app/api/redis/route.ts

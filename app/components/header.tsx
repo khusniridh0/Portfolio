@@ -23,7 +23,7 @@ const navItem = [
 export const HeaderI = () => {
     return (
         <header id="main-nav" className="flex justify-between items-center sticky top-5">
-            <Link href='/'>
+            <Link href='/' rel="preload">
                 <Image src="/logo/logo-91x80.webp" width={76} height={76} alt="Khusni Ridho" className="logo w-auto h-10 lg:h-[64px] max-w-[76px] p-1 lg:p-3 rounded-full" loading="eager" />
             </Link>
             <MenuComponent items={navItem} />
@@ -39,7 +39,7 @@ export const HeaderI = () => {
 export const HeaderII = () => {
     return (
         <header id="main-nav" className="flex justify-between items-center sticky top-5">
-            <Link href='/'>
+            <Link href='/' rel="preload">
                 <Image src="/logo/logo-91x80.webp" width={76} height={76} alt="Khusni Ridho" className="logo w-auto h-10 lg:h-[64px] max-w-[76px] p-1 lg:p-3 rounded-full" loading="eager" />
             </Link>
 

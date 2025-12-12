@@ -13,10 +13,7 @@ export async function GET(req: NextRequest) {
     const project = dataWorks.find((item) => item.slug === slug);
 
     if (!project) {
-        return NextResponse.json(
-            { error: "Project tidak ditemukan" },
-            { status: 404 }
-        );
+        return NextResponse.json({ error: "Project tidak ditemukan", status: 404 });
     }
 
     return NextResponse.json(project);

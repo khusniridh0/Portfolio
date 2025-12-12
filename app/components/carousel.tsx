@@ -61,7 +61,7 @@ const Carousel = ({ config, children }: { config: CarouselConfig, children: Reac
 
         const scrollWidth = current.scrollWidth;
         const clientWidth = items.clientWidth;
-        const direction = event.currentTarget.getAttribute('data-direction') as 'next' | 'prev'; // Define possible values
+        const direction = event.currentTarget.getAttribute('data-direction') as 'next' | 'prev';
 
         const newScrollLeft = direction === 'next'
             ? Math.min(scrollWidth - clientWidth, current.scrollLeft + clientWidth)

@@ -4,7 +4,7 @@ import { ArrowRight, Copy, SendMessage } from "@/app/components/icons";
 import ImageSkeleton from "next/image";
 import Link from "next/link";
 import { useActionState, useEffect, useState } from "react";
-import { formContact, formState } from "@/app/action/action";
+import { formContact, formState } from "@/app/actions/contact";
 import { scrolled } from "@/app/utils/event";
 
 interface Contact {
@@ -62,8 +62,8 @@ export const ContactForm = () => {
             </button>
 
             {(state?.message) && (
-                <div className={`text-center mt-4 font-medium flex items-center justify-center gap-2 ${state?.success ? 'text-green-600' : 'text-red-600'}`}>
-                    <span className={`rounded-full w-8 h-8 flex items-center justify-center ${state?.success ? 'bg-green-200' : 'bg-red-200'}`}>{state.success ? '✔️' : '❗'}</span>
+                <div className={`text-center mt-4 font-medium flex items-start justify-center gap-2 ${state?.success ? 'text-green-600' : 'text-red-600'}`}>
+                    <span className={`rounded-full h-8 text-sm flex items-center justify-center aspect-square ${state?.success ? 'bg-green-200' : 'bg-red-200'}`}>{state.success ? '✔️' : '❗'}</span>
                     <span className="inline-block">{state?.message}</span>
                 </div>
             )}
@@ -78,7 +78,7 @@ export const ContactList = ({ dataContact }: { dataContact: Contact[] }) => {
         e.preventDefault();
         navigator.clipboard.writeText(data.link).then(() => {
             setCopied(index);
-        }).catch(err => console.log('Gagal copy link:', err));
+        })
     }
 
     useEffect(() => {
@@ -94,7 +94,7 @@ export const ContactList = ({ dataContact }: { dataContact: Contact[] }) => {
     return dataContact.map((item, i) => (
         <div className="rounded-1 border-primary p-5 md:col-span-2 lg:col-span-1 mb-6" key={i}>
             <div className="flex justify-between items-center mb-3">
-                <ImageSkeleton src={item.image} width={50} height={50} alt="whatsapp" loading="lazy" />
+                <ImageSkeleton src={item.image} width={50} height={50} className="h-10 w-auto" alt="whatsapp" loading="lazy" />
                 <button type="button" className={`copy ${copied == i && 'copied'} flex flex-col gap-1 items-center`} onClick={e => copying(e, item, i)}>
                     <Copy color={`${copied == i ? 'var(--color-green-500)' : 'var(--text-content)'}`} />
                     <span className="text-sm">Copy</span>
