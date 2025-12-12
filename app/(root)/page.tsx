@@ -154,7 +154,7 @@ const Home = async () => {
 
             <section id="about" className="pt-40 relative">
                 <div className="section-title relative flex justify-center items-center mb-20">
-                    <h1 className="text-7xl lg:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">About</h1>
+                    <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">About</h1>
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">introduction</h1>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 relative">
@@ -183,7 +183,7 @@ const Home = async () => {
 
             <section id="skill" className="lg:pt-40">
                 <div className="section-title relative flex justify-center items-center mb-20">
-                    <h1 className="text-7xl lg:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">mastery</h1>
+                    <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">mastery</h1>
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Journey & Learning</h1>
                 </div>
                 <ActiveTap tabs={tabs} />
@@ -191,7 +191,7 @@ const Home = async () => {
 
             <section id="works" className="pt-40">
                 <div className="section-title relative flex justify-center items-center mb-20">
-                    <h1 className="text-7xl lg:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">works</h1>
+                    <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">works</h1>
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Experience</h1>
                 </div>
                 <div className="benner">
@@ -202,7 +202,7 @@ const Home = async () => {
 
             <section id="cta" className="py-40">
                 <div className="section-title relative flex justify-center items-center mb-20">
-                    <h1 className="text-7xl lg:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">links</h1>
+                    <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">links</h1>
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Let&lsquo;s Make a Change</h1>
                 </div>
 
@@ -315,7 +315,7 @@ const Tap1 = () => {
             ))}
         </div>
         {createPiramid(newRows, dataStack).map((items, i) => (
-            <div className="hidden xl:flex flex-wrap gap-4 mb-4 xl:gap-8 xl:mb-8 justify-center item-center mx-auto" key={i}>
+            <div className="hidden xl:flex flex-wrap gap-4 mb-4 xl:gap-4 xl:mb-4 justify-center item-center mx-auto" key={i}>
                 {items.map((item, i) => {
                     return (
                         <div className="smooth hover:border-gradient rounded-1 p-4 w-28 h-28 lg:w-30 lg:h-30 flex flex-col justify-center items-center shadow-primary duration-200" key={i}>

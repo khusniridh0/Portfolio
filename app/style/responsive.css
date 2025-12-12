@@ -32,4 +32,8 @@
 
 }
 
-@media (width >=96rem) {}
+@media (width >=96rem) {
+    .container {
+        padding: calc(var(--spacing) * 0);
+    }
+}

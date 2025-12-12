@@ -34,7 +34,7 @@ const Project = async () => {
                 <div className="col-span-12 lg:col-span-10">
                     <div className="mb-20">
                         <div className="section-title relative flex justify-center items-center mb-16">
-                            <h1 className="text-7xl lg:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">Works</h1>
+                            <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">Works</h1>
                             <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Experience</h1>
                         </div>
                         <p className="text-lg lg:text-2xl text-center max-w-3xl mx-auto">Arsitek digital ahli dalam membangun UI interaktif, didukung keahlian di bidang Full Stack Web Development, Desain UI/UX, dan Software Testing.</p>

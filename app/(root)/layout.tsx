@@ -10,7 +10,7 @@ const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
             <Cursor />
             <Loading />
             <div className="max-h-screen overflow-x-hidden main-layout scroll-smooth" >
-                <main className="container mx-auto relative">
+                <main className="global-container mx-auto relative">
                     {children}
                 </main>
             </div>

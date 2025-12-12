@@ -45,8 +45,9 @@
         }
     }
 
-    .container {
-        padding: 20px;
+    .global-container {
+        max-width: 100rem;
+        padding: 0 calc(var(--spacing) * 6);
     }
 
     .rounded-1 {

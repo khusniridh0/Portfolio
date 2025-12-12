@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.SITE_URL!;
-
   return [
     {
-      url: `${baseUrl}/`,
+      url: 'https://khusniridho.vercel.app/',
+      lastModified: new Date(),
+    },
+    {
+      url: 'https://malangdev.my.id/',
       lastModified: new Date(),
     }
   ];
