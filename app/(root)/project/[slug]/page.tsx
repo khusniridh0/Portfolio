@@ -39,10 +39,28 @@ interface Stack {
     image: string;
 }
 
+interface Project {
+    name: string
+    desc: string
+    image: string
+    detail: {
+        category: string
+        stack: Stack[]
+        images: string[]
+    }
+}
+
+interface Response {
+    code: number,
+    status: string,
+    message: string,
+    data: Project
+}
+
 const ProjectDetail = async ({ params }: ProjectProps) => {
     const { slug } = await params
-    const data = await getProjectDetail(slug);
-    if (!data) return <ErrorNotFound />
+    const response = await getProjectDetail(slug);
+    const { data, status } = response as Response
     const carouselConfig: CarouselConfig = {
         gap: 20,
         drag: true,
@@ -65,6 +83,8 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
             }
         }
     };
+
+    if (status == 'error') return <ErrorNotFound />
 
     return (
         <>

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getProjects } from "@/app/actions/project";
 import ErrorNotFound from "@/app/components/error-404";
 import Footer from "@/app/components/Footer";
@@ -15,8 +16,10 @@ interface Works {
 }
 
 const Project = async () => {
-    const data = await getProjects()
-    if (!data) return <ErrorNotFound />
+    const response = await getProjects()
+    const { data, status } = response as { data: Works[], status: string }
+    if (status == 'error') return <ErrorNotFound />
+
     return (
         <>
             <HeaderII />

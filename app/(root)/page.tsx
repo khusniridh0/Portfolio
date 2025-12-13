@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getProjects } from "@/app/actions/project";
 import { ContactForm, ContactList, ContactMe } from "@/app/components/contact";
 import ErrorNotFound from "@/app/components/error-404";
@@ -30,6 +31,13 @@ interface CarouselConfig {
     drag: boolean;
     responsive: CarouselResponsive[];
     nav: CarouselNav;
+}
+
+interface Works {
+    slug: string;
+    name: string;
+    image: string;
+    desc: string;
 }
 
 const dataBrand = [
@@ -75,11 +83,11 @@ const jsonLd = {
 };
 
 const Home = async () => {
-    const data = await getProjects({ start: 0, end: 9 })
-    if (!data) return <ErrorNotFound />
-    const activeWorks = data?.slice(0, 3);
-    const otherWorks = data?.slice(3);
-
+    const response = await getProjects({ start: 0, end: 9 })
+    const { data, status } = response as { data: Works[], status: string }
+    if (status == 'error') return <ErrorNotFound />
+    const activeWorks = data?.slice(0, 3)
+    const otherWorks = data?.slice(3)
     const carouselConfig: CarouselConfig = {
         gap: 20,
         drag: false,

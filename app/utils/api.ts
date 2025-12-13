@@ -3,7 +3,12 @@
 const API_BASE = `${process.env.SITE_URL}/api`;
 const SMTP_BASE = process.env.EMAIL_SMTP!;
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
-type FetchOptions = RequestInit & { revalidate?: number };
+
+export interface SmtpError {
+    status: number;
+    message: string;
+}
+
 type RequestOptions = {
     params?: Record<string, string | number | boolean | undefined>;
     body?: unknown;
@@ -12,50 +17,37 @@ type RequestOptions = {
     cache?: RequestCache;
 };
 
-async function baseFetch<T>(
-    url: string,
-    options: FetchOptions = {}
-): Promise<T> {
-    const res = await fetch(url, {
-        ...options,
+export async function smtp<TResponse>(
+    path: string,
+    payload: unknown
+): Promise<TResponse> {
+    const res = await fetch(`${SMTP_BASE}${path}`, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            ...options.headers,
         },
-        next: {
-            revalidate: options.revalidate ?? 300,
-        },
+        body: JSON.stringify(payload),
+        cache: 'no-store',
     });
 
     if (!res.ok) {
-        const text = await res.text();
-        throw new Error(
-            `Fetch error ${res.status}: ${text}`
-        );
+        let message = 'SMTP request failed';
+
+        try {
+            const data = await res.json();
+            message = data?.message ?? message;
+        } catch {
+            message = await res.text();
+        }
+
+        throw {
+            status: res.status,
+            message,
+        } satisfies SmtpError;
     }
 
     return res.json();
 }
-
-
-
-export function smtp<T>(
-    path: string,
-    body: unknown
-) {
-    return baseFetch<T>(`${SMTP_BASE}${path}`, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        cache: 'no-store', // penting!
-    });
-}
-
-
-
-
-
-
-
 
 function buildUrl(
     path: string,
@@ -74,11 +66,7 @@ function buildUrl(
     return url.toString();
 }
 
-async function coreRequest<T>(
-    method: Method,
-    path: string,
-    options: RequestOptions = {}
-): Promise<{ data: T }> {
+async function coreRequest<T>(method: Method, path: string, options: RequestOptions = {}): Promise<{ data: T }> {
     const url = buildUrl(path, options.params);
 
     const res = await fetch(url, {
@@ -106,8 +94,7 @@ async function coreRequest<T>(
         );
     }
 
-    const data = await res.json();
-    return { data };
+    return await res.json();
 }
 
 export const request = {
@@ -133,34 +120,3 @@ export const request = {
         return coreRequest<T>('DELETE', path, options);
     },
 };
-
-
-
-
-
-
-
-
-
-
-
-// 'server only';
-
-// import axios from "axios";
-
-// export const smtp = axios.create({
-//     baseURL: process.env.EMAIL_SMTP,
-//     timeout: 30000,
-//     headers: {
-//         'Content-Type': 'application/json',
-//     },
-// });
-
-// export const request = axios.create({
-//     baseURL: `${process.env.SITE_URL}/api/`,
-//     timeout: 10000,
-//     headers: {
-//         'Content-Type': 'application/json',
-//         'x-api-key': process.env.API_KEY
-//     },
-// });

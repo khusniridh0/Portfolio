@@ -26,16 +26,12 @@ const Loading = () => {
 
 
     return (
-        show && <div className="h-screen w-screen fixed top-0 left-0 overflow-hidden z-40 grid grid-cols-6 grid-rows-2">
+        show && <div className="w-screen h-screen fixed top-0 left-0 overflow-hidden z-40 grid grid-cols-6 grid-rows-2">
             {[...Array(6)].map((_, i) => (
-                <div className="w-full h-full" key={i}>
-                    <div className={`${!ready && 'loading-up'} loading`} style={{ '--delay': `${i}ms` } as React.CSSProperties}></div>
-                </div>
+                <div className={`w-full h-full loading ${!ready && 'loading-up'}`} key={i} style={{ '--delay': `${i}ms` } as React.CSSProperties}/>
             ))}
             {[...Array(6)].map((_, i) => (
-                <div className="w-full h-full" key={i}>
-                    <div className={`${!ready && 'loading-down'} loading`} style={{ '--delay': `${i}ms` } as React.CSSProperties}></div>
-                </div>
+                <div className={`w-full h-full loading ${!ready && 'loading-down'}`} key={i} style={{ '--delay': `${i}ms` } as React.CSSProperties}/>
             ))}
         </div>
     );

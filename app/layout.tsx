@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
@@ -64,8 +65,11 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${montserrat.variable} antialiased`}>
-				<SpeedInsights />
 				{children}
+				{process.env.NODE_ENV === 'production' && (<>
+					<SpeedInsights />
+					<Analytics />
+				</>)}
 			</body>
 		</html>
 	);

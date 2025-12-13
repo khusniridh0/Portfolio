@@ -4,6 +4,10 @@ import { smtp } from "@/app/utils/api";
 import { createResponse, getIp, rateLimit } from "@/app/utils/api-rule";
 import { NextRequest, NextResponse } from "next/server";
 
+interface ContactResponse {
+    message: string;
+}
+
 export async function POST(req: NextRequest) {
     try {
         const { allowed } = await rateLimit(getIp(req));
@@ -16,8 +20,8 @@ export async function POST(req: NextRequest) {
             text: message,
         }
 
-        const response = await smtp.post('/send-email', payload);
-        const isSuccess = response.status === 200 && /OK/i.test(response.data?.message || '');
+        const response = await smtp<ContactResponse>('/send-email', payload);
+        const isSuccess = /OK/i.test(response.message);
         if (!isSuccess) return NextResponse.json(createResponse({ code: 401, message: 'Failed to send email' }));
         return NextResponse.json(createResponse({ code: 200, message: 'Email sent successfully' }));
     } catch {
