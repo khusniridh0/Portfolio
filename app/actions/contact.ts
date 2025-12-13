@@ -4,6 +4,10 @@ import { request } from "@/app/utils/api";
 import { getErrors } from "@/app/utils/errors";
 import * as z from "zod";
 
+interface ContactResponse {
+    status: 'success' | 'error';
+}
+
 const contactSchema = z.object({
     name: z.string()
         .min(3, { message: 'Nama minimal 3 karakter.' }),
@@ -41,7 +45,7 @@ export const formContact = async (_prevState: formState, formData: FormData): Pr
     }
 
     try {
-        const response = await request.post('/contact', data);
+        const response = await request.post<ContactResponse>('/contact', data);
         const { data: { status } } = response;
         if (status != 'success') return { success: false, message: 'Pesan tidak terkirim, terjadi kesalahan sistem. Mohon hubungi kami kembali melalui saluran lain. 🙏', errors: {} }
         return { success: true, message: 'Terimakasih, pesan anda telah terkirim.', errors: {} }
