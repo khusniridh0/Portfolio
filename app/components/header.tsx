@@ -1,5 +1,6 @@
 'use client'
 
+import React from "react";
 import { Close, Menu, Moon, Sun } from "@/app/components/icons";
 import { AllContext } from "@/app/contexts/public-context";
 import Image from "next/image";
@@ -50,7 +51,7 @@ export const HeaderII = () => {
     )
 }
 
-export const MenuComponent = ({ items }: { items: NavItem[] }) => {
+export const MenuComponent = React.memo(({ items }: { items: NavItem[] }) => {
     const { menu, setMenu } = useContext(AllContext)!;
     return (
         <nav className={`${menu && 'show'}`}>
@@ -66,9 +67,11 @@ export const MenuComponent = ({ items }: { items: NavItem[] }) => {
         </nav>
     )
 
-}
+});
 
-export const ToggleMenu = () => {
+MenuComponent.displayName = 'MenuComponent';
+
+export const ToggleMenu = React.memo(() => {
     const { menu, setMenu } = useContext(AllContext)!;
     return (
         <button className={`fixed -right-6 top-0 bottom-0 lg:hidden z-[40] ${menu ? 'fadeOutRight' : 'fadeInRight'}`} aria-label="toggle menu" onClick={() => { setMenu(true) }}>
@@ -77,9 +80,11 @@ export const ToggleMenu = () => {
             </div>
         </button>
     )
-}
+});
 
-export const ChangeTheme = () => {
+ToggleMenu.displayName = 'ToggleMenu';
+
+export const ChangeTheme = React.memo(() => {
     const { theme, setTheme } = useContext(AllContext)!;
 
     return (
@@ -90,4 +95,6 @@ export const ChangeTheme = () => {
             </button>
         </>
     )
-}
+});
+
+ChangeTheme.displayName = 'ChangeTheme';

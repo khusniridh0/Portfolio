@@ -1,46 +1,66 @@
 'use client'
 
-import { useEffect } from "react";
-import { select } from "@/app/utils/func";
+import { useEffect, useMemo, useState } from "react";
+import { throttle } from "@/app/utils/func";
 
 const Cursor = () => {
-
-    const cursorTreck = (e: MouseEvent) => {
-        const cursor = select('.cursor').target ?? undefined;
-        cursor?.setAttribute('style', `top: ${e.pageY - 2}px; left: ${e.pageX - 2}px;`);
-    }
-
-    const cursorClicked = (e: MouseEvent) => {
-        const clicked = select('.cursor-clicked').target ?? undefined;
-        const cursor = clicked?.cloneNode(true) as HTMLElement
-
-        cursor.classList.add('clicked')
-        cursor.style.top = `${e.pageY - 2}px`
-        cursor.style.left = `${e.pageX - 2}px`
-        clicked?.parentElement?.appendChild(cursor);
-        setTimeout(() => {
-            cursor.remove();
-        }, 500)
-    }
+    const [isEnabled, setIsEnabled] = useState(false);
 
     useEffect(() => {
-        const body = select('body');
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const updateState = () => {
+            const isDesktop = window.innerWidth >= 1024;
+            setIsEnabled(isDesktop && !mediaQuery.matches);
+        };
 
-        if (body) {
-            body.event('mousemove', cursorTreck as EventListener);
-            body.event('click', cursorClicked as EventListener);
+        updateState();
+        mediaQuery.addEventListener('change', updateState);
+        window.addEventListener('resize', updateState);
 
-            return () => {
-                body.removeEvent('mousemove', cursorTreck as EventListener);
-                body.removeEvent('click', cursorClicked as EventListener);
-            };
-        }
-    });
+        return () => {
+            mediaQuery.removeEventListener('change', updateState);
+            window.removeEventListener('resize', updateState);
+        };
+    }, []);
+
+    const throttledCursorTrack = useMemo(
+        () => throttle((e: MouseEvent) => {
+            const cursor = document.querySelector<HTMLSpanElement>('.cursor');
+            cursor?.setAttribute('style', `top:${e.pageY - 2}px;left:${e.pageX - 2}px;`);
+        }, 16),
+        []
+    );
+
+    useEffect(() => {
+        if (!isEnabled) return;
+
+        const body = document.body;
+        const handleClick = (e: MouseEvent) => {
+            const template = document.querySelector<HTMLDivElement>('.cursor-clicked');
+            const clickIndicator = template?.cloneNode(true) as HTMLElement | null;
+            if (!clickIndicator) return;
+            clickIndicator.classList.add('clicked');
+            clickIndicator.style.top = `${e.pageY - 2}px`;
+            clickIndicator.style.left = `${e.pageX - 2}px`;
+            template?.parentElement?.appendChild(clickIndicator);
+            setTimeout(() => clickIndicator.remove(), 500);
+        };
+
+        body.addEventListener('mousemove', throttledCursorTrack as EventListener, { passive: true });
+        body.addEventListener('click', handleClick, { passive: true });
+
+        return () => {
+            body.removeEventListener('mousemove', throttledCursorTrack as EventListener);
+            body.removeEventListener('click', handleClick);
+        };
+    }, [isEnabled, throttledCursorTrack]);
+
+    if (!isEnabled) return null;
 
     return (
         <>
             <span className="cursor w-[20px] h-[20px] translate-[-7px] absolute z-50 pointer-events-none hidden lg:inline-block" />
-            <div className="cursor-clicked w-[20px] h-[20px] translate-[-7px] absolute z-50">
+            <div className="cursor-clicked w-[20px] h-[20px] translate-[-7px] absolute z-50 pointer-events-none hidden">
                 <svg className="w-[30px] h-[30px] translate-x-[-18px] translate-y-[-16px]" viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect className="rect-animate" x="479.998" width="40" height="387" rx="20" fill="var(--color-amber-500)" />
                     <rect className="rect-animate" y="45.7148" x="290.179" width="40" height="387" rx="20" transform="rotate(-22.5 290.179 45.7148)" fill="var(--color-amber-500)" />
@@ -51,6 +71,6 @@ const Cursor = () => {
             </div>
         </>
     );
-}
+};
 
 export default Cursor;

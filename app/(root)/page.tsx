@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+import React from "react";
 import { getProjects } from "@/app/actions/project";
 import { ContactForm, ContactList, ContactMe } from "@/app/components/contact";
 import ErrorNotFound from "@/app/components/error-404";
@@ -8,9 +8,11 @@ import Avatar from "@/app/components/hero";
 import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, WhatsApp } from "@/app/components/icons";
 import ImageSkeleton from "@/app/components/image";
 import { ActiveTap } from "@/app/components/skill";
+import { Tap1, Tap2, Tap3 } from "@/app/components/tabs";
 import { ActiveWorks, SliderWork } from "@/app/components/works";
-import { dataCertificate, dataContact, dataLearning, dataStack, dataWorks } from "@/app/services/main";
+import { dataContact, dataStack, dataWorks } from "@/app/services/main";
 import Link from "next/link";
+import Script from "next/script";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -82,13 +84,7 @@ const jsonLd = {
 
 };
 
-const Home = async () => {
-    const response = await getProjects({ start: 0, end: 9 })
-    const { data, status } = response as { data: Works[], status: string }
-    if (status == 'error') return <ErrorNotFound />
-    const activeWorks = data?.slice(0, 3)
-    const otherWorks = data?.slice(3)
-    const carouselConfig: CarouselConfig = {
+const getCarouselConfig = (): CarouselConfig => ({
         gap: 20,
         drag: false,
         responsive: [
@@ -113,20 +109,31 @@ const Home = async () => {
                 y: 'bottom'
             }
         }
-    };
+});
 
-    const tabs = [
+const getTabs = () => [
         { title: 'Tech Stack', component: <Tap1 />, key: 'tap1' },
         { title: 'Learning', component: <Tap2 />, key: 'tap2' },
         { title: 'Certificate', component: <Tap3 />, key: 'tap3' },
-    ]
+];
+
+const Home = async () => {
+    const response = await getProjects({ start: 0, end: 9 })
+    const { data, status } = response as { data: Works[], status: string }
+    if (status == 'error') return <ErrorNotFound />
+    const activeWorks = data?.slice(0, 3)
+    const otherWorks = data?.slice(3)
+    const carouselConfig = getCarouselConfig();
+    const tabs = getTabs();
 
     return (
         <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <Script id="ld-person" type="application/ld+json" strategy="beforeInteractive">
+                {JSON.stringify(jsonLd)}
+            </Script>
             <HeaderI />
 
-            <section id="hero" className="grid grid-cols-1 lg:grid-cols-2 items-center min-h-screen">
+            <section id="hero" className="hero-inline grid grid-cols-1 lg:grid-cols-2 items-center min-h-screen">
                 <div className="avatar flex justify-center lg:justify-end lg:order-2">
                     <Avatar />
                 </div>
@@ -167,7 +174,7 @@ const Home = async () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 relative">
                     <div className="profile sticky top-0 md:top-30  bg-[var(--body)] h-fit">
-                        <ImageSkeleton src="/picture/profile.png" alt="Khusni Ridho" width={640} height={837} className="w-full grayscale mix-blend-plus-darker dark:mix-blend-difference" loading="lazy" />
+                        <ImageSkeleton src="/picture/profile.png" alt="Khusni Ridho" width={640} height={837} className="w-full grayscale mix-blend-plus-darker dark:mix-blend-difference" priority />
                     </div>
                     <div className="description lg:pt-[10px] pl-1 ">
                         <div className="pb-8 mb-8 about-point">
@@ -287,82 +294,20 @@ const Home = async () => {
     );
 }
 
-const NextArrow = () => {
+const NextArrow = React.memo(() => {
     return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
         <ArrowRight color="var(--color-white)" size={20} />
     </div>
-}
+});
 
-const PrevArrow = () => {
+NextArrow.displayName = 'NextArrow';
+
+const PrevArrow = React.memo(() => {
     return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
         <ArrowLeft color="var(--color-white)" size={20} />
     </div>
-}
+});
 
-const Tap1 = () => {
-    const newRows = [9, 7, 5, 3, 1]
-    const createPiramid = (count: number[], data: typeof dataStack) => {
-        const output: typeof dataStack[] = [];
-        let index = 0;
-
-        count.forEach(row => {
-            output.push(data.slice(index, index + row));
-            index += row;
-        });
-
-        return output;
-    }
-
-    return <>
-        <div className="flex flex-wrap gap-3 mb-4 xl:hidden xl:gap-8 xl:mb-8 justify-center item-center mx-auto">
-            {dataStack.map((item, i) => (
-                <div className="smooth hover:border-gradient rounded-1 p-4 w-28 h-28 lg:w-30 lg:h-30 flex flex-col justify-center items-center shadow-primary duration-200" key={i}>
-                    <ImageSkeleton src={`${item.image}`} alt="Stack Brand" width={48} height={36} className="mb-4 aspect-[4/3]" loading="lazy" />
-                    <span className=" font-semibold text-center text-sm">{item.name}</span>
-                </div>
-            ))}
-        </div>
-        {createPiramid(newRows, dataStack).map((items, i) => (
-            <div className="hidden xl:flex flex-wrap gap-4 mb-4 xl:gap-4 xl:mb-4 justify-center item-center mx-auto" key={i}>
-                {items.map((item, i) => {
-                    return (
-                        <div className="smooth hover:border-gradient rounded-1 p-4 w-28 h-28 lg:w-30 lg:h-30 flex flex-col justify-center items-center shadow-primary duration-200" key={i}>
-                            <ImageSkeleton src={`${item.image}`} alt="Stack Brand" width={48} height={36} className="mb-4 aspect-[4/3]" loading="lazy" />
-                            <span className=" font-semibold text-center text-sm">{item.name}</span>
-                        </div>
-                    )
-                })}
-            </div>
-        ))}
-    </>
-}
-
-const Tap2 = () => {
-    return <div className="">
-        {dataLearning.map((item, i) => (
-            <div key={i}>
-                <div className="flex gap-6 lg:gap-20 justify">
-                    <h3 className="text-xl min-w-fit">[ {i + 1} ]</h3>
-                    <ImageSkeleton src={item.image} alt={item.name} width={352} height={246} className="hidden lg:block aspect-[1.43/1] object-cover w-88 rounded-1" loading="lazy" />
-                    <div className="">
-                        <h3 className="text-2xl lg:text-4xl font-bold mb-4">{item.name}</h3>
-                        <p>{item.desc}</p>
-                    </div>
-                </div>
-                {i != dataLearning.length - 1 && <div className="horizon w-full h-px my-8" />}
-            </div>
-        ))}
-    </div>
-}
-
-const Tap3 = () => {
-    return <div className="flex flex-wrap gap-4 mb-4 justify-center item-center mx-auto">
-        {dataCertificate.map((item, i) => (
-            <Link href={item.link} target="_blank" className="smooth hover:border-gradient rounded-1 p-2 lg:w-90 md:w-78 flex flex-col justify-center items-center shadow-primary duration-200" key={i} rel="preload">
-                <ImageSkeleton src={item.image} alt="Certificate" width={344} height={243} className="aspect-[1.43/1]" loading="lazy" />
-            </Link>
-        ))}
-    </div>
-}
+PrevArrow.displayName = 'PrevArrow';
 
 export default Home;

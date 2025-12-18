@@ -1,20 +1,21 @@
-import Cursor from "@/app/components/cusrsor";
-import Event from "@/app/components/event";
 import Loading from "@/app/components/loading";
+import { ErrorBoundary } from "@/app/components/error-boundary";
 import { AllProvider } from "@/app/contexts/public-context";
+import GlobalInteractions from "@/app/components/global-interactions";
 
 const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 
     return (
         <AllProvider>
-            <Cursor />
+            <ErrorBoundary>
+            <GlobalInteractions />
             <Loading />
             <div className="max-h-screen overflow-x-hidden main-layout scroll-smooth" >
                 <main className="global-container mx-auto relative">
                     {children}
                 </main>
             </div>
-            <Event />
+            </ErrorBoundary>
         </AllProvider>
     )
 }

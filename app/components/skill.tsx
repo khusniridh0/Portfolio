@@ -1,6 +1,6 @@
 'use client'
 
-import { JSX, useState } from "react"
+import { JSX, useState, useCallback } from "react"
 
 interface Tab {
     title: string
@@ -10,7 +10,7 @@ interface Tab {
 
 export const ActiveTap = ({ tabs }: { tabs: Tab[] }) => {
     const [active, setActive] = useState(tabs[0].key)
-    const handleActive = (key: string) => setActive(key)
+    const handleActive = useCallback((key: string) => setActive(key), [])
 
     return (
         <>

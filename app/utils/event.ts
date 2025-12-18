@@ -1,5 +1,3 @@
-import { select } from "@/app/utils/func";
-
 export const scrolling = (event: MouseEvent) => {
     event.preventDefault();
     const virtualWindow = event.currentTarget;
@@ -29,6 +27,7 @@ export const scrolled = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
     const targetElement = event.currentTarget instanceof HTMLElement ? event.currentTarget : null;
     const target = targetElement?.getAttribute('href')?.slice(1) ?? '';
-    const element = select(`${target}`).target
-    element?.scrollIntoView()
+    const selector = target.startsWith('#') ? target : `#${target}`;
+    const element = document.querySelector(selector);
+    element?.scrollIntoView({ behavior: 'smooth' });
 }

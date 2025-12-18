@@ -1,3 +1,4 @@
+import React from "react";
 import { getProjectDetail } from "@/app/actions/project";
 import Carousel from "@/app/components/carousel";
 import ErrorNotFound from "@/app/components/error-404";
@@ -56,6 +57,8 @@ interface Response {
     message: string,
     data: Project
 }
+
+export const revalidate = 3600;
 
 const ProjectDetail = async ({ params }: ProjectProps) => {
     const { slug } = await params
@@ -157,16 +160,20 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
     )
 }
 
-const NextArrow = () => {
+const NextArrow = React.memo(() => {
     return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
         <ArrowRight color="var(--color-white)" size={20} />
     </div>
-}
+});
 
-const PrevArrow = () => {
+NextArrow.displayName = 'NextArrow';
+
+const PrevArrow = React.memo(() => {
     return <div className="bg-[var(--primary)] text-sm font-semibold rounded-1 py-3 px-4 -translate-y-2">
         <ArrowLeft color="var(--color-white)" size={20} />
     </div>
-}
+});
+
+PrevArrow.displayName = 'PrevArrow';
 
 export default ProjectDetail;

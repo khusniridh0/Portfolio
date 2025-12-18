@@ -8,8 +8,19 @@ const Loading = () => {
 
     const [ready, setReady] = useState<boolean>(true);
     const [show, setShow] = useState<boolean>(true);
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
     useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+        updatePreference();
+        mediaQuery.addEventListener('change', updatePreference);
+        return () => mediaQuery.removeEventListener('change', updatePreference);
+    }, []);
+
+    useEffect(() => {
+        if (prefersReducedMotion) return;
+
         const cleanupReady = setTimeout(() => {
             setReady(() => false);
         }, 100);
@@ -22,8 +33,11 @@ const Loading = () => {
             clearTimeout(cleanupReady);
             clearTimeout(cleanupShow);
         };
-    }, [pathname]);
+    }, [pathname, prefersReducedMotion]);
 
+    if (prefersReducedMotion) {
+        return null;
+    }
 
     return (
         show && <div className="w-screen h-screen fixed top-0 left-0 overflow-hidden z-40 grid grid-cols-6 grid-rows-2">

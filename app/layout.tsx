@@ -8,6 +8,7 @@ const url = process.env.SITE_URL!;
 const montserrat = Montserrat({
 	variable: "--font-geist-mono",
 	subsets: ["latin"],
+	display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -55,6 +56,9 @@ export const metadata: Metadata = {
 		shortcut: "/favicon.ico",
 		apple: "/logo/icon-180.png",
 	},
+	other: {
+		"Content-Security-Policy": "default-src 'self'; img-src 'self' data: https://*.vercel-storage.com; connect-src 'self' https://api.upstash.io; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+	}
 };
 
 export default function RootLayout({

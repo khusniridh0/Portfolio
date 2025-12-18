@@ -3,7 +3,7 @@
 import { ArrowRight, Copy, SendMessage } from "@/app/components/icons";
 import ImageSkeleton from "next/image";
 import Link from "next/link";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useState, useCallback } from "react";
 import { formContact, formState } from "@/app/actions/contact";
 import { scrolled } from "@/app/utils/event";
 
@@ -62,7 +62,11 @@ export const ContactForm = () => {
             </button>
 
             {(state?.message) && (
-                <div className={`text-center mt-4 font-medium flex items-start justify-center gap-2 ${state?.success ? 'text-green-600' : 'text-red-600'}`}>
+                <div
+                    className={`text-center mt-4 font-medium flex items-start justify-center gap-2 ${state?.success ? 'text-green-600' : 'text-red-600'}`}
+                    aria-live="polite"
+                    role="status"
+                >
                     <span className={`rounded-full h-8 text-sm flex items-center justify-center aspect-square ${state?.success ? 'bg-green-200' : 'bg-red-200'}`}>{state.success ? '✔️' : '❗'}</span>
                     <span className="inline-block">{state?.message}</span>
                 </div>
@@ -74,21 +78,22 @@ export const ContactForm = () => {
 export const ContactList = ({ dataContact }: { dataContact: Contact[] }) => {
     const [copied, setCopied] = useState<number | null>(null)
 
-    const copying = (e: React.MouseEvent, data: typeof dataContact[number], index: number) => {
+    const copying = useCallback((e: React.MouseEvent, data: typeof dataContact[number], index: number) => {
         e.preventDefault();
         navigator.clipboard.writeText(data.link).then(() => {
             setCopied(index);
         })
-    }
+    }, [])
 
     useEffect(() => {
-        const timer = setInterval(() => {
+        if (copied === null) return;
+        const timer = setTimeout(() => {
             setCopied(null);
-        }, 5000)
+        }, 5000);
 
         return () => {
-            clearInterval(timer);
-        }
+            clearTimeout(timer);
+        };
     }, [copied])
 
     return dataContact.map((item, i) => (
