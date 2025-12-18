@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, ReactNode, useEffect, useReducer } from "react";
+import { createContext, ReactNode, useEffect, useReducer, useMemo, useCallback } from "react";
 
 type State = {
     theme: string;
@@ -63,30 +63,48 @@ const reducer = (state: State, action: Action): State => {
 export const AllProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const setTheme = (data: string) => {
-        document.body.className = data;
-        localStorage.setItem('theme', data);
-        dispatch({ type: 'SET_THEME', payload: data });
-    };
+    const setTheme = useCallback((data: string) => {
+        const applyTheme = () => {
+            document.body.className = data;
+            localStorage.setItem('theme', data);
+            dispatch({ type: 'SET_THEME', payload: data });
+        };
+        if (typeof window !== 'undefined' && 'requestAnimationFrame' in window) {
+            window.requestAnimationFrame(applyTheme);
+        } else {
+            applyTheme();
+        }
+    }, []);
 
-    const setSection = (data: string) => {
+    const setSection = useCallback((data: string) => {
         dispatch({ type: 'SET_SECTION', payload: data });
-    };
+    }, []);
 
-    const setReread = (data: object) => {
+    const setReread = useCallback((data: object) => {
         dispatch({ type: 'SET_REREAD', payload: data });
-    };
+    }, []);
     
-    const setMenu = (data: boolean) => {
+    const setMenu = useCallback((data: boolean) => {
         dispatch({ type: 'SET_MENU', payload: data });
-    };
+    }, []);
 
     useEffect(() => {
         setTheme(localStorage.getItem('theme') || 'light');
-    }, []);
+    }, [setTheme]);
+
+    const contextValue = useMemo(() => ({
+        theme: state.theme,
+        section: state.section,
+        reread: state.reread,
+        menu: state.menu,
+        setTheme,
+        setSection,
+        setReread,
+        setMenu
+    }), [state.theme, state.section, state.reread, state.menu, setTheme, setSection, setReread, setMenu]);
 
     return (
-        <AllContext.Provider value={{ theme: state.theme, section: state.section, reread: state.reread, menu: state.menu, setTheme, setSection, setReread, setMenu }}>
+        <AllContext.Provider value={contextValue}>
             {children}
         </AllContext.Provider>
     );

@@ -1,38 +1,27 @@
-const events = (element: HTMLElement, event: string, callback: EventListener) => {
-    element.addEventListener(event, callback);
-};
-
-const removeEvents = (element: HTMLElement, event: string, callback: EventListener) => {
-    element.removeEventListener(event, callback);
-}
-
-const createSelector = (arg: string | Element) => {
-    const element = typeof arg === 'string' ? document.querySelector(arg) : arg;
-
-    return {
-        target: element,
-        event: (event: string, callback: EventListener) => {
-            if (element) {
-                events(element as HTMLElement, event, callback);
-            }
-        },
-        removeEvent: (event: string, callback: EventListener) => {
-            if (element) {
-                removeEvents(element as HTMLElement, event, callback);
-            }
+export const throttle = <Args extends unknown[]>(
+    func: (...args: Args) => void,
+    limit: number
+): ((...args: Args) => void) => {
+    let inThrottle: boolean;
+    return function (...args: Args) {
+        if (!inThrottle) {
+            func(...args);
+            inThrottle = true;
+            setTimeout(() => (inThrottle = false), limit);
         }
     };
 };
 
-export const select = Object.assign(
-    createSelector,
-    {
-        all: (selector: string) => {
-            const elements = Array.from(document.querySelectorAll(selector)) || [];
-            return elements.map(el => createSelector(el));
-        },
-        first: (selector: string) => createSelector(selector),
-        last: (selector: string) => createSelector(selector),
-        find: (selector: string) => createSelector(selector),
-    }
-);
+export const debounce = <Args extends unknown[]>(
+    func: (...args: Args) => void,
+    wait: number
+): ((...args: Args) => void) => {
+    let timeout: ReturnType<typeof setTimeout> | null;
+    return function (...args: Args) {
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            timeout = null;
+            func(...args);
+        }, wait);
+    };
+};

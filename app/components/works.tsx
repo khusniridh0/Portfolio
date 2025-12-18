@@ -37,7 +37,13 @@ interface CarouselConfig {
 }
 
 export const ActiveWorks = ({ dataWorks }: { dataWorks: Works[] }) => {
-    const [active, setActive] = useState(dataWorks[0]);
+    const [active, setActive] = useState(dataWorks?.[0] || null);
+
+    const handleItemClick = useCallback((item: Works) => {
+        setActive(item);
+    }, []);
+
+    if (!active) return null;
 
     return (
         <div className="benner-content relative mb-8">
@@ -52,7 +58,7 @@ export const ActiveWorks = ({ dataWorks }: { dataWorks: Works[] }) => {
                 </div>
                 <div className="banner-other flex gap-4 flex-1 lg:justify-end">
                     {dataWorks.map((item, i) => (
-                        <div className="other-item" key={i} onClick={() => setActive(item)}>
+                        <div className="other-item" key={i} onClick={() => handleItemClick(item)}>
                             <span className="flex text-sm lg:text-md font-semibold mb-2 text-white">
                                 [ {i + 1} ]
                             </span>
@@ -98,7 +104,7 @@ export const Backwork = () => {
         return () => {
             window.removeEventListener('keydown', handleKeyDown)
         };
-    })
+    }, [closeProject])
 
     return <button type="button" className="border-primary h-10 w-10 flex items-center justify-center rounded-full" aria-label="close" onClick={closeProject}>
         <Close color="var(--text-content)" size={20} />

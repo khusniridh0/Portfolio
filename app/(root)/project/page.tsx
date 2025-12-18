@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 import { getProjects } from "@/app/actions/project";
 import ErrorNotFound from "@/app/components/error-404";
 import Footer from "@/app/components/Footer";

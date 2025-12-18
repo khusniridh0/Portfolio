@@ -1,6 +1,7 @@
 'use client'
 
 import { Children, useEffect, useRef, useState } from "react";
+import { debounce } from "@/app/utils/func";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -76,10 +77,11 @@ const Carousel = ({ config, children }: { config: CarouselConfig, children: Reac
             const perview = responsive.find(responsiveItem => responsiveItem.breakpoint <= width)?.perview ?? 0;
             setPerview(perview);
         };
-        window.addEventListener('resize', handleResize);
+        const debouncedHandleResize = debounce(handleResize, 250);
+        window.addEventListener('resize', debouncedHandleResize);
         handleResize();
-        return () => window.removeEventListener('resize', handleResize);
-    });
+        return () => window.removeEventListener('resize', debouncedHandleResize);
+    }, [responsive]);
 
     return (
         <div className="carousel py-12 relative">

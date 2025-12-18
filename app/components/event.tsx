@@ -1,48 +1,65 @@
 'use client'
 
 import { usePathname } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { AllContext } from "@/app/contexts/public-context";
 import { scrolling } from "@/app/utils/event";
-import { select } from "@/app/utils/func";
+import { throttle } from "@/app/utils/func";
 
 const Event = () => {
     const { setMenu } = useContext(AllContext)!;
     const pathname = usePathname();
+    const [enabled, setEnabled] = useState(true);
 
-    const changeActive = (event: MouseEvent) => {
-        scrolling(event);
-        setMenu(false);
-    };
+    const throttledChangeActive = useMemo(
+        () => throttle((event: MouseEvent) => {
+            scrolling(event);
+            setMenu(false);
+        }, 100),
+        [setMenu]
+    );
 
-    const preload = () => {
-        const mainLayout = select('.main-layout').target as HTMLElement;
-        setTimeout(() => {
-            select('.main-layout').target!.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 100)
-        
-        mainLayout.classList.add('showing');
-        setTimeout(() => {
-            mainLayout.classList.remove('showing');
-        }, 800)
-    }
-
-    useEffect(() => { if (pathname.includes('/project/')) preload() }, [pathname]);
     useEffect(() => {
-        const mainLayout = select('.main-layout')
-        select.all('img').forEach(({ target }) => {
-            target?.setAttribute('draggable', 'false');
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const updateState = () => setEnabled(!mediaQuery.matches);
+        updateState();
+        mediaQuery.addEventListener('change', updateState);
+        return () => mediaQuery.removeEventListener('change', updateState);
+    }, []);
+
+    useEffect(() => {
+        if (!pathname.includes('/project/')) return;
+        const mainLayout = document.querySelector<HTMLElement>('.main-layout');
+        if (!mainLayout) return;
+
+        setTimeout(() => {
+            mainLayout.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+
+        mainLayout.classList.add('showing');
+        const timeout = setTimeout(() => {
+            mainLayout.classList.remove('showing');
+        }, 800);
+
+        return () => clearTimeout(timeout);
+    }, [pathname]);
+
+    useEffect(() => {
+        if (!enabled) return;
+        const mainLayout = document.querySelector<HTMLElement>('.main-layout');
+        if (!mainLayout) return;
+
+        document.querySelectorAll('img').forEach((img) => {
+            img.setAttribute('draggable', 'false');
         });
 
-
-        mainLayout.event('scroll', changeActive as EventListener);
-
+        mainLayout.addEventListener('scroll', throttledChangeActive as EventListener, { passive: true });
         return () => {
-            mainLayout.removeEvent('scroll', changeActive as EventListener);
+            mainLayout.removeEventListener('scroll', throttledChangeActive as EventListener);
         };
-    });
+    }, [throttledChangeActive, enabled]);
 
-    return (<></>);
+    return null;
 }
 
 export default Event;
