@@ -1,36 +1,52 @@
-export const dynamic = "force-dynamic";
 import type { MetadataRoute } from "next";
 import { getProjectsSlug } from "@/app/actions/project";
 
+export const revalidate = 3600;
+
+const BASE_URL = process.env.SITE_URL || 'https://malangdev.my.id';
 interface Response {
-  code: number,
   status: string,
-  message: string,
   data: []
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const response = await getProjectsSlug()
-  const { data, status } = response as Response
+  try {
+    const response = await getProjectsSlug() as Response;
+    // Gunakan pengecekan yang lebih aman
+    const projectEntries = response?.status && Array.isArray(response.data)
+      ? response.data.map((slug: string) => ({
+        url: `${BASE_URL}/project/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      }))
+      : [];
 
-  const slugs = status ? data.map(item => ({
-    url: `https://malangdev.my.id/project/${item}`,
-    lastModified: new Date(),
-  })) : [];
+    const staticPages: MetadataRoute.Sitemap = [
+      {
+        url: `${BASE_URL}/`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 1.0,
+      },
+      {
+        url: `${BASE_URL}/readme`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.5,
+      },
+      {
+        url: `${BASE_URL}/project`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+      },
+    ];
 
-  return [
-    {
-      url: 'https://malangdev.my.id/',
-      lastModified: new Date(),
-    },
-    {
-      url: 'https://malangdev.my.id/readme',
-      lastModified: new Date(),
-    },
-    {
-      url: 'https://malangdev.my.id/project',
-      lastModified: new Date(),
-    },
-    ...slugs
-  ];
+    return [...staticPages, ...projectEntries];
+  } catch {
+    return [
+      { url: `${BASE_URL}/`, lastModified: new Date() }
+    ];
+  }
 }
