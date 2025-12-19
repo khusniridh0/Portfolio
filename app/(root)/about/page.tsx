@@ -1,18 +1,18 @@
 import Footer from "@/app/components/Footer";
-import { HeaderII } from "@/app/components/header";
-import ImageSkeleton from "@/app/components/image";
+import { HeaderII } from "@/app/components/header-server";
+import ImageServer from "@/app/components/image-server";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: 'Readme | Portfolio Khusni Ridho',
+	title: 'About | Portfolio Khusni Ridho',
 	description: 'Dokumentasi teknis dan arsitektur portfolio website. Case study tentang implementasi Next.js, optimasi performa, dan keputusan engineering yang diambil.',
 	openGraph: {
-		title: 'Readme | Portfolio Khusni Ridho',
+		title: 'About | Portfolio Khusni Ridho',
 		description: 'Dokumentasi teknis dan arsitektur portfolio website.',
 		type: 'article',
 	},
 	alternates: {
-		canonical: `${process.env.SITE_URL}/readme`,
+		canonical: `${process.env.SITE_URL}/about`,
 	},
 };
 
@@ -43,7 +43,7 @@ const ReadMe = async () => {
                         </div>
                     </div>
 
-                    <ImageSkeleton src="/picture/readme.webp" alt="Website My Portfolio" width={853} height={480} className="w-full h-auto aspect-video object-cover my-10" />
+                    <ImageServer src="/picture/readme.webp" alt="Website My Portfolio" width={853} height={480} className="w-full h-auto aspect-video object-cover my-10" priority />
 
                     <div className="part-1 mb-20">
                         <Heading level={2}>Intoduction</Heading>

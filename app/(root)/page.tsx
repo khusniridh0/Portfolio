@@ -4,7 +4,7 @@ import Footer from "@/app/components/Footer";
 import { HeaderI } from "@/app/components/header";
 import Avatar from "@/app/components/hero";
 import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, WhatsApp } from "@/app/components/icons";
-import ImageSkeleton from "@/app/components/image";
+import ImageServer from "@/app/components/image-server";
 import { ActiveTap } from "@/app/components/skill";
 import { Tap1, Tap2, Tap3 } from "@/app/components/tabs";
 import { ActiveWorks, SliderWork } from "@/app/components/works";
@@ -163,7 +163,7 @@ const Home = async () => {
                     <h1 className="text-4xl lg:text-7xl font-bold mb-2 lg:mb-6 w-fit uppercase">Khusni Ridho</h1>
                     <p className="text-md lg:text-xl mb-8">Software Developer fokus pada UI/UX, Full-Stack Web Development, dan Software Testing.</p>
                     <div className="flex items-center gap-10">
-                        <Link href="/readme" className="w-fit btn rounded-full border-gradient">
+                        <Link href="/about" className="w-fit btn rounded-full border-gradient">
                             <span className="me-4">Read-Me</span>
                             <ArrowRight color="var(--text-content)" />
                         </Link>
@@ -189,7 +189,7 @@ const Home = async () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 relative">
                     <div className="profile sticky top-0 md:top-30  bg-[var(--body)] h-fit">
-                        <ImageSkeleton src="/picture/profile.png" alt="Khusni Ridho" width={640} height={837} className="w-full grayscale mix-blend-plus-darker dark:mix-blend-difference" priority />
+                        <ImageServer src="/picture/profile.png" alt="Khusni Ridho" width={640} height={837} className="w-full grayscale mix-blend-plus-darker dark:mix-blend-difference" priority />
                     </div>
                     <div className="description lg:pt-[10px] pl-1 ">
                         <div className="pb-8 mb-8 about-point">
@@ -239,7 +239,7 @@ const Home = async () => {
                 <div className="cta-branding grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                     <div className="branding-item relative overflow-hidden rounded-1 border-primary p-5">
                         <div className="flex justify-between items-center mb-3">
-                            <ImageSkeleton src="/icon/worker.webp" width={51} height={50} alt="worker" loading="lazy" />
+                            <ImageServer src="/icon/worker.webp" width={51} height={50} alt="worker" loading="lazy" />
                             <h2 className="text-3xl font-bold">{dataWorks.length}</h2>
                         </div>
                         <h3 className="text-lg font-semibold">Project</h3>
@@ -247,7 +247,7 @@ const Home = async () => {
                     </div>
                     <div className="branding-item relative overflow-hidden rounded-1 border-primary p-5">
                         <div className="flex justify-between items-center mb-3">
-                            <ImageSkeleton src="/icon/technology.webp" width={51} height={50} alt="technology" loading="lazy" />
+                            <ImageServer src="/icon/technology.webp" width={51} height={50} alt="technology" loading="lazy" />
                             <h2 className="text-3xl font-bold">{dataStack.length}</h2>
                         </div>
                         <h3 className="text-lg font-semibold">Tech Stack</h3>
@@ -255,7 +255,7 @@ const Home = async () => {
                     </div>
                     <div className="branding-item relative overflow-hidden rounded-1 border-primary p-5 md:col-span-2 lg:col-span-1">
                         <div className="flex justify-between items-center mb-3">
-                            <ImageSkeleton src="/icon/certificate.webp" width={51} height={50} alt="certificate" loading="lazy" />
+                            <ImageServer src="/icon/certificate.webp" width={51} height={50} alt="certificate" loading="lazy" />
                             <h2 className="text-3xl font-bold">{dataWorks.length}</h2>
                         </div>
                         <h3 className="text-lg font-semibold">Certificate</h3>

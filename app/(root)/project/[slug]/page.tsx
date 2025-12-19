@@ -3,7 +3,7 @@ import Carousel from "@/app/components/carousel";
 import { ArrowLeft, ArrowRight } from "@/app/components/icons";
 import { Backwork } from "@/app/components/works";
 import { dataContact } from "@/app/services/main";
-import ImageSkeleton from "next/image";
+import ImageServer from "@/app/components/image-server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -210,7 +210,7 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
                     <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start items-center gap-6">
                         {dataContact.map((contact, i) => (
                             <Link href={contact.link} target="_blank" key={i} className="flex flex-col items-center gap-2 lg:py-3" rel="noopener noreferrer">
-                                <ImageSkeleton src={contact.image} width={48} height={48} alt={`${contact.name} icon`} className="w-auto h-10" loading="lazy" />
+                                <ImageServer src={contact.image} width={48} height={48} alt={`${contact.name} icon`} className="w-auto h-10" loading="lazy" />
                                 <span className="text-sm ">{contact.name}</span>
                             </Link>
                         ))}
@@ -232,7 +232,7 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
                             {data.detail.stack.map((stack: Stack, i: number) => (
                                 <div className="flex h-fit gap-2 items-center rounded-full border-primary py-2 px-2" key={i}>
                                     <span className="relative">
-                                        <ImageSkeleton src={stack.image} width={32} height={32} alt="technology" className="w-auto h-5" loading="lazy" />
+                                        <ImageServer src={stack.image} width={32} height={32} alt="technology" className="w-auto h-5" loading="lazy" />
                                     </span>
                                     <span className="text-sm mr-2">{stack.name}</span>
                                 </div>
@@ -244,9 +244,9 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
 
             <div className="mt-20">
                 <Carousel config={carouselConfig}>
-                    <ImageSkeleton src={data.image} alt={data.name} width={1024} height={768} loading="lazy" />
+                    <ImageServer src={data.image} alt={data.name} width={1024} height={768} priority />
                     {data.detail.images.map((image: string, i: number) => (
-                        <ImageSkeleton src={image} alt={data.name} width={1024} height={768} loading="lazy" key={i} />
+                        <ImageServer src={image} alt={data.name} width={1024} height={768} loading="lazy" key={i} />
                     ))}
                 </Carousel>
             </div>
