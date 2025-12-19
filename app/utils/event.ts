@@ -1,5 +1,4 @@
-export const scrolling = (event: MouseEvent) => {
-    event.preventDefault();
+export const scrolling = (event: Event) => {
     const virtualWindow = event.currentTarget;
     const header = document.querySelector<HTMLDivElement>('#main-nav nav');
     const navs = header ? Array.from(header.children) : [];

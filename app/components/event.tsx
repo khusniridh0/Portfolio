@@ -12,7 +12,7 @@ const Event = () => {
     const [enabled, setEnabled] = useState(true);
 
     const throttledChangeActive = useMemo(
-        () => throttle((event: MouseEvent) => {
+        () => throttle((event: Event) => {
             scrolling(event);
             setMenu(false);
         }, 100),
