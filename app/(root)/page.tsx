@@ -78,10 +78,22 @@ const jsonLd = {
     contactPoint: [
         {
             "@type": "ContactPoint",
-            url: `${process.env.SITE_URL}/#contact`
+            contactType: "Professional",
+            url: `${process.env.SITE_URL}/#contact`,
+            availableLanguage: ["Indonesian", "English"]
         }
     ]
+};
 
+const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Khusni Ridho Portfolio",
+    url: process.env.SITE_URL,
+    author: {
+        "@type": "Person",
+        name: "Khusni Ridho"
+    }
 };
 
 const getCarouselConfig = (): CarouselConfig => ({
@@ -131,6 +143,9 @@ const Home = async () => {
             <Script id="ld-person" type="application/ld+json" strategy="beforeInteractive">
                 {JSON.stringify(jsonLd)}
             </Script>
+            <Script id="ld-website" type="application/ld+json" strategy="beforeInteractive">
+                {JSON.stringify(websiteSchema)}
+            </Script>
             <HeaderI />
 
             <section id="hero" className="hero-inline grid grid-cols-1 lg:grid-cols-2 items-center min-h-screen">
@@ -148,7 +163,7 @@ const Home = async () => {
                     <h1 className="text-4xl lg:text-7xl font-bold mb-2 lg:mb-6 w-fit uppercase">Khusni Ridho</h1>
                     <p className="text-md lg:text-xl mb-8">Software Developer fokus pada UI/UX, Full-Stack Web Development, dan Software Testing.</p>
                     <div className="flex items-center gap-10">
-                        <Link href="/readme" className="w-fit btn rounded-full border-gradient" rel="preload">
+                        <Link href="/readme" className="w-fit btn rounded-full border-gradient">
                             <span className="me-4">Read-Me</span>
                             <ArrowRight color="var(--text-content)" />
                         </Link>
@@ -159,7 +174,7 @@ const Home = async () => {
             <section id="brand" className="py-18 lg:p-0">
                 <div id="brand" className="flex flex-wrap justify-around lg:justify-between items-center gap-x-22 gap-y-8 lg:gap-4 lg:flex-nowrap lg:flex-row">
                     {dataBrand.map((item, i) => (
-                        <Link href={item.link} target="_blank" className="flex gap-x-2 justify-center items-center" key={i} rel="preload">
+                        <Link href={item.link} target="_blank" className="flex gap-x-2 justify-center items-center" key={i} rel="noopener noreferrer">
                             <span className="lg:inline-block">{item.icon}</span>
                             <span className=" md:text-2xl">{item.name}</span>
                         </Link>

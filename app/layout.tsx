@@ -17,23 +17,6 @@ export const metadata: Metadata = {
 	authors: [{ name: "Khusni Ridho", url }],
 	title: "Khusni Ridho — Full Stack Developer & Desain UI/UX",
 	description: "Software Developer Full Stack, menciptakan solusi digital yang skalabel dan maintainable. Fokus pada UI/UX Design, Full Stack Web Development, dan Software Testing. Berpengalaman dengan Next.js, React.js, Tailwind CSS, Django, PHP, JavaScript, serta manajemen database MySQL & MongoDB. Tertarik dengan Machine Learning, dan Data Science.",
-	keywords: [
-		url,
-		"Khusni Ridho",
-		"khusniridho",
-		"KhusniRidho",
-		"Full Stack Developer",
-		"Frontend Developer",
-		"Web Developer",
-		"UI/UX Designer",
-		"Software Developer",
-		"Software Testing",
-		"Software Tester",
-		"Malang Developer",
-		"Malang Dev",
-		"malangdev",
-		"malangdev.my.id"
-	],
 
 	openGraph: {
 		title: "Khusni Ridho — Full Stack Developer & UI/UX Design",
@@ -41,6 +24,7 @@ export const metadata: Metadata = {
 		url,
 		siteName: "Khusni Ridho",
 		type: "website",
+		locale: "id_ID",
 		images: [{ url: "/picture/og-image.png", width: 1200, height: 630, alt: "Khusni Ridho — Full Stack Developer & UI/UX Design" }],
 	},
 
@@ -49,6 +33,10 @@ export const metadata: Metadata = {
 		title: "Khusni Ridho — Full Stack Developer",
 		description: "Software Developer Full Stack fokus pada UI/UX, Web Development, dan Software Testing.",
 		images: ["/picture/og-image.png"],
+	},
+
+	alternates: {
+		canonical: url,
 	},
 
 	icons: {
@@ -67,7 +55,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="id">
 			<body className={`${montserrat.variable} antialiased`}>
 				{children}
 				{process.env.NODE_ENV === 'production' && (<>
