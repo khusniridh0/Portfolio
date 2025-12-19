@@ -68,7 +68,7 @@ Tap2.displayName = 'Tap2';
 export const Tap3 = React.memo(() => {
     return <div className="flex flex-wrap gap-4 mb-4 justify-center item-center mx-auto">
         {dataCertificate.map((item, i) => (
-            <Link href={item.link} target="_blank" className="smooth hover:border-gradient rounded-1 p-2 lg:w-90 md:w-78 flex flex-col justify-center items-center shadow-primary duration-200" key={i} rel="preload">
+            <Link href={item.link} target="_blank" className="smooth hover:border-gradient rounded-1 p-2 lg:w-90 md:w-78 flex flex-col justify-center items-center shadow-primary duration-200" key={i} rel="noopener noreferrer">
                 <ImageSkeleton src={item.image} alt="Certificate" width={344} height={243} className="aspect-[1.43/1]" loading="lazy" />
             </Link>
         ))}

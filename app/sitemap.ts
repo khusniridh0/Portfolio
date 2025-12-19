@@ -12,11 +12,12 @@ interface Response {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const response = await getProjectsSlug() as Response;
-    // Gunakan pengecekan yang lebih aman
+    // Note: API currently only returns slugs, not updatedAt timestamps
+    // If API is updated to include updatedAt/modifiedAt, use that instead of new Date()
     const projectEntries = response?.status && Array.isArray(response.data)
       ? response.data.map((slug: string) => ({
         url: `${BASE_URL}/project/${slug}`,
-        lastModified: new Date(),
+        lastModified: new Date(), // TODO: Use project.updatedAt when available from API
         changeFrequency: 'weekly' as const,
         priority: 0.7,
       }))

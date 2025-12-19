@@ -50,7 +50,7 @@ export const ActiveWorks = ({ dataWorks }: { dataWorks: Works[] }) => {
             <ImageSkeleton src={active.image} alt="Banner" width={720} height={400} className="w-full rounded-1 aspect-[9/16] md:aspect-[4/3] lg:aspect-video object-cover" loading="lazy" />
             <div className="banner-attribute flex flex-col lg:flex-row gap-4 lg:gap-6 lg:items-end absolute bottom-0 left-0 p-4 w-full">
                 <div className="banner-caption flex-2 text-white">
-                    <Link href={`/project/${active.slug}`} className="inline-block text-2xl lg:text-5xl font-semibold capitalize underline underline-offset-4 lg:mb-6 lg:underline-offset-6 text-nowrap text-truncate" rel="preload">
+                    <Link href={`/project/${active.slug}`} className="inline-block text-2xl lg:text-5xl font-semibold capitalize underline underline-offset-4 lg:mb-6 lg:underline-offset-6 text-nowrap text-truncate">
                         {active.name}
                         <sup className="inline-block ml-2"><ExternalLink color="#fff" size={16} /></sup>
                     </Link>
@@ -77,11 +77,11 @@ export const SliderWork = ({ dataWorks, config }: { dataWorks: Works[], config: 
             <div className="clip-banner-content">
                 <Carousel config={{ ...config }}>
                     {dataWorks.map((item, i) => (
-                        <Link href={`/project/${item.slug}`} className="clip-banner-item aspect-[4/3] rounded-1 overflow-hidden block" draggable={false} key={i} rel="preload">
+                        <Link href={`/project/${item.slug}`} className="clip-banner-item aspect-[4/3] rounded-1 overflow-hidden block" draggable={false} key={i}>
                             <ImageSkeleton src={item.image} alt={item.name} width={411} height={308} className="w-full h-full object-cover" loading="lazy" />
                         </Link>
                     ))}
-                    <Link href='/project' className="aspect-[4/3] rounded-1 overflow-hidden block" draggable={false} rel="preload">
+                    <Link href='/project' className="aspect-[4/3] rounded-1 overflow-hidden block" draggable={false}>
                         <ImageSkeleton src="/project/all-project.gif" alt="All Project" width={411} height={308} className="w-full h-full object-cover" loading="lazy" unoptimized/>
                     </Link>
                 </Carousel>

@@ -7,6 +7,7 @@ import ImageSkeleton from "@/app/components/image";
 import { dataContact } from "@/app/services/main";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 interface Works {
     slug: string;
@@ -14,6 +15,19 @@ interface Works {
     image: string;
     desc: string;
 }
+
+export const metadata: Metadata = {
+	title: 'Projects | Portfolio Khusni Ridho',
+	description: 'Koleksi project web development dan UI/UX design yang telah dibuat oleh Khusni Ridho. Meliputi aplikasi full-stack, website, dan desain interface modern.',
+	openGraph: {
+		title: 'Projects | Portfolio Khusni Ridho',
+		description: 'Koleksi project web development dan UI/UX design yang telah dibuat oleh Khusni Ridho.',
+		type: 'website',
+	},
+	alternates: {
+		canonical: `${process.env.SITE_URL}/project`,
+	},
+};
 
 const Project = async () => {
     const response = await getProjects()
@@ -51,7 +65,7 @@ const Project = async () => {
                                         <ImageSkeleton src={item.image} alt={item.name} width={671} height={503} className="w-auto h-full object-cover" loading="lazy" />
                                     </div>
                                     <div className="px-2">
-                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4" rel="preload">
+                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4">
                                             {item.name}
                                             <sup className="inline-block ml-2"><ExternalLink color="var(--text-content)" size={16} /></sup>
                                         </Link>
@@ -64,7 +78,7 @@ const Project = async () => {
                                         <ImageSkeleton src={item.image} alt={item.name} width={484} height={363} className="w-auto h-full object-cover" loading="lazy" />
                                     </div>
                                     <div className="px-2">
-                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4" rel="preload">
+                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4">
                                             {item.name}
                                             <sup className="inline-block ml-2"><ExternalLink color="var(--text-content)" size={16} /></sup>
                                         </Link>
@@ -81,7 +95,7 @@ const Project = async () => {
                         <div className="horizon w-px h-full" />
                         <div className="absolute flex -rotate-90">
                             {dataContact.map((contact, i) => (
-                                <Link href={contact.link} target="_blank" className="bg-[var(--body)] py-2 px-6 uppercase" key={i} rel="preload">
+                                <Link href={contact.link} target="_blank" className="bg-[var(--body)] py-2 px-6 uppercase" key={i} rel="noopener noreferrer">
                                     {contact.name}
                                 </Link>
                             ))}

@@ -1,6 +1,20 @@
 import Footer from "@/app/components/Footer";
 import { HeaderII } from "@/app/components/header";
 import ImageSkeleton from "@/app/components/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: 'Readme | Portfolio Khusni Ridho',
+	description: 'Dokumentasi teknis dan arsitektur portfolio website. Case study tentang implementasi Next.js, optimasi performa, dan keputusan engineering yang diambil.',
+	openGraph: {
+		title: 'Readme | Portfolio Khusni Ridho',
+		description: 'Dokumentasi teknis dan arsitektur portfolio website.',
+		type: 'article',
+	},
+	alternates: {
+		canonical: `${process.env.SITE_URL}/readme`,
+	},
+};
 
 const ReadMe = async () => {
 

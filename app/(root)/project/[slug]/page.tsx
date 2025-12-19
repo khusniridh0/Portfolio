@@ -7,6 +7,8 @@ import ImageSkeleton from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
+import type { Metadata } from "next";
+import Script from "next/script";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -60,6 +62,50 @@ interface Response {
 
 export const revalidate = 3600;
 
+export async function generateMetadata(
+	{ params }: ProjectProps
+): Promise<Metadata> {
+	const { slug } = await params;
+	const response = await getProjectDetail(slug);
+	const { data, status } = response as Response;
+
+	if (status === 'error' || !data) {
+		return {
+			title: 'Project Not Found',
+			robots: { index: false, follow: false }
+		};
+	}
+
+	const baseUrl = process.env.SITE_URL!;
+
+	return {
+		title: `${data.name} | Portfolio Khusni Ridho`,
+		description: data.desc,
+		openGraph: {
+			title: `${data.name} | Portfolio Khusni Ridho`,
+			description: data.desc,
+			images: [
+				{
+					url: data.image,
+					width: 1200,
+					height: 630,
+					alt: data.name,
+				},
+			],
+			type: 'article',
+		},
+		twitter: {
+			card: 'summary_large_image',
+			title: data.name,
+			description: data.desc,
+			images: [data.image],
+		},
+		alternates: {
+			canonical: `${baseUrl}/project/${slug}`,
+		},
+	};
+}
+
 const ProjectDetail = async ({ params }: ProjectProps) => {
     const { slug } = await params
     const response = await getProjectDetail(slug);
@@ -89,8 +135,56 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
 
     if (status == 'error') return notFound()
 
+    const baseUrl = process.env.SITE_URL!;
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": baseUrl
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Projects",
+                "item": `${baseUrl}/project`
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": data.name,
+                "item": `${baseUrl}/project/${slug}`
+            }
+        ]
+    };
+
+    const projectSchema = {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        name: data.name,
+        description: data.desc,
+        image: data.image,
+        creator: {
+            "@type": "Person",
+            name: "Khusni Ridho"
+        },
+        about: {
+            "@type": "Thing",
+            name: data.detail.category
+        }
+    };
+
     return (
         <>
+            <Script id="ld-breadcrumb" type="application/ld+json" strategy="beforeInteractive">
+                {JSON.stringify(breadcrumbSchema)}
+            </Script>
+            <Script id="ld-project" type="application/ld+json" strategy="beforeInteractive">
+                {JSON.stringify(projectSchema)}
+            </Script>
             <div className="fixed top-0 left-0 w-screen py-4 z-10 backdrop-filter backdrop-blur-xl bg-[var(--body-50)]">
                 <div className="container flex flex-col lg:flex-row items-center justify-between gap-y-6 mx-auto">
                     <div className="flex items-center gap-3 bg-[var(--body-50)] backdrop-filter backdrop-blur-sm rounded-full pl-6 self-end lg:self-center lg:order-2">
@@ -115,8 +209,8 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
                 <div className="grid grid-cols-12 gap-x-6 gap-y-8 lg:gap-y-10">
                     <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start items-center gap-6">
                         {dataContact.map((contact, i) => (
-                            <Link href={contact.link} target="_blank" key={i} className="flex flex-col items-center gap-2 lg:py-3" rel="preload">
-                                <ImageSkeleton src={contact.image} width={48} height={48} alt="" className="w-auto h-10" loading="lazy" />
+                            <Link href={contact.link} target="_blank" key={i} className="flex flex-col items-center gap-2 lg:py-3" rel="noopener noreferrer">
+                                <ImageSkeleton src={contact.image} width={48} height={48} alt={`${contact.name} icon`} className="w-auto h-10" loading="lazy" />
                                 <span className="text-sm ">{contact.name}</span>
                             </Link>
                         ))}

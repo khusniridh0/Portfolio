@@ -24,7 +24,7 @@ const navItem = [
 export const HeaderI = () => {
     return (
         <header id="main-nav" className="flex justify-between items-center sticky top-5">
-            <Link href='/' rel="preload">
+            <Link href='/'>
                 <Image src="/logo/logo-91x80.webp" width={76} height={76} alt="Khusni Ridho" className="logo w-auto h-10 lg:h-[64px] max-w-[76px] p-1 lg:p-3 rounded-full" loading="eager" />
             </Link>
             <MenuComponent items={navItem} />
@@ -40,7 +40,7 @@ export const HeaderI = () => {
 export const HeaderII = () => {
     return (
         <header id="main-nav" className="flex justify-between items-center sticky top-5">
-            <Link href='/' rel="preload">
+            <Link href='/'>
                 <Image src="/logo/logo-91x80.webp" width={76} height={76} alt="Khusni Ridho" className="logo w-auto h-10 lg:h-[64px] max-w-[76px] p-1 lg:p-3 rounded-full" loading="eager" />
             </Link>
 
@@ -56,7 +56,7 @@ export const MenuComponent = React.memo(({ items }: { items: NavItem[] }) => {
     return (
         <nav className={`${menu && 'show'}`}>
             {items?.map((item: NavItem, index: number) =>
-                <Link onClick={scrolled} href={'/' + item?.link} className={`item-link w-full py-3 lg:p-0 text-center font-semibold ${index === 0 && 'active'}`} key={index} rel="preload">
+                <Link onClick={scrolled} href={'/' + item?.link} className={`item-link w-full py-3 lg:p-0 text-center font-semibold ${index === 0 && 'active'}`} key={index}>
                     <span>{item?.text}</span>
                 </Link>
             )}

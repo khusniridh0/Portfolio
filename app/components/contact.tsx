@@ -28,7 +28,7 @@ const initialState = {
 
 export const ContactMe = () => {
     return (
-        <Link onClick={scrolled} href="/#contact" className="w-fit btn rounded-full border-gradient" rel="preload">
+        <Link onClick={scrolled} href="/#contact" className="w-fit btn rounded-full border-gradient">
             <span className="me-4">Contact Me</span>
             <ArrowRight color="var(--text-content)" />
         </Link>
@@ -99,7 +99,7 @@ export const ContactList = ({ dataContact }: { dataContact: Contact[] }) => {
     return dataContact.map((item, i) => (
         <div className="rounded-1 border-primary p-5 md:col-span-2 lg:col-span-1 mb-6" key={i}>
             <div className="flex justify-between items-center mb-3">
-                <ImageSkeleton src={item.image} width={50} height={50} className="h-10 w-auto" alt="whatsapp" loading="lazy" />
+                <ImageSkeleton src={item.image} width={50} height={50} className="h-10 w-auto" alt={`${item.name} icon`} loading="lazy" />
                 <button type="button" className={`copy ${copied == i && 'copied'} flex flex-col gap-1 items-center`} onClick={e => copying(e, item, i)}>
                     <Copy color={`${copied == i ? 'var(--color-green-500)' : 'var(--text-content)'}`} />
                     <span className="text-sm">Copy</span>
