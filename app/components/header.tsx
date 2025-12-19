@@ -1,12 +1,15 @@
 'use client'
 
+'use client'
+
 import React from "react";
-import { Close, Menu, Moon, Sun } from "@/app/components/icons";
+import { Close, Menu } from "@/app/components/icons";
 import { AllContext } from "@/app/contexts/public-context";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 import { scrolled } from "@/app/utils/event";
+import { ChangeTheme } from "./header-client";
 
 interface NavItem {
     link: string;
@@ -84,17 +87,4 @@ export const ToggleMenu = React.memo(() => {
 
 ToggleMenu.displayName = 'ToggleMenu';
 
-export const ChangeTheme = React.memo(() => {
-    const { theme, setTheme } = useContext(AllContext)!;
-
-    return (
-        <>
-            <span className="text-sm font-semibold capitalize">{theme}</span>
-            <button className="border-primary p-2 lg:p-3 rounded-full" aria-label="change theme" onClick={() => { setTheme(theme == 'light' ? 'dark' : 'light') }}>
-                {theme == 'dark' ? <Sun color="var(--text-content)" /> : <Moon color="var(--text-content)" />}
-            </button>
-        </>
-    )
-});
-
-ChangeTheme.displayName = 'ChangeTheme';
+// ChangeTheme moved to header-client.tsx

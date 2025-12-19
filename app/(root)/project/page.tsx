@@ -1,9 +1,9 @@
 export const revalidate = 3600;
 import { getProjects } from "@/app/actions/project";
 import Footer from "@/app/components/Footer";
-import { HeaderII } from "@/app/components/header";
+import { HeaderII } from "@/app/components/header-server";
 import { ExternalLink } from "@/app/components/icons";
-import ImageSkeleton from "@/app/components/image";
+import ImageServer from "@/app/components/image-server";
 import { dataContact } from "@/app/services/main";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -62,7 +62,7 @@ const Project = async () => {
                             (i % 4 === 0) || (i % 4 === 3) ? (
                                 <div className="lg:p-6 col-span-6 md:col-span-3 lg:col-span-4" key={i}>
                                     <div className="w-full h-auto aspect-[4/3] rounded-lg overflow-hidden">
-                                        <ImageSkeleton src={item.image} alt={item.name} width={671} height={503} className="w-auto h-full object-cover" loading="lazy" />
+                                        <ImageServer src={item.image} alt={item.name} width={671} height={503} className="w-auto h-full object-cover" {...(i < 2 ? { priority: true } : { loading: "lazy" })} />
                                     </div>
                                     <div className="px-2">
                                         <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4">
@@ -75,7 +75,7 @@ const Project = async () => {
                             ) : (
                                 <div className="lg:p-6 col-span-6 md:col-span-3 lg:col-span-3" key={i}>
                                     <div className="w-full h-auto aspect-[4/3] rounded-lg overflow-hidden">
-                                        <ImageSkeleton src={item.image} alt={item.name} width={484} height={363} className="w-auto h-full object-cover" loading="lazy" />
+                                        <ImageServer src={item.image} alt={item.name} width={484} height={363} className="w-auto h-full object-cover" {...(i < 2 ? { priority: true } : { loading: "lazy" })} />
                                     </div>
                                     <div className="px-2">
                                         <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4">

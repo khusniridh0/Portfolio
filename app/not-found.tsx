@@ -1,5 +1,5 @@
 import Cursor from "@/app/components/cusrsor";
-import ImageSkeleton from "@/app/components/image";
+import ImageServer from "@/app/components/image-server";
 import { AllProvider } from "@/app/contexts/public-context";
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ const NotFound = () => {
             <Cursor />
             <div className="container mx-auto">
                 <div className="max-h-screen h-screen w-full flex flex-col xl:flex-row-reverse items-center justify-center lg:justify-around bg-[var(--body)]">
-                    <ImageSkeleton src="/picture/error-404.svg" alt="404 Error - Page Not Found Illustration" width={800} height={800} className="w-full max-w-[500px] lg:max-w-[600px] xl:max-w-[700px] h-auto" loading="lazy" />
+                    <ImageServer src="/picture/error-404.svg" alt="404 Error - Page Not Found Illustration" width={800} height={800} className="w-full max-w-[500px] lg:max-w-[600px] xl:max-w-[700px] h-auto" loading="lazy" />
                     <div className="text-center xl:text-left">
                         <h1 className="text-6xl lg:text-8xl font-bold mb-4">Uh, ohh!</h1>
                         <h2 className="text-2xl lg:text-4xl mb-4">We Sincerely Apologize</h2>

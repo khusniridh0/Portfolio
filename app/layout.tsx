@@ -9,6 +9,8 @@ const montserrat = Montserrat({
 	variable: "--font-geist-mono",
 	subsets: ["latin"],
 	display: 'swap',
+	preload: true,
+	adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
