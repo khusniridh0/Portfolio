@@ -43,7 +43,7 @@ export const dataContact = [
 	{
 		image: '/icon/email.webp',
 		name: 'Email',
-		link: 'mail.khusniridho@gmail.com',
+		link: 'mailto:mail.khusniridho@gmail.com',
 	},
 	{
 		image: '/icon/instagram.webp',
