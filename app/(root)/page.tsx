@@ -1,7 +1,5 @@
-import React from "react";
 import { getProjects } from "@/app/actions/project";
 import { ContactForm, ContactList, ContactMe } from "@/app/components/contact";
-import ErrorNotFound from "@/app/components/error-404";
 import Footer from "@/app/components/Footer";
 import { HeaderI } from "@/app/components/header";
 import Avatar from "@/app/components/hero";
@@ -12,7 +10,9 @@ import { Tap1, Tap2, Tap3 } from "@/app/components/tabs";
 import { ActiveWorks, SliderWork } from "@/app/components/works";
 import { dataContact, dataStack, dataWorks } from "@/app/services/main";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import Script from "next/script";
+import React from "react";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -120,7 +120,7 @@ const getTabs = () => [
 const Home = async () => {
     const response = await getProjects({ start: 0, end: 9 })
     const { data, status } = response as { data: Works[], status: string }
-    if (status == 'error') return <ErrorNotFound />
+    if (status == 'error') return notFound()
     const activeWorks = data?.slice(0, 3)
     const otherWorks = data?.slice(3)
     const carouselConfig = getCarouselConfig();

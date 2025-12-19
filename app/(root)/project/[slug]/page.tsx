@@ -1,12 +1,12 @@
-import React from "react";
 import { getProjectDetail } from "@/app/actions/project";
 import Carousel from "@/app/components/carousel";
-import ErrorNotFound from "@/app/components/error-404";
 import { ArrowLeft, ArrowRight } from "@/app/components/icons";
 import { Backwork } from "@/app/components/works";
 import { dataContact } from "@/app/services/main";
 import ImageSkeleton from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import React from "react";
 
 interface CarouselResponsive {
     breakpoint: number;
@@ -87,7 +87,7 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
         }
     };
 
-    if (status == 'error') return <ErrorNotFound />
+    if (status == 'error') return notFound()
 
     return (
         <>

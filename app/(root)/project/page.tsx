@@ -1,12 +1,12 @@
 export const revalidate = 3600;
 import { getProjects } from "@/app/actions/project";
-import ErrorNotFound from "@/app/components/error-404";
 import Footer from "@/app/components/Footer";
 import { HeaderII } from "@/app/components/header";
 import { ExternalLink } from "@/app/components/icons";
 import ImageSkeleton from "@/app/components/image";
 import { dataContact } from "@/app/services/main";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface Works {
     slug: string;
@@ -18,7 +18,7 @@ interface Works {
 const Project = async () => {
     const response = await getProjects()
     const { data, status } = response as { data: Works[], status: string }
-    if (status == 'error') return <ErrorNotFound />
+    if (status == 'error') return notFound()
 
     return (
         <>
