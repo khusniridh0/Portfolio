@@ -18,11 +18,11 @@ export const metadata: Metadata = {
 	creator: "Khusni Ridho",
 	authors: [{ name: "Khusni Ridho", url }],
 	title: "Khusni Ridho — Full Stack Developer & Desain UI/UX",
-	description: "Software Developer Full Stack, menciptakan solusi digital yang skalabel dan maintainable. Fokus pada UI/UX Design, Full Stack Web Development, dan Software Testing. Berpengalaman dengan Next.js, React.js, Tailwind CSS, Django, PHP, JavaScript, serta manajemen database MySQL & MongoDB. Tertarik dengan Machine Learning, dan Data Science.",
+	description: "Full Stack Developer & UI/UX Malang. Membangun solusi digital yang mengedepankan performa, estetika dan maintainable untuk bisnis anda.",
 
 	openGraph: {
 		title: "Khusni Ridho — Full Stack Developer & UI/UX Design",
-		description: "Software Developer Full Stack fokus pada UI/UX, Web Development, dan Software Testing. Lihat project, pengalaman, dan skill pada halaman website saya.",
+		description: "Full Stack Developer berpengalaman di UI/UX, Web Development, dan Software Testing. Lihat Project, Experience, Skill di sini.",
 		url,
 		siteName: "Khusni Ridho",
 		type: "website",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 	twitter: {
 		card: "summary_large_image",
 		title: "Khusni Ridho — Full Stack Developer",
-		description: "Software Developer Full Stack fokus pada UI/UX, Web Development, dan Software Testing.",
+		description: "Full Stack Developer berpengalaman di UI/UX, Web Development, dan Software Testing.",
 		images: ["/picture/og-image.png"],
 	},
 
@@ -61,6 +61,7 @@ export default function RootLayout({
 			<body className={`${montserrat.variable} antialiased`}>
 				{children}
 				{process.env.NODE_ENV === 'production' && (<>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore dolores, facere eligendi a exercitationem similique rerum repudiandae obcaecati assumenda voluptates debitis, magnam, quidem voluptatem quam autem! Saepe earum adipisci esse, harum dignissimos facilis rem fugiat perferendis natus consequatur quos sed possimus quaerat perspiciatis officiis temporibus expedita aliquam, animi aperiam amet tempore, mollitia ducimus. At labore voluptas, sapiente delectus itaque nisi vitae rem error expedita aspernatur, ad nemo. Iste tenetur natus, possimus voluptas voluptatem odio facilis illum itaque soluta recusandae saepe reprehenderit vel molestias omnis. Non voluptates optio odio, provident amet recusandae, aperiam eaque atque libero voluptatibus laborum natus, doloribus nam.
 					<SpeedInsights />
 					<Analytics />
 				</>)}
