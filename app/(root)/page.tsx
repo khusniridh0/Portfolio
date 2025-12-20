@@ -71,7 +71,7 @@ const jsonLd = {
     name: "Khusni Ridho",
     url: process.env.SITE_URL,
     jobTitle: "Full Stack Developer & UI/UX Designer",
-    description: "Software Developer Full Stack yang berfokus pada web development modern dengan Next.js, React, TypeScript, dan desain UI/UX.",
+    description: "Full Stack Developer & UI/UX Malang. Membangun solusi digital yang mengedepankan performa, estetika dan maintainable untuk bisnis anda.",
     image: `${process.env.SITE_URL}/picture/og-image.png`,
     sameAs: [...dataBrand.slice(0, -1).map((item) => item.link)],
     knowsAbout: [...dataStack.map((item) => item.name)],
