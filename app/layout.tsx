@@ -2,9 +2,9 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import "./style/main.css";
+import "@/styles/main.css";
 
-const url = process.env.SITE_URL!;
+const url = process.env.SITE_URL || "https://malangdev.my.id";
 const montserrat = Montserrat({
 	variable: "--font-geist-mono",
 	subsets: ["latin"],
@@ -51,17 +51,12 @@ export const metadata: Metadata = {
 	}
 };
 
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
 	return (
 		<html lang="id">
 			<body className={`${montserrat.variable} antialiased`}>
 				{children}
 				{process.env.NODE_ENV === 'production' && (<>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore dolores, facere eligendi a exercitationem similique rerum repudiandae obcaecati assumenda voluptates debitis, magnam, quidem voluptatem quam autem! Saepe earum adipisci esse, harum dignissimos facilis rem fugiat perferendis natus consequatur quos sed possimus quaerat perspiciatis officiis temporibus expedita aliquam, animi aperiam amet tempore, mollitia ducimus. At labore voluptas, sapiente delectus itaque nisi vitae rem error expedita aspernatur, ad nemo. Iste tenetur natus, possimus voluptas voluptatem odio facilis illum itaque soluta recusandae saepe reprehenderit vel molestias omnis. Non voluptates optio odio, provident amet recusandae, aperiam eaque atque libero voluptatibus laborum natus, doloribus nam.
 					<SpeedInsights />
 					<Analytics />
 				</>)}

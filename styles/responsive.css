@@ -1,0 +1,39 @@
+@media (width >=40rem) {}
+
+@media (width >=48rem) {
+    #works .clip-banner .clip-banner-item {
+        flex: 0 0 calc((100% / 2) - 15px);
+    }
+}
+
+@media (width >=64rem) {
+    #main-nav nav {
+        @apply relative grid grid-cols-5 w-auto h-auto top-0 left-0 transform-none rounded-full;
+    }
+
+    #main-nav nav.show {
+        @apply transform-none;
+    }
+}
+
+@media (width >=80rem) {
+    body:not([page="error"]) * {
+        @apply select-none;
+        cursor: none;
+    }
+
+    .container {
+        @apply p-0;
+    }
+
+    #works .clip-banner .clip-banner-item {
+        flex: 0 0 calc((100% / 3) - 15px);
+    }
+
+}
+
+@media (width >=96rem) {
+    .container {
+        padding: calc(var(--spacing) * 0);
+    }
+}

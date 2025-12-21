@@ -1,5 +1,5 @@
-import { dataWorks } from "@/app/services/main";
-import { createResponse } from "@/app/utils/api-rule";
+import { dataWorks } from "@/services/main";
+import { createResponse } from "@/utils/api-rule";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

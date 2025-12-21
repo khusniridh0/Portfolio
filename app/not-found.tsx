@@ -1,6 +1,6 @@
-import Cursor from "@/app/components/cusrsor";
-import ImageServer from "@/app/components/image-server";
-import { AllProvider } from "@/app/contexts/public-context";
+import Cursor from "@/components/client/cusrsor";
+import ImageServer from "@/components/image-server";
+import { AllProvider } from "@/contexts/public-context";
 import Link from "next/link";
 
 import { Metadata } from "next";
@@ -18,13 +18,13 @@ const NotFound = () => {
         <AllProvider>
             <Cursor />
             <div className="container mx-auto">
-                <div className="max-h-screen h-screen w-full flex flex-col xl:flex-row-reverse items-center justify-center lg:justify-around bg-[var(--body)]">
+                <div className="max-h-screen h-screen w-full flex flex-col xl:flex-row-reverse items-center flex-center-center lg:justify-around bg-[var(--body)]">
                     <ImageServer src="/picture/error-404.svg" alt="404 Error - Page Not Found Illustration" width={800} height={800} className="w-full max-w-[500px] lg:max-w-[600px] xl:max-w-[700px] h-auto" loading="lazy" />
                     <div className="text-center xl:text-left">
                         <h1 className="text-6xl lg:text-8xl font-bold mb-4">Uh, ohh!</h1>
                         <h2 className="text-2xl lg:text-4xl mb-4">We Sincerely Apologize</h2>
                         <h3 className="text-1xl lg:text-2xl mb-10">We can’t find the page that you are looking for!</h3>
-                        <Link href="/" className="btn w-fit rounded-full border-gradient mt-6 mx-auto xl:mx-0">
+                        <Link href="/" className="btn w-fit rounded-full border-gradient mt-6 mx-auto xl:mx-0" draggable={false}>
                             <span>Back to Home</span>
                         </Link>
                     </div>

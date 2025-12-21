@@ -1,12 +1,9 @@
 'server only';
 
-import { smtp } from "@/app/utils/api";
-import { createResponse, getIp, rateLimit } from "@/app/utils/api-rule";
+import { smtp } from "@/services/api";
+import { createResponse, getIp, rateLimit } from "@/utils/api-rule";
 import { NextRequest, NextResponse } from "next/server";
-
-interface ContactResponse {
-    message: string;
-}
+import type { ContactSmtpResponse } from '@/types';
 
 export async function POST(req: NextRequest) {
     try {
@@ -20,7 +17,7 @@ export async function POST(req: NextRequest) {
             text: message,
         }
 
-        const response = await smtp<ContactResponse>('/send-email', payload);
+        const response = await smtp<ContactSmtpResponse>('/send-email', payload);
         const isSuccess = /OK/i.test(response.message);
         if (!isSuccess) return NextResponse.json(createResponse({ code: 401, message: 'Failed to send email' }));
         return NextResponse.json(createResponse({ code: 200, message: 'Email sent successfully' }));

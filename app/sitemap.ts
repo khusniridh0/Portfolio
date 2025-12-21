@@ -1,23 +1,18 @@
 import type { MetadataRoute } from "next";
-import { getProjectsSlug } from "@/app/actions/project";
+import { getProjectsSlug } from "@/actions/project";
+import type { SitemapResponse } from '@/types';
 
 export const revalidate = 3600;
 
 const BASE_URL = process.env.SITE_URL || 'https://malangdev.my.id';
-interface Response {
-  status: string,
-  data: []
-}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
-    const response = await getProjectsSlug() as Response;
-    // Note: API currently only returns slugs, not updatedAt timestamps
-    // If API is updated to include updatedAt/modifiedAt, use that instead of new Date()
+    const response = await getProjectsSlug() as SitemapResponse;
     const projectEntries = response?.status && Array.isArray(response.data)
       ? response.data.map((slug: string) => ({
         url: `${BASE_URL}/project/${slug}`,
-        lastModified: new Date(), // TODO: Use project.updatedAt when available from API
+        lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.7,
       }))

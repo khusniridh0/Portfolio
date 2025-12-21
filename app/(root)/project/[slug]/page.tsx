@@ -1,73 +1,22 @@
-import { getProjectDetail } from "@/app/actions/project";
-import Carousel from "@/app/components/carousel";
-import { ArrowLeft, ArrowRight } from "@/app/components/icons";
-import { Backwork } from "@/app/components/works";
-import { dataContact } from "@/app/services/main";
-import ImageServer from "@/app/components/image-server";
+import { getProjectDetail } from "@/actions/project";
+import Carousel from "@/components/client/carousel";
+import { ArrowLeft, ArrowRight } from "@/components/icons";
+import ImageServer from "@/components/image-server";
+import { Backwork } from "@/components/client/works";
+import { dataContact } from "@/services/main";
+import type { CarouselConfig, ProjectProps, ProjectResponse } from '@/types';
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React from "react";
-import type { Metadata } from "next";
 import Script from "next/script";
-
-interface CarouselResponsive {
-    breakpoint: number;
-    perview: number;
-}
-
-interface CarouselNav {
-    next: React.ReactNode;
-    prev: React.ReactNode;
-    position: {
-        x: 'center' | 'start' | 'end' | 'between';
-        y: 'top' | 'bottom';
-    }
-}
-
-interface CarouselConfig {
-    gap: number;
-    drag: boolean,
-    responsive: CarouselResponsive[];
-    nav: CarouselNav;
-}
-
-interface ProjectProps {
-    params: {
-        slug: string;
-    }
-}
-
-interface Stack {
-    name: string;
-    image: string;
-}
-
-interface Project {
-    name: string
-    desc: string
-    image: string
-    detail: {
-        category: string
-        stack: Stack[]
-        images: string[]
-    }
-}
-
-interface Response {
-    code: number,
-    status: string,
-    message: string,
-    data: Project
-}
+import React from "react";
 
 export const revalidate = 3600;
 
-export async function generateMetadata(
-	{ params }: ProjectProps
-): Promise<Metadata> {
+export const generateMetadata = async ( { params }: ProjectProps ): Promise<Metadata>  => {
 	const { slug } = await params;
 	const response = await getProjectDetail(slug);
-	const { data, status } = response as Response;
+	const { data, status } = response as ProjectResponse;
 
 	if (status === 'error' || !data) {
 		return {
@@ -109,7 +58,7 @@ export async function generateMetadata(
 const ProjectDetail = async ({ params }: ProjectProps) => {
     const { slug } = await params
     const response = await getProjectDetail(slug);
-    const { data, status } = response as Response
+    const { data, status } = response as ProjectResponse
     const carouselConfig: CarouselConfig = {
         gap: 20,
         drag: true,
@@ -186,9 +135,9 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
                 {JSON.stringify(projectSchema)}
             </Script>
             <div className="fixed top-0 left-0 w-screen py-4 z-10 backdrop-filter backdrop-blur-xl bg-[var(--body-50)]">
-                <div className="container flex flex-col lg:flex-row items-center justify-between gap-y-6 mx-auto">
-                    <div className="flex items-center gap-3 bg-[var(--body-50)] backdrop-filter backdrop-blur-sm rounded-full pl-6 self-end lg:self-center lg:order-2">
-                        <div className="flex items-center gap-1">
+                <div className="global-container flex flex-col lg:flex-row items-center justify-between gap-y-6 mx-auto">
+                    <div className="flex-items-center gap-3 bg-[var(--body-50)] backdrop-filter backdrop-blur-sm rounded-full pl-6 self-end lg:self-center lg:order-2">
+                        <div className="flex-items-center gap-1">
                             <span className="text-xl font-semibold inline-block">[</span>
                             <span className="text-xs font-semibold inline-block capitalize mt-1">ESC</span>
                             <span className="text-xl font-semibold inline-block">]</span>
@@ -196,9 +145,9 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
                         <Backwork />
                     </div>
                     <h1 className="text-lg font-semibold flex lg:order-1 self-start lg:self-center">
-                        <span className="capitalize block">My works</span>
-                        <span className="mx-3">|</span>
-                        <span className="capitalize block">
+                        <span className="capitalize hidden lg:inline-block">My works</span>
+                        <span className="mx-3 hidden lg:inline-block">|</span>
+                        <span className="capitalize inline-block">
                             {data.detail.category}
                         </span>
                     </h1>
@@ -207,9 +156,9 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
 
             <div className="content mt-38 lg:mt-28">
                 <div className="grid grid-cols-12 gap-x-6 gap-y-8 lg:gap-y-10">
-                    <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start items-center gap-6">
+                    <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start flex-items-center gap-6">
                         {dataContact.map((contact, i) => (
-                            <Link href={contact.link} target="_blank" key={i} className="flex flex-col items-center gap-2 lg:py-3" rel="noopener noreferrer">
+                            <Link href={contact.link} target="_blank" key={i} className="flex flex-col flex-items-center gap-2 lg:py-3" rel="noopener noreferrer" draggable={false}>
                                 <ImageServer src={contact.image} width={48} height={48} alt={`${contact.name} icon`} className="w-auto h-10" loading="lazy" />
                                 <span className="text-sm ">{contact.name}</span>
                             </Link>
@@ -229,8 +178,8 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
                             <div className="horizon w-full h-px my-4" />
                         </h1>
                         <div className="flex flex-wrap justify-start items-start gap-4">
-                            {data.detail.stack.map((stack: Stack, i: number) => (
-                                <div className="flex h-fit gap-2 items-center rounded-full border-primary py-2 px-2" key={i}>
+                            {data.detail.stack.map((stack, i: number) => (
+                                <div className="flex h-fit gap-2 flex-items-center rounded-full border-primary py-2 px-2" key={i}>
                                     <span className="relative">
                                         <ImageServer src={stack.image} width={32} height={32} alt="technology" className="w-auto h-5" loading="lazy" />
                                     </span>

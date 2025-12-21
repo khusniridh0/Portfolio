@@ -1,20 +1,14 @@
 export const revalidate = 3600;
-import { getProjects } from "@/app/actions/project";
-import Footer from "@/app/components/Footer";
-import { HeaderII } from "@/app/components/header-server";
-import { ExternalLink } from "@/app/components/icons";
-import ImageServer from "@/app/components/image-server";
-import { dataContact } from "@/app/services/main";
+import { getProjects } from "@/actions/project";
+import Footer from "@/components/Footer";
+import { HeaderII } from "@/components/header-server";
+import { ExternalLink } from "@/components/icons";
+import ImageServer from "@/components/image-server";
+import { dataContact } from "@/services/main";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-
-interface Works {
-    slug: string;
-    name: string;
-    image: string;
-    desc: string;
-}
+import type { Works } from '@/types';
 
 export const metadata: Metadata = {
 	title: 'Projects | Portfolio Khusni Ridho',
@@ -40,7 +34,7 @@ const Project = async () => {
 
             <section className="grid grid-cols-12 pt-20">
                 <div className="col-span-1 hidden lg:block relative">
-                    <div className="sticky top-0 flex lg:flex-col justify-center items-center gap-10 h-screen">
+                    <div className="sticky-sidebar">
                         <div className="horizon w-px h-full" />
                         <div className="-rotate-90 absolute bg-[var(--body)] w-90 py-2 px-6 uppercase">
                             web development & design ui/ux
@@ -50,7 +44,7 @@ const Project = async () => {
 
                 <div className="col-span-12 lg:col-span-10">
                     <div className="mb-20">
-                        <div className="section-title relative flex justify-center items-center mb-16">
+                        <div className="section-title mb-16">
                             <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">Works</h1>
                             <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Experience</h1>
                         </div>
@@ -65,7 +59,7 @@ const Project = async () => {
                                         <ImageServer src={item.image} alt={item.name} width={671} height={503} className="w-auto h-full object-cover" {...(i < 2 ? { priority: true } : { loading: "lazy" })} />
                                     </div>
                                     <div className="px-2">
-                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4">
+                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4" draggable={false}>
                                             {item.name}
                                             <sup className="inline-block ml-2"><ExternalLink color="var(--text-content)" size={16} /></sup>
                                         </Link>
@@ -78,7 +72,7 @@ const Project = async () => {
                                         <ImageServer src={item.image} alt={item.name} width={484} height={363} className="w-auto h-full object-cover" {...(i < 2 ? { priority: true } : { loading: "lazy" })} />
                                     </div>
                                     <div className="px-2">
-                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4">
+                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4" draggable={false}>
                                             {item.name}
                                             <sup className="inline-block ml-2"><ExternalLink color="var(--text-content)" size={16} /></sup>
                                         </Link>
@@ -91,11 +85,11 @@ const Project = async () => {
                 </div>
 
                 <div className="col-span-1 hidden lg:block relative">
-                    <div className="sticky top-0 flex lg:flex-col justify-center items-center gap-10 h-screen">
+                    <div className="sticky-sidebar">
                         <div className="horizon w-px h-full" />
                         <div className="absolute flex -rotate-90">
                             {dataContact.map((contact, i) => (
-                                <Link href={contact.link} target="_blank" className="bg-[var(--body)] py-2 px-6 uppercase" key={i} rel="noopener noreferrer">
+                                <Link href={contact.link} target="_blank" className="bg-[var(--body)] py-2 px-6 uppercase" key={i} rel="noopener noreferrer" draggable={false}>
                                     {contact.name}
                                 </Link>
                             ))}
