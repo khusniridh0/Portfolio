@@ -1,11 +1,7 @@
 'use server'
 
-import { request } from "@/app/utils/api";
-
-export interface GetProjects {
-    start?: number
-    end?: number
-}
+import { request } from "@/services/api";
+import type { GetProjects } from '@/types';
 
 // interface Detail {
 //     category: '',

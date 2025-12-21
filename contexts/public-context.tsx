@@ -1,19 +1,7 @@
 'use client'
 
 import { createContext, ReactNode, useEffect, useReducer, useMemo, useCallback } from "react";
-
-type State = {
-    theme: string;
-    section: string;
-    reread: object | null;
-    menu: boolean;
-};
-
-type Action =
-    | { type: 'SET_THEME'; payload: string }
-    | { type: 'SET_SECTION'; payload: string }
-    | { type: 'SET_REREAD'; payload: object | null }
-    | { type: 'SET_MENU'; payload: boolean };
+import type { State, Action } from '@/types';
 
 export const AllContext = createContext<{
     theme: string;

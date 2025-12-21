@@ -1,20 +1,14 @@
 export const revalidate = 3600;
-import { getProjects } from "@/app/actions/project";
-import Footer from "@/app/components/Footer";
-import { HeaderII } from "@/app/components/header-server";
-import { ExternalLink } from "@/app/components/icons";
-import ImageServer from "@/app/components/image-server";
-import { dataContact } from "@/app/services/main";
+import { getProjects } from "@/actions/project";
+import Footer from "@/components/Footer";
+import { HeaderII } from "@/components/header-server";
+import { ExternalLink } from "@/components/icons";
+import ImageServer from "@/components/image-server";
+import { dataContact } from "@/services/main";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-
-interface Works {
-    slug: string;
-    name: string;
-    image: string;
-    desc: string;
-}
+import type { Works } from '@/types';
 
 export const metadata: Metadata = {
 	title: 'Projects | Portfolio Khusni Ridho',

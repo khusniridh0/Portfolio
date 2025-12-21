@@ -1,17 +1,12 @@
 'use client'
 
-import { ArrowRight, Copy, SendMessage } from "@/app/components/icons";
+import { ArrowRight, Copy, SendMessage } from "@/components/icons";
 import Image from "next/image";
 import Link from "next/link";
 import { useActionState, useEffect, useState, useCallback } from "react";
-import { formContact, formState } from "@/app/actions/contact";
-import { scrolled } from "@/app/utils/event";
-
-interface Contact {
-    image: string
-    name: string
-    link: string
-}
+import { formContact, formState } from "@/actions/contact";
+import { scrolled } from "@/utils/event";
+import type { Contact } from '@/types';
 
 const initialErrors: formState['errors'] = {
     name: { error: '' },

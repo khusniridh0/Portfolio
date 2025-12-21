@@ -1,8 +1,8 @@
 'use client'
 
 import React from "react";
-import { Moon, Sun } from "@/app/components/icons";
-import { AllContext } from "@/app/contexts/public-context";
+import { Moon, Sun } from "@/components/icons";
+import { AllContext } from "@/contexts/public-context";
 import { useContext } from "react";
 
 export const ChangeTheme = React.memo(() => {

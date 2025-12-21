@@ -1,3 +1,5 @@
+'server only';
+
 export const dataStack = [
 	{ index: 0, image: '/brand/figma.webp', name: 'Figma' },
 	{ index: 1, image: '/brand/html.webp', name: 'HTML' },

@@ -1,6 +1,6 @@
-import Cursor from "@/app/components/cusrsor";
-import ImageServer from "@/app/components/image-server";
-import { AllProvider } from "@/app/contexts/public-context";
+import Cursor from "@/components/cusrsor";
+import ImageServer from "@/components/image-server";
+import { AllProvider } from "@/contexts/public-context";
 import Link from "next/link";
 
 import { Metadata } from "next";

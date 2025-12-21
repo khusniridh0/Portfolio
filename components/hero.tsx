@@ -2,7 +2,7 @@
 
 import { useContext, useMemo } from "react";
 import Image from "next/image";
-import { AllContext } from "@/app/contexts/public-context";
+import { AllContext } from "@/contexts/public-context";
 
 const blurPlaceholder =
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+YHCAw6L73Pv4gAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAADElEQVQI12P4//8/AwAI/AL+lmE2HQAAAABJRU5ErkJggg==";

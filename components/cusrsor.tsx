@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from "react";
-import { throttle } from "@/app/utils/func";
+import { throttle } from "@/utils/func";
 
 const Cursor = () => {
     const [isEnabled, setIsEnabled] = useState(false);
@@ -59,7 +59,7 @@ const Cursor = () => {
 
     return (
         <>
-            <span className="cursor w-[20px] h-[20px] translate-[-7px] absolute z-50 pointer-events-none hidden lg:inline-block" />
+            <span className="cursor w-[20px] h-[20px] translate-[-7px] absolute z-50 pointer-events-none hidden lg:inline-block duration-50" />
             <div className="cursor-clicked w-[20px] h-[20px] translate-[-7px] absolute z-50 pointer-events-none hidden">
                 <svg className="w-[30px] h-[30px] translate-x-[-18px] translate-y-[-16px]" viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect className="rect-animate" x="479.998" width="40" height="387" rx="20" fill="var(--color-amber-500)" />

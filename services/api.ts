@@ -1,58 +1,11 @@
 'server-only'
 
+import type { Method, RequestOptions, SmtpError } from '@/types';
+
 const API_BASE = `${process.env.SITE_URL}/api`;
 const SMTP_BASE = process.env.EMAIL_SMTP!;
-type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
-export interface SmtpError {
-    status: number;
-    message: string;
-}
-
-type RequestOptions = {
-    params?: Record<string, string | number | boolean | undefined>;
-    body?: unknown;
-    headers?: HeadersInit;
-    revalidate?: number;
-    cache?: RequestCache;
-};
-
-export async function smtp<TResponse>(
-    path: string,
-    payload: unknown
-): Promise<TResponse> {
-    const res = await fetch(`${SMTP_BASE}${path}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-        cache: 'no-store',
-    });
-
-    if (!res.ok) {
-        let message = 'SMTP request failed';
-
-        try {
-            const data = await res.json();
-            message = data?.message ?? message;
-        } catch {
-            message = await res.text();
-        }
-
-        throw {
-            status: res.status,
-            message,
-        } satisfies SmtpError;
-    }
-
-    return res.json();
-}
-
-function buildUrl(
-    path: string,
-    params?: RequestOptions['params']
-) {
+function buildUrl(path: string, params?: RequestOptions['params']) {
     const url = new URL(`${API_BASE}/${path}`);
 
     if (params) {
@@ -95,6 +48,35 @@ async function coreRequest<T>(method: Method, path: string, options: RequestOpti
     }
 
     return await res.json();
+}
+
+export async function smtp<TResponse>(path: string, payload: unknown): Promise<TResponse> {
+    const res = await fetch(`${SMTP_BASE}${path}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        cache: 'no-store',
+    });
+
+    if (!res.ok) {
+        let message = 'SMTP request failed';
+
+        try {
+            const data = await res.json();
+            message = data?.message ?? message;
+        } catch {
+            message = await res.text();
+        }
+
+        throw {
+            status: res.status,
+            message,
+        } satisfies SmtpError;
+    }
+
+    return res.json();
 }
 
 export const request = {

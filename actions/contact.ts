@@ -1,12 +1,9 @@
 'use server'
 
-import { request } from "@/app/utils/api";
-import { getErrors } from "@/app/utils/errors";
+import { request } from "@/services/api";
+import { getErrors } from "@/utils/errors";
 import * as z from "zod";
-
-interface ContactResponse {
-    status: 'success' | 'error';
-}
+import type { ContactResponse, ContactData, FormState } from '@/types';
 
 const contactSchema = z.object({
     name: z.string()
@@ -20,18 +17,11 @@ const contactSchema = z.object({
         .min(10, { message: "Pesan minimal 10 karakter." })
         .max(1000, { message: "Pesan maksimal 1000 karakter." })
         .transform((val) => val.trim().replace(/\s\s+/g, ' '))
-})
+});
 
-type ContactData = z.infer<typeof contactSchema>;
+export type formState = FormState;
 
-export type formState = {
-    success: boolean;
-    message: string;
-    errors: Record<string, { error: string }> | null;
-    formInput?: ContactData
-}
-
-export const formContact = async (_prevState: formState, formData: FormData): Promise<formState> => {
+export const formContact = async (_prevState: FormState, formData: FormData): Promise<FormState> => {
     const formInput = Object.fromEntries(formData);
     const { data, success, error } = contactSchema.safeParse(formInput);
     if (!success) {
@@ -39,7 +29,7 @@ export const formContact = async (_prevState: formState, formData: FormData): Pr
         return {
             success: false,
             message: 'Pesan tidak terkirim, periksa kembali form anda.',
-            formInput: formInput as ContactData,
+            formInput: formInput as unknown as ContactData,
             errors,
         }
     }

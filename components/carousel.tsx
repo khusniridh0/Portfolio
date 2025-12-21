@@ -1,28 +1,8 @@
 'use client'
 
 import { Children, useEffect, useRef, useState } from "react";
-import { debounce } from "@/app/utils/func";
-
-interface CarouselResponsive {
-    breakpoint: number;
-    perview: number;
-}
-
-interface CarouselNav {
-    next: React.ReactNode;
-    prev: React.ReactNode;
-    position: {
-        x: 'center' | 'start' | 'end' | 'between';
-        y: 'top' | 'bottom';
-    }
-}
-
-interface CarouselConfig {
-    gap: number;
-    drag: boolean;
-    responsive: CarouselResponsive[];
-    nav: CarouselNav;
-}
+import { debounce } from "@/utils/func";
+import type { CarouselConfig } from '@/types';
 
 const initialState = {
     status: false,

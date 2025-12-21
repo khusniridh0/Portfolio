@@ -1,27 +1,20 @@
 'server only';
 
+import type { ApiResponse, ResponseStatus } from '@/types';
 import { Redis } from "@upstash/redis";
 import { NextRequest } from "next/server";
-
-export type ResponseStatus = 'success' | 'error';
-export interface ApiResponse<T = []> {
-    code: number;
-    status: ResponseStatus;
-    message: string;
-    data: T | null;
-}
 
 export const redis = new Redis({
     url: process.env.UPSTASH_REDIS_REST_URL,
     token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-export function createResponse<T = []>({ code = 500, message = '', data = null, }: { code?: number; message?: string; data?: T | null; }): ApiResponse<T> {
+export const createResponse = <T = []>({ code = 500, message = '', data = null, }: { code?: number; message?: string; data?: T | null; }): ApiResponse<T> => {
     const status: ResponseStatus = code < 400 ? 'success' : 'error';
     return { code, status, message, data };
 }
 
-export async function rateLimit(ip: string) {
+export const rateLimit = async (ip: string) => {
     const perMinuteKey = `rl:minute:${ip}`;
     const dailyKey = `rl:daily`;
     const requestsPerMinute = await redis.incr(perMinuteKey);
@@ -46,7 +39,7 @@ export async function rateLimit(ip: string) {
     return { allowed: true };
 }
 
-export function getIp(req: NextRequest): string {
+export const getIp = (req: NextRequest): string => {
     const headers = req.headers;
 
     const xForwardedFor = headers.get('x-forwarded-for');

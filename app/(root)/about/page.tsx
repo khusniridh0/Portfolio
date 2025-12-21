@@ -1,6 +1,6 @@
-import Footer from "@/app/components/Footer";
-import { HeaderII } from "@/app/components/header-server";
-import ImageServer from "@/app/components/image-server";
+import Footer from "@/components/Footer";
+import { HeaderII } from "@/components/header-server";
+import ImageServer from "@/components/image-server";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

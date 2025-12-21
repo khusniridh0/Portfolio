@@ -1,40 +1,13 @@
 'use client'
 
-import { Close, ExternalLink } from "@/app/components/icons";
-import { AllContext } from "@/app/contexts/public-context";
+import Carousel from "@/components/carousel";
+import { Close, ExternalLink } from "@/components/icons";
+import { AllContext } from "@/contexts/public-context";
+import type { CarouselConfig, Works } from '@/types';
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import Carousel from "@/app/components/carousel";
-
-interface Works {
-    slug: string;
-    name: string;
-    image: string;
-    desc: string;
-}
-
-interface CarouselResponsive {
-    breakpoint: number;
-    perview: number;
-}
-
-interface CarouselNav {
-    next: React.ReactNode;
-    prev: React.ReactNode;
-    position: {
-        x: 'center' | 'start' | 'end' | 'between';
-        y: 'top' | 'bottom';
-    }
-}
-
-interface CarouselConfig {
-    gap: number;
-    drag: boolean;
-    responsive: CarouselResponsive[];
-    nav: CarouselNav;
-}
+import { useCallback, useContext, useEffect, useState } from "react";
 
 export const ActiveWorks = ({ dataWorks }: { dataWorks: Works[] }) => {
     const [active, setActive] = useState(dataWorks?.[0] || null);

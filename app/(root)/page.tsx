@@ -1,46 +1,19 @@
-import { getProjects } from "@/app/actions/project";
-import { ContactForm, ContactList, ContactMe } from "@/app/components/contact";
-import Footer from "@/app/components/Footer";
-import { HeaderI } from "@/app/components/header";
-import Avatar from "@/app/components/hero";
-import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, WhatsApp } from "@/app/components/icons";
-import ImageServer from "@/app/components/image-server";
-import { ActiveTap } from "@/app/components/skill";
-import { Tap1, Tap2, Tap3 } from "@/app/components/tabs";
-import { ActiveWorks, SliderWork } from "@/app/components/works";
-import { dataContact, dataStack, dataWorks } from "@/app/services/main";
+import { getProjects } from "@/actions/project";
+import { ContactForm, ContactList, ContactMe } from "@/components/contact";
+import Footer from "@/components/Footer";
+import { HeaderI } from "@/components/header";
+import Avatar from "@/components/hero";
+import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, WhatsApp } from "@/components/icons";
+import ImageServer from "@/components/image-server";
+import { ActiveTap } from "@/components/skill";
+import { Tap1, Tap2, Tap3 } from "@/components/tabs";
+import { ActiveWorks, SliderWork } from "@/components/works";
+import { dataContact, dataStack, dataWorks } from "@/services/main";
+import type { CarouselConfig, Works } from '@/types';
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import React from "react";
-
-interface CarouselResponsive {
-    breakpoint: number;
-    perview: number;
-}
-
-interface CarouselNav {
-    next: React.ReactNode;
-    prev: React.ReactNode;
-    position: {
-        x: 'center' | 'start' | 'end' | 'between';
-        y: 'top' | 'bottom';
-    }
-}
-
-interface CarouselConfig {
-    gap: number;
-    drag: boolean;
-    responsive: CarouselResponsive[];
-    nav: CarouselNav;
-}
-
-interface Works {
-    slug: string;
-    name: string;
-    image: string;
-    desc: string;
-}
 
 const dataBrand = [
     {
@@ -135,8 +108,8 @@ const Home = async () => {
     if (status == 'error') return notFound()
     const activeWorks = data?.slice(0, 3)
     const otherWorks = data?.slice(3)
-    const carouselConfig = getCarouselConfig();
-    const tabs = getTabs();
+    const carouselConfig = getCarouselConfig()
+    const tabs = getTabs()
 
     return (
         <>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { dataCertificate, dataLearning, dataStack } from "@/app/services/main";
+import { dataCertificate, dataLearning, dataStack } from "@/services/main";
 import Link from "next/link";
 
 export const Tap1 = React.memo(() => {

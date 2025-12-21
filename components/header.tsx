@@ -3,18 +3,14 @@
 'use client'
 
 import React from "react";
-import { Close, Menu } from "@/app/components/icons";
-import { AllContext } from "@/app/contexts/public-context";
+import { Close, Menu } from "@/components/icons";
+import { AllContext } from "@/contexts/public-context";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
-import { scrolled } from "@/app/utils/event";
+import { scrolled } from "@/utils/event";
 import { ChangeTheme } from "./header-client";
-
-interface NavItem {
-    link: string;
-    text: string;
-}
+import type { NavItem } from '@/types';
 
 const navItem = [
     { link: '#hero', text: 'Home' },
