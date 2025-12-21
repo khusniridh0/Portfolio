@@ -1,6 +1,6 @@
 'use client'
 
-import { Children, useEffect, useRef, useState } from "react";
+import { Children, ReactNode, useEffect, useRef, useState } from "react";
 import { debounce } from "@/utils/func";
 import type { CarouselConfig } from '@/types';
 
@@ -10,7 +10,7 @@ const initialState = {
     scrollLeft: 0
 }
 
-const Carousel = ({ config, children }: { config: CarouselConfig, children: React.ReactNode }) => {
+const Carousel = ({ config, children }: { config: CarouselConfig, children: ReactNode }) => {
     const carousel = useRef<HTMLDivElement>(null);
     const carouselItems = useRef<HTMLDivElement>(null);
     const { responsive, gap, nav, drag } = config;

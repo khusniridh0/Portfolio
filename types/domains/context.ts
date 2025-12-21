@@ -1,5 +1,3 @@
-// Context domain types
-
 export type State = {
     theme: string;
     section: string;

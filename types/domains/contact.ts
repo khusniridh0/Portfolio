@@ -1,5 +1,3 @@
-// Contact domain types
-
 export interface ContactResponse {
     status: 'success' | 'error';
 }

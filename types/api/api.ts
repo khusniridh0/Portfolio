@@ -1,6 +1,3 @@
-// API-related types
-
-
 export interface SmtpError {
     status: number;
     message: string;

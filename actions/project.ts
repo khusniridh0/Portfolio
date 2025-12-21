@@ -3,21 +3,6 @@
 import { request } from "@/services/api";
 import type { GetProjects } from '@/types';
 
-// interface Detail {
-//     category: '',
-//     stack: [],
-//     images: []
-// }
-
-// interface Project {
-//     slug: '',
-//     name: '',
-//     image: '',
-//     desc: '',
-//     detail: Detail
-// }
-
-
 export async function getProjectsSlug() {
     try {
         return await request.get('project', { params: { map: true } });

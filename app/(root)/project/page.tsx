@@ -59,7 +59,7 @@ const Project = async () => {
                                         <ImageServer src={item.image} alt={item.name} width={671} height={503} className="w-auto h-full object-cover" {...(i < 2 ? { priority: true } : { loading: "lazy" })} />
                                     </div>
                                     <div className="px-2">
-                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4">
+                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4" draggable={false}>
                                             {item.name}
                                             <sup className="inline-block ml-2"><ExternalLink color="var(--text-content)" size={16} /></sup>
                                         </Link>
@@ -72,7 +72,7 @@ const Project = async () => {
                                         <ImageServer src={item.image} alt={item.name} width={484} height={363} className="w-auto h-full object-cover" {...(i < 2 ? { priority: true } : { loading: "lazy" })} />
                                     </div>
                                     <div className="px-2">
-                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4">
+                                        <Link href={`/project/${item.slug}`} className="inline-block text-2xl font-bold mt-3 lg:mt-7 mb-4" draggable={false}>
                                             {item.name}
                                             <sup className="inline-block ml-2"><ExternalLink color="var(--text-content)" size={16} /></sup>
                                         </Link>
@@ -89,7 +89,7 @@ const Project = async () => {
                         <div className="horizon w-px h-full" />
                         <div className="absolute flex -rotate-90">
                             {dataContact.map((contact, i) => (
-                                <Link href={contact.link} target="_blank" className="bg-[var(--body)] py-2 px-6 uppercase" key={i} rel="noopener noreferrer">
+                                <Link href={contact.link} target="_blank" className="bg-[var(--body)] py-2 px-6 uppercase" key={i} rel="noopener noreferrer" draggable={false}>
                                     {contact.name}
                                 </Link>
                             ))}

@@ -1,5 +1,3 @@
-// Component Props interfaces
-
 import type React from 'react';
 
 export interface ErrorBoundaryState {

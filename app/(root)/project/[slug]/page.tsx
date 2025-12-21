@@ -1,8 +1,8 @@
 import { getProjectDetail } from "@/actions/project";
-import Carousel from "@/components/carousel";
+import Carousel from "@/components/client/carousel";
 import { ArrowLeft, ArrowRight } from "@/components/icons";
 import ImageServer from "@/components/image-server";
-import { Backwork } from "@/components/works";
+import { Backwork } from "@/components/client/works";
 import { dataContact } from "@/services/main";
 import type { CarouselConfig, ProjectProps, ProjectResponse } from '@/types';
 import type { Metadata } from "next";
@@ -158,7 +158,7 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
                 <div className="grid grid-cols-12 gap-x-6 gap-y-8 lg:gap-y-10">
                     <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start items-center gap-6">
                         {dataContact.map((contact, i) => (
-                            <Link href={contact.link} target="_blank" key={i} className="flex flex-col items-center gap-2 lg:py-3" rel="noopener noreferrer">
+                            <Link href={contact.link} target="_blank" key={i} className="flex flex-col items-center gap-2 lg:py-3" rel="noopener noreferrer" draggable={false}>
                                 <ImageServer src={contact.image} width={48} height={48} alt={`${contact.name} icon`} className="w-auto h-10" loading="lazy" />
                                 <span className="text-sm ">{contact.name}</span>
                             </Link>

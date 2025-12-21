@@ -1,4 +1,4 @@
-import Cursor from "@/components/cusrsor";
+import Cursor from "@/components/client/cusrsor";
 import ImageServer from "@/components/image-server";
 import { AllProvider } from "@/contexts/public-context";
 import Link from "next/link";
@@ -24,7 +24,7 @@ const NotFound = () => {
                         <h1 className="text-6xl lg:text-8xl font-bold mb-4">Uh, ohh!</h1>
                         <h2 className="text-2xl lg:text-4xl mb-4">We Sincerely Apologize</h2>
                         <h3 className="text-1xl lg:text-2xl mb-10">We can’t find the page that you are looking for!</h3>
-                        <Link href="/" className="btn w-fit rounded-full border-gradient mt-6 mx-auto xl:mx-0">
+                        <Link href="/" className="btn w-fit rounded-full border-gradient mt-6 mx-auto xl:mx-0" draggable={false}>
                             <span>Back to Home</span>
                         </Link>
                     </div>

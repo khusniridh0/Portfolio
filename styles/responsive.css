@@ -17,7 +17,7 @@
 }
 
 @media (width >=80rem) {
-    * {
+    body:not([page="error"]) * {
         @apply select-none;
         cursor: none;
     }

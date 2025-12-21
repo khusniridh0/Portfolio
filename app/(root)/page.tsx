@@ -1,13 +1,13 @@
 import { getProjects } from "@/actions/project";
-import { ContactForm, ContactList, ContactMe } from "@/components/contact";
+import { ContactForm, ContactList, ContactMe } from "@/components/client/contact";
 import Footer from "@/components/Footer";
-import { HeaderI } from "@/components/header";
-import Avatar from "@/components/hero";
+import Avatar from "@/components/client/hero";
+import { ActiveTap } from "@/components/client/skill";
+import { Tap1, Tap2, Tap3 } from "@/components/client/tabs";
+import { ActiveWorks, SliderWork } from "@/components/client/works";
+import { HeaderI } from "@/components/header-server";
 import { ArrowLeft, ArrowRight, Github, Instagram, LinkedIn, WhatsApp } from "@/components/icons";
 import ImageServer from "@/components/image-server";
-import { ActiveTap } from "@/components/skill";
-import { Tap1, Tap2, Tap3 } from "@/components/tabs";
-import { ActiveWorks, SliderWork } from "@/components/works";
 import { dataContact, dataStack, dataWorks } from "@/services/main";
 import type { CarouselConfig, Works } from '@/types';
 import Link from "next/link";
@@ -136,7 +136,7 @@ const Home = async () => {
                     <h1 className="text-4xl lg:text-7xl font-bold mb-2 lg:mb-6 w-fit uppercase">Khusni Ridho</h1>
                     <p className="text-md lg:text-xl mb-8">Software Developer fokus pada UI/UX, Full-Stack Web Development, dan Software Testing.</p>
                     <div className="flex items-center gap-10">
-                        <Link href="/about" className="w-fit btn rounded-full border-gradient">
+                        <Link href="/about" className="w-fit btn rounded-full border-gradient" draggable={false}>
                             <span className="me-4">Read-Me</span>
                             <ArrowRight color="var(--text-content)" />
                         </Link>
@@ -147,7 +147,7 @@ const Home = async () => {
             <section id="brand" className="py-18 lg:p-0">
                 <div id="brand" className="flex flex-wrap justify-around lg:justify-between items-center gap-x-22 gap-y-8 lg:gap-4 lg:flex-nowrap lg:flex-row">
                     {dataBrand.map((item, i) => (
-                        <Link href={item.link} target="_blank" className="flex gap-x-2 justify-center items-center" key={i} rel="noopener noreferrer">
+                        <Link href={item.link} target="_blank" className="flex gap-x-2 justify-center items-center" key={i} rel="noopener noreferrer" draggable={false}>
                             <span className="lg:inline-block">{item.icon}</span>
                             <span className=" md:text-2xl">{item.name}</span>
                         </Link>

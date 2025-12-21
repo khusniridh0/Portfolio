@@ -1,7 +1,7 @@
-import { ErrorBoundary } from "@/components/error-boundary";
+import { ErrorBoundary } from "@/components/client/error-boundary";
 import { AllProvider } from "@/contexts/public-context";
-import GlobalInteractions from "@/components/global-interactions";
-import Loading from "@/components/loading";
+import GlobalInteractions from "@/components/client/global-interactions";
+import Loading from "@/components/client/loading";
 
 const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 

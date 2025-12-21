@@ -207,7 +207,7 @@
 
         background-color: var(--body-50);
         gap: 50px;
-        padding: 30px;
+        padding: 25px;
         width: calc(100% - 15px);
         height: calc(100% - 15px);
         border-radius: var(--rounded);

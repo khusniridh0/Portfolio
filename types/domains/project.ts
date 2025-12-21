@@ -1,5 +1,3 @@
-// Project domain types
-
 export interface GetProjects {
     start?: number;
     end?: number;

@@ -1,6 +1,6 @@
 'use client'
 
-import Carousel from "@/components/carousel";
+import Carousel from "@/components/client/carousel";
 import { Close, ExternalLink } from "@/components/icons";
 import { AllContext } from "@/contexts/public-context";
 import type { CarouselConfig, Works } from '@/types';
@@ -20,10 +20,10 @@ export const ActiveWorks = ({ dataWorks }: { dataWorks: Works[] }) => {
 
     return (
         <div className="benner-content relative mb-8">
-            <Image src={active.image} alt="Banner" width={720} height={400} className="w-full rounded-1 aspect-[9/16] md:aspect-[4/3] lg:aspect-video object-cover" priority />
+            <Image src={active.image} alt="Banner" width={720} height={400} className="w-full rounded-1 aspect-[9/16] md:aspect-[4/3] lg:aspect-video object-cover" priority draggable={false} />
             <div className="banner-attribute flex flex-col lg:flex-row gap-4 lg:gap-6 lg:items-end absolute bottom-0 left-0 p-4 w-full">
                 <div className="banner-caption flex-2 text-white">
-                    <Link href={`/project/${active.slug}`} className="inline-block text-2xl lg:text-5xl font-semibold capitalize underline underline-offset-4 lg:mb-6 lg:underline-offset-6 text-nowrap text-truncate">
+                    <Link href={`/project/${active.slug}`} className="inline-block text-2xl lg:text-5xl font-semibold capitalize underline underline-offset-4 lg:mb-6 lg:underline-offset-6 text-nowrap text-truncate" draggable={false}>
                         {active.name}
                         <sup className="inline-block ml-2"><ExternalLink color="#fff" size={16} /></sup>
                     </Link>
@@ -35,7 +35,7 @@ export const ActiveWorks = ({ dataWorks }: { dataWorks: Works[] }) => {
                             <span className="flex text-sm lg:text-md font-semibold mb-2 text-white">
                                 [ {i + 1} ]
                             </span>
-                            <Image src={item.image} alt={item.name} width={125} height={167} className="w-24 lg:w-34 aspect-[3/4] object-cover" loading="lazy" />
+                            <Image src={item.image} alt={item.name} width={125} height={167} className="w-24 lg:w-34 aspect-[3/4] object-cover" loading="lazy" draggable={false} />
                         </div>
                     ))}
                 </div>
@@ -51,11 +51,11 @@ export const SliderWork = ({ dataWorks, config }: { dataWorks: Works[], config: 
                 <Carousel config={{ ...config }}>
                     {dataWorks.map((item, i) => (
                         <Link href={`/project/${item.slug}`} className="clip-banner-item aspect-[4/3] rounded-1 overflow-hidden block" draggable={false} key={i}>
-                            <Image src={item.image} alt={item.name} width={411} height={308} className="w-full h-full object-cover" loading="lazy" />
+                            <Image src={item.image} alt={item.name} width={411} height={308} className="w-full h-full object-cover" loading="lazy" draggable={false} />
                         </Link>
                     ))}
                     <Link href='/project' className="aspect-[4/3] rounded-1 overflow-hidden block" draggable={false}>
-                        <Image src="/project/all-project.gif" alt="All Project" width={411} height={308} className="w-full h-full object-cover" loading="lazy" unoptimized/>
+                        <Image src="/project/all-project.gif" alt="All Project" width={411} height={308} className="w-full h-full object-cover" loading="lazy" unoptimized draggable={false} />
                     </Link>
                 </Carousel>
             </div>
