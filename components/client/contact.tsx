@@ -51,7 +51,7 @@ export const ContactForm = () => {
                 <textarea id="message" name="message" rows={10} defaultValue={state.formInput?.message} className="rounded-1 text-sm border-secondary p-4" required autoComplete="off" ></textarea>
                 {message && <span className="text-[13px] text-red-600 font-medium">{message?.error}</span>}
             </div>
-        <button type="submit" className={`flex justify-center items-center text-sm font-semibold rounded-1 p-3 w-full ${loading ? 'bg-[var(--primary-50)]' : 'bg-[var(--primary)]'}`} disabled={loading}>
+        <button type="submit" className={`flex-center-center text-sm font-semibold rounded-1 p-3 w-full ${loading ? 'bg-[var(--primary-50)]' : 'bg-[var(--primary)]'}`} disabled={loading}>
                 <span className="me-2 text-white">{loading ? 'Sending...' : 'Send Message'}</span>
                 <SendMessage color="var(--color-white)" />
             </button>
@@ -62,7 +62,7 @@ export const ContactForm = () => {
                     aria-live="polite"
                     role="status"
                 >
-                    <span className={`rounded-full h-8 text-sm flex items-center justify-center aspect-square ${state?.success ? 'bg-green-200' : 'bg-red-200'}`}>{state.success ? '✔️' : '❗'}</span>
+                    <span className={`rounded-full h-8 text-sm flex-items-center-justify-center aspect-square ${state?.success ? 'bg-green-200' : 'bg-red-200'}`}>{state.success ? '✔️' : '❗'}</span>
                     <span className="inline-block">{state?.message}</span>
                 </div>
             )}
@@ -93,9 +93,9 @@ export const ContactList = ({ dataContact }: { dataContact: Contact[] }) => {
 
     return dataContact.map((item, i) => (
         <div className="rounded-1 border-primary p-5 md:col-span-2 lg:col-span-1 mb-6" key={i}>
-            <div className="flex justify-between items-center mb-3">
+            <div className="flex-between-center mb-3">
                 <Image src={item.image} width={50} height={50} className="h-10 w-auto" alt={`${item.name} icon`} loading="lazy" draggable={false} />
-                <button type="button" className={`copy ${copied == i && 'copied'} flex flex-col gap-1 items-center`} onClick={e => copying(e, item, i)}>
+                <button type="button" className={`copy ${copied == i && 'copied'} flex flex-col gap-1 flex-items-center`} onClick={e => copying(e, item, i)}>
                     <Copy color={`${copied == i ? 'var(--color-green-500)' : 'var(--text-content)'}`} />
                     <span className="text-sm">Copy</span>
                 </button>

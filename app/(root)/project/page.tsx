@@ -34,7 +34,7 @@ const Project = async () => {
 
             <section className="grid grid-cols-12 pt-20">
                 <div className="col-span-1 hidden lg:block relative">
-                    <div className="sticky top-0 flex lg:flex-col justify-center items-center gap-10 h-screen">
+                    <div className="sticky-sidebar">
                         <div className="horizon w-px h-full" />
                         <div className="-rotate-90 absolute bg-[var(--body)] w-90 py-2 px-6 uppercase">
                             web development & design ui/ux
@@ -44,7 +44,7 @@ const Project = async () => {
 
                 <div className="col-span-12 lg:col-span-10">
                     <div className="mb-20">
-                        <div className="section-title relative flex justify-center items-center mb-16">
+                        <div className="section-title mb-16">
                             <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">Works</h1>
                             <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Experience</h1>
                         </div>
@@ -85,7 +85,7 @@ const Project = async () => {
                 </div>
 
                 <div className="col-span-1 hidden lg:block relative">
-                    <div className="sticky top-0 flex lg:flex-col justify-center items-center gap-10 h-screen">
+                    <div className="sticky-sidebar">
                         <div className="horizon w-px h-full" />
                         <div className="absolute flex -rotate-90">
                             {dataContact.map((contact, i) => (

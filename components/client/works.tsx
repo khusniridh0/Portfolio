@@ -79,7 +79,7 @@ export const Backwork = () => {
         };
     }, [closeProject])
 
-    return <button type="button" className="border-primary h-10 w-10 flex items-center justify-center rounded-full" aria-label="close" onClick={closeProject}>
+    return <button type="button" className="border-primary h-10 w-10 flex-items-center-justify-center rounded-full" aria-label="close" onClick={closeProject}>
         <Close color="var(--text-content)" size={20} />
     </button>
 }

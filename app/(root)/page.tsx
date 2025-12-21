@@ -70,36 +70,36 @@ const websiteSchema = {
 };
 
 const getCarouselConfig = (): CarouselConfig => ({
-        gap: 20,
-        drag: false,
-        responsive: [
-            {
-                breakpoint: 1280,
-                perview: 3
-            },
-            {
-                breakpoint: 767,
-                perview: 2
-            },
-            {
-                breakpoint: 100,
-                perview: 1
-            }
-        ],
-        nav: {
-            next: <NextArrow />,
-            prev: <PrevArrow />,
-            position: {
-                x: 'center',
-                y: 'bottom'
-            }
+    gap: 20,
+    drag: false,
+    responsive: [
+        {
+            breakpoint: 1280,
+            perview: 3
+        },
+        {
+            breakpoint: 767,
+            perview: 2
+        },
+        {
+            breakpoint: 100,
+            perview: 1
         }
+    ],
+    nav: {
+        next: <NextArrow />,
+        prev: <PrevArrow />,
+        position: {
+            x: 'center',
+            y: 'bottom'
+        }
+    }
 });
 
 const getTabs = () => [
-        { title: 'Tech Stack', component: <Tap1 />, key: 'tap1' },
-        { title: 'Learning', component: <Tap2 />, key: 'tap2' },
-        { title: 'Certificate', component: <Tap3 />, key: 'tap3' },
+    { title: 'Tech Stack', component: <Tap1 />, key: 'tap1' },
+    { title: 'Learning', component: <Tap2 />, key: 'tap2' },
+    { title: 'Certificate', component: <Tap3 />, key: 'tap3' },
 ];
 
 const Home = async () => {
@@ -128,16 +128,16 @@ const Home = async () => {
                 <div className="description ">
                     <div className="flex gap-x-8 gap-y-4 flex-col lg:flex-row items-center mb-8 lg:mb-4">
                         <span className="color-gradient font-semibold text-2xl uppercase">Hey there</span>
-                        <span className="text-sm  font-semibold py-3 px-6 border border-primary rounded-full capitalize flex items-center gap-4">
+                        <span className="text-sm  font-semibold py-3 px-6 border border-primary rounded-full capitalize flex-items-center gap-4">
                             <div className="dot-animated rounded-full dark:bg-green-900"></div>
                             available for new opportunities
                         </span>
                     </div>
                     <h1 className="text-4xl lg:text-7xl font-bold mb-2 lg:mb-6 w-fit uppercase">Khusni Ridho</h1>
                     <p className="text-md lg:text-xl mb-8">Software Developer fokus pada UI/UX, Full-Stack Web Development, dan Software Testing.</p>
-                    <div className="flex items-center gap-10">
+                    <div className="flex-items-center gap-10">
                         <Link href="/about" className="w-fit btn rounded-full border-gradient" draggable={false}>
-                            <span className="me-4">Read-Me</span>
+                            <span className="me-4">Readme</span>
                             <ArrowRight color="var(--text-content)" />
                         </Link>
                     </div>
@@ -147,7 +147,7 @@ const Home = async () => {
             <section id="brand" className="py-18 lg:p-0">
                 <div id="brand" className="flex flex-wrap justify-around lg:justify-between items-center gap-x-22 gap-y-8 lg:gap-4 lg:flex-nowrap lg:flex-row">
                     {dataBrand.map((item, i) => (
-                        <Link href={item.link} target="_blank" className="flex gap-x-2 justify-center items-center" key={i} rel="noopener noreferrer" draggable={false}>
+                        <Link href={item.link} target="_blank" className="flex-center-center gap-x-2" key={i} rel="noopener noreferrer" draggable={false}>
                             <span className="lg:inline-block">{item.icon}</span>
                             <span className=" md:text-2xl">{item.name}</span>
                         </Link>
@@ -156,7 +156,7 @@ const Home = async () => {
             </section>
 
             <section id="about" className="pt-40 relative">
-                <div className="section-title relative flex justify-center items-center mb-20">
+                <div className="section-title mb-20">
                     <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">About</h1>
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">introduction</h1>
                 </div>
@@ -185,7 +185,7 @@ const Home = async () => {
             </section>
 
             <section id="skill" className="lg:pt-40">
-                <div className="section-title relative flex justify-center items-center mb-20">
+                <div className="section-title mb-20">
                     <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">mastery</h1>
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Journey & Learning</h1>
                 </div>
@@ -193,7 +193,7 @@ const Home = async () => {
             </section>
 
             <section id="works" className="pt-40">
-                <div className="section-title relative flex justify-center items-center mb-20">
+                <div className="section-title mb-20">
                     <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">works</h1>
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Experience</h1>
                 </div>
@@ -204,14 +204,14 @@ const Home = async () => {
             </section>
 
             <section id="cta" className="py-40">
-                <div className="section-title relative flex justify-center items-center mb-20">
+                <div className="section-title mb-20">
                     <h1 className="text-7xl lg:text-[150px] xl:text-[200px] text-[var(--body)] font-bold text-border-gradient w-fit uppercase opacity-50 tracking-[6px] absolute left-0">links</h1>
                     <h1 className="relative text-2xl lg:text-6xl w-fit  uppercase">Let&lsquo;s Make a Change</h1>
                 </div>
 
                 <div className="cta-branding grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                     <div className="branding-item relative overflow-hidden rounded-1 border-primary p-5">
-                        <div className="flex justify-between items-center mb-3">
+                        <div className="flex-between-center mb-3">
                             <ImageServer src="/icon/worker.webp" width={51} height={50} alt="worker" loading="lazy" />
                             <h2 className="text-3xl font-bold">{dataWorks.length}</h2>
                         </div>
@@ -219,7 +219,7 @@ const Home = async () => {
                         <p className="text-sm ">Portofolio proyek full-stack dan desain. Pengalaman praktik nyata dari ide hingga peluncuran.</p>
                     </div>
                     <div className="branding-item relative overflow-hidden rounded-1 border-primary p-5">
-                        <div className="flex justify-between items-center mb-3">
+                        <div className="flex-between-center mb-3">
                             <ImageServer src="/icon/technology.webp" width={51} height={50} alt="technology" loading="lazy" />
                             <h2 className="text-3xl font-bold">{dataStack.length}</h2>
                         </div>
@@ -227,7 +227,7 @@ const Home = async () => {
                         <p className="text-sm ">Kemampuan dalam berbagai teknologi & framework utama. Siap menyesuaikan dengan kebutuhan tim Anda.</p>
                     </div>
                     <div className="branding-item relative overflow-hidden rounded-1 border-primary p-5 md:col-span-2 lg:col-span-1">
-                        <div className="flex justify-between items-center mb-3">
+                        <div className="flex-between-center mb-3">
                             <ImageServer src="/icon/certificate.webp" width={51} height={50} alt="certificate" loading="lazy" />
                             <h2 className="text-3xl font-bold">{dataWorks.length}</h2>
                         </div>
@@ -240,7 +240,7 @@ const Home = async () => {
                     <div className="lg:w-150 py-4 lg:py-[12px] lg:px-[12px] text-center lg:text-left">
                         <h1 className="text-4xl lg:text-[48px] md:w-120 lg:w-full  font-medium uppercase mx-auto mb-4">Let&lsquo;s What are you waiting for?</h1>
                         <h2 className="text-xl mb-8">Diskusikan proyek Anda sekarang, mari berkolaborasi dan ciptakan inovasi bersama!</h2>
-                        <div className="flex justify-center lg:justify-start">
+                        <div className="flex justify-center items-center lg:justify-start">
                             <ContactMe />
                         </div>
                     </div>
@@ -262,8 +262,10 @@ const Home = async () => {
                 </div>
 
                 <div className="section-title text-center mb-20">
-                    <h1 className="relative text-2xl lg:text-6xl  uppercase mb-4">Get in Touch with Us</h1>
-                    <p>Silakan isi formulir di bawah ini, atau Anda dapat menghubungi saya melalui media sosial maupun email.</p>
+                    <div>
+                        <h1 className="relative text-2xl lg:text-6xl  uppercase mb-4">Get in Touch with Us</h1>
+                        <p>Silakan isi formulir di bawah ini, atau Anda dapat menghubungi saya melalui media sosial maupun email.</p>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-6 md:grid-cols-12 gap-10">

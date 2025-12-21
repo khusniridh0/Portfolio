@@ -23,7 +23,7 @@ const ReadMe = async () => {
             <HeaderII />
             <section className="grid grid-cols-12 pt-20 max-w-5xl mx-auto">
                 <div className="col-span-1 hidden lg:block relative">
-                    <div className="sticky top-0 flex lg:flex-col justify-center items-center gap-10 h-screen">
+                    <div className="sticky-sidebar">
                         <div className="horizon w-px h-full" />
                         <div className="-rotate-90 absolute bg-[var(--body)] w-60 py-2 px-6 uppercase text-center">
                             web development
@@ -36,7 +36,7 @@ const ReadMe = async () => {
                         Arsitektur, Optimasi Kinerja, dan Keputusan Teknis yang Membentuk Proyek ini
                     </Quote>
 
-                    <div className="relative hidden lg:flex lg:flex-col justify-center items-center h-10 translate-y-8">
+                    <div className="relative hidden lg:flex-col-center-center h-10 translate-y-8">
                         <div className="horizon w-full h-px" />
                         <div className="absolute bg-[var(--body)] w-50 py-2 px-6 uppercase text-center">
                             design ui/ux
@@ -148,7 +148,7 @@ const ReadMe = async () => {
                     </div>
                 </div>
                 <div className="col-span-1 hidden lg:block relative">
-                    <div className="sticky top-0 flex lg:flex-col justify-center items-center gap-10 h-screen">
+                    <div className="sticky-sidebar">
                         <div className="horizon w-px h-full" />
                         <div className="-rotate-90 absolute bg-[var(--body)] w-60 py-2 px-6 uppercase text-center">
                             software tester

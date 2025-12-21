@@ -136,8 +136,8 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
             </Script>
             <div className="fixed top-0 left-0 w-screen py-4 z-10 backdrop-filter backdrop-blur-xl bg-[var(--body-50)]">
                 <div className="global-container flex flex-col lg:flex-row items-center justify-between gap-y-6 mx-auto">
-                    <div className="flex items-center gap-3 bg-[var(--body-50)] backdrop-filter backdrop-blur-sm rounded-full pl-6 self-end lg:self-center lg:order-2">
-                        <div className="flex items-center gap-1">
+                    <div className="flex-items-center gap-3 bg-[var(--body-50)] backdrop-filter backdrop-blur-sm rounded-full pl-6 self-end lg:self-center lg:order-2">
+                        <div className="flex-items-center gap-1">
                             <span className="text-xl font-semibold inline-block">[</span>
                             <span className="text-xs font-semibold inline-block capitalize mt-1">ESC</span>
                             <span className="text-xl font-semibold inline-block">]</span>
@@ -156,9 +156,9 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
 
             <div className="content mt-38 lg:mt-28">
                 <div className="grid grid-cols-12 gap-x-6 gap-y-8 lg:gap-y-10">
-                    <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start items-center gap-6">
+                    <div className="col-span-12 lg:col-span-1 flex lg:flex-col justify-around lg:justify-start flex-items-center gap-6">
                         {dataContact.map((contact, i) => (
-                            <Link href={contact.link} target="_blank" key={i} className="flex flex-col items-center gap-2 lg:py-3" rel="noopener noreferrer" draggable={false}>
+                            <Link href={contact.link} target="_blank" key={i} className="flex flex-col flex-items-center gap-2 lg:py-3" rel="noopener noreferrer" draggable={false}>
                                 <ImageServer src={contact.image} width={48} height={48} alt={`${contact.name} icon`} className="w-auto h-10" loading="lazy" />
                                 <span className="text-sm ">{contact.name}</span>
                             </Link>
@@ -179,7 +179,7 @@ const ProjectDetail = async ({ params }: ProjectProps) => {
                         </h1>
                         <div className="flex flex-wrap justify-start items-start gap-4">
                             {data.detail.stack.map((stack, i: number) => (
-                                <div className="flex h-fit gap-2 items-center rounded-full border-primary py-2 px-2" key={i}>
+                                <div className="flex h-fit gap-2 flex-items-center rounded-full border-primary py-2 px-2" key={i}>
                                     <span className="relative">
                                         <ImageServer src={stack.image} width={32} height={32} alt="technology" className="w-auto h-5" loading="lazy" />
                                     </span>

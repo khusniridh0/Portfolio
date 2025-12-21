@@ -405,11 +405,11 @@
     #works .clip-banner .clip-banner-item::after {
         content: '';
         @apply absolute top-0 left-0 w-full h-full;
-        transition: all 0.3s ease-in-out;
+        transition: var(--duration-2);
     }
 
     #works .clip-banner .clip-banner-item img {
-        transition: all 0.3s ease-in-out;
+        transition: var(--duration-2);
     }
 
     #works .clip-banner .clip-banner-item:hover img {
