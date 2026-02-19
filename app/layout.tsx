@@ -56,11 +56,13 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
 		<html lang="id">
 			<body className={`${montserrat.variable} antialiased`}>
 				{children}
-				{process.env.NODE_ENV === 'production' && (<>
-					<SpeedInsights />
-					<Analytics />
-				</>)}
+				{/* this place for analytics */}
 			</body>
 		</html>
 	);
 }
+
+// {process.env.NODE_ENV === 'production' && (<>
+// 					<SpeedInsights />
+// 					<Analytics />
+// 				</>)}
