@@ -1,5 +1,5 @@
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from "@vercel/speed-insights/next";
+// import { Analytics } from '@vercel/analytics/next';
+// import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "@/styles/main.css";
@@ -56,13 +56,11 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
 		<html lang="id">
 			<body className={`${montserrat.variable} antialiased`}>
 				{children}
-				{/* this place for analytics */}
+				{/* {process.env.NODE_ENV === 'production' && (<>
+					<SpeedInsights />
+					<Analytics />
+				</>)} */}
 			</body>
 		</html>
 	);
 }
-
-// {process.env.NODE_ENV === 'production' && (<>
-// 					<SpeedInsights />
-// 					<Analytics />
-// 				</>)}
